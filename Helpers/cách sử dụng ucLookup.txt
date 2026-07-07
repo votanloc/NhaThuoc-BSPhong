@@ -1,0 +1,92 @@
+khai báo 
+
+	private LPsoft.Helpers.ucLookup ucSearchCD;
+	private TextBox activeTextBox;
+
+trong hàm load
+
+     // Khởi tạo đối tượng
+            ucSearchCD = new LPsoft.Helpers.ucLookup();
+            this.Controls.Add(ucSearchCD);
+            ucSearchCD.Visible = false;
+
+
+            this.Controls.Add(ucSearchCD);
+            ucSearchCD.Visible = false;
+            ucSearchCD.BringToFront();
+
+            // Xử lý khi chọn xong dữ liệu
+            ucSearchCD.OnRowSelected += (row) =>
+            {
+                // Kiểm tra xem TextBox nào đang được ghi nhớ
+                if (activeTextBox == txtBacSi)
+                {
+                    txtBacSi.Text = row["TenNguoiDung"].ToString();
+                    ucSearchCD.Visible = false;
+
+                    txtChanDoan.Focus();
+
+                }
+                else if (activeTextBox == txtDiaChi)
+                {
+                    // LƯU Ý: Phải viết đúng tên cột trong SQL (diachi)
+                    txtDiaChi.Text = row["diachi"].ToString();
+
+                    ucSearchCD.Visible = false;
+
+                    txtBacSi.Focus();
+                }
+                ucSearchCD.Visible = false;
+            };
+
+
+trong hàm textChanged
+
+    activeTextBox = txtDiaChi;
+    string diaChi = "%" + txtDiaChi.Text.Trim() + "%";
+
+    if (string.IsNullOrEmpty(txtDiaChi.Text.Trim()))
+    {
+        ucSearchCD.Visible = false;
+        return;
+    }
+
+    DataTable dtDiachi = Helpers.MySqlHelper.ExecuteDataTable(
+        @"SELECT madiachi,diachi FROM dm_diachi where 
+        (madiachi LIKE @DiaChi OR diachi LIKE @Diachi)
+        order by madiachi asc",
+        new MySqlParameter("@DiaChi", diaChi)
+    );
+
+    if (dtDiachi != null && dtDiachi.Rows.Count > 0)
+    {
+        // 1. Điền dữ liệu và định dạng
+        var widths = new Dictionary<string, int> { { "madiachi", 100 }, { "diachi", 400 } };
+        //var formats = new Dictionary<string, string> { { "Gia", "#,###" } };
+        ucSearchCD.FillData(dtDiachi, widths, null);
+
+        // 2. TÍNH TOÁN VỊ TRÍ ĐỂ VẼ NGAY DƯỚI TEXTBOX
+        // Lấy tọa độ của TextBox so với Form chính (bất kể nó nằm trong Panel nào)
+        Point locationOnForm = txtDiaChi.Parent.PointToScreen(txtDiaChi.Location);
+        locationOnForm = this.PointToClient(locationOnForm);
+
+        ucSearchCD.Left = locationOnForm.X;
+        ucSearchCD.Top = locationOnForm.Y + txtDiaChi.Height;
+        ucSearchCD.Width = 500; // Độ rộng của bảng kết quả
+        ucSearchCD.Height = 150; // Chiều cao của bảng kết quả
+
+        ucSearchCD.Visible = true;
+        ucSearchCD.BringToFront();
+    }
+    else
+    {
+        ucSearchCD.Visible = false;
+    }
+
+
+trong hàm keydown
+
+    if (ucSearchCD != null && ucSearchCD.Visible)
+    {
+        ucSearchCD.HandleKeyDown(e);
+    }
