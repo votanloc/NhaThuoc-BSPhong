@@ -29,6 +29,19 @@
         private void InitializeComponent()
         {
             tableLayoutPanel1 = new TableLayoutPanel();
+            tableLayoutPanel4 = new TableLayoutPanel();
+            panel1 = new Panel();
+            label2 = new Label();
+            dateTimePicker2 = new DateTimePicker();
+            dateTimePicker1 = new DateTimePicker();
+            label11 = new Label();
+            label1 = new Label();
+            textBox6 = new TextBox();
+            dgvTimPhieuNhap = new DataGridView();
+            colMaPhieu = new DataGridViewTextBoxColumn();
+            colLyDoNhap = new DataGridViewTextBoxColumn();
+            colTongTien = new DataGridViewTextBoxColumn();
+            colNgayNhap = new DataGridViewTextBoxColumn();
             tableLayoutPanel2 = new TableLayoutPanel();
             groupBox2 = new GroupBox();
             label9 = new Label();
@@ -65,18 +78,10 @@
             button5 = new Button();
             label6 = new Label();
             textBox4 = new TextBox();
-            groupBox1 = new GroupBox();
-            dgvTimPhieuNhap = new DataGridView();
-            colMaPhieu = new DataGridViewTextBoxColumn();
-            colLyDoNhap = new DataGridViewTextBoxColumn();
-            colTongTien = new DataGridViewTextBoxColumn();
-            colNgayNhap = new DataGridViewTextBoxColumn();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            label1 = new Label();
-            dateTimePicker1 = new DateTimePicker();
-            label2 = new Label();
-            dateTimePicker2 = new DateTimePicker();
             tableLayoutPanel1.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvTimPhieuNhap).BeginInit();
             tableLayoutPanel2.SuspendLayout();
             groupBox2.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
@@ -84,25 +89,135 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             flowLayoutPanel3.SuspendLayout();
             flowLayoutPanel4.SuspendLayout();
-            groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvTimPhieuNhap).BeginInit();
-            flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 450F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel4, 0, 0);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 1, 0);
-            tableLayoutPanel1.Controls.Add(groupBox1, 0, 0);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(1284, 661);
+            tableLayoutPanel1.Size = new Size(1399, 730);
             tableLayoutPanel1.TabIndex = 0;
+            // 
+            // tableLayoutPanel4
+            // 
+            tableLayoutPanel4.ColumnCount = 1;
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel4.Controls.Add(panel1, 0, 0);
+            tableLayoutPanel4.Controls.Add(dgvTimPhieuNhap, 0, 1);
+            tableLayoutPanel4.Dock = DockStyle.Fill;
+            tableLayoutPanel4.Location = new Point(3, 3);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 3;
+            tableLayoutPanel4.RowStyles.Add(new RowStyle());
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel4.RowStyles.Add(new RowStyle());
+            tableLayoutPanel4.Size = new Size(444, 724);
+            tableLayoutPanel4.TabIndex = 2;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(dateTimePicker2);
+            panel1.Controls.Add(dateTimePicker1);
+            panel1.Controls.Add(label11);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(textBox6);
+            panel1.Location = new Point(3, 3);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(420, 125);
+            panel1.TabIndex = 6;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(203, 15);
+            label2.Name = "label2";
+            label2.Size = new Size(78, 18);
+            label2.TabIndex = 2;
+            label2.Text = "Đến ngày:";
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.CustomFormat = "dd/MM/yyyy";
+            dateTimePicker2.Format = DateTimePickerFormat.Custom;
+            dateTimePicker2.Location = new Point(287, 13);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new Size(116, 26);
+            dateTimePicker2.TabIndex = 3;
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.CustomFormat = "dd/MM/yyyy";
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.Location = new Point(81, 13);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(116, 26);
+            dateTimePicker1.TabIndex = 1;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(6, 58);
+            label11.Name = "label11";
+            label11.Size = new Size(77, 18);
+            label11.TabIndex = 4;
+            label11.Text = "Họ và tên:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(6, 15);
+            label1.Name = "label1";
+            label1.Size = new Size(69, 18);
+            label1.TabIndex = 0;
+            label1.Text = "Từ ngày:";
+            // 
+            // textBox6
+            // 
+            textBox6.Location = new Point(89, 54);
+            textBox6.Name = "textBox6";
+            textBox6.Size = new Size(314, 26);
+            textBox6.TabIndex = 5;
+            // 
+            // dgvTimPhieuNhap
+            // 
+            dgvTimPhieuNhap.BackgroundColor = Color.White;
+            dgvTimPhieuNhap.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvTimPhieuNhap.Columns.AddRange(new DataGridViewColumn[] { colMaPhieu, colLyDoNhap, colTongTien, colNgayNhap });
+            dgvTimPhieuNhap.Dock = DockStyle.Fill;
+            dgvTimPhieuNhap.Location = new Point(3, 134);
+            dgvTimPhieuNhap.Name = "dgvTimPhieuNhap";
+            dgvTimPhieuNhap.Size = new Size(438, 587);
+            dgvTimPhieuNhap.TabIndex = 1;
+            // 
+            // colMaPhieu
+            // 
+            colMaPhieu.HeaderText = "Mã phiếu";
+            colMaPhieu.Name = "colMaPhieu";
+            // 
+            // colLyDoNhap
+            // 
+            colLyDoNhap.HeaderText = "Lý do nhập";
+            colLyDoNhap.Name = "colLyDoNhap";
+            // 
+            // colTongTien
+            // 
+            colTongTien.HeaderText = "Tổng tiền";
+            colTongTien.Name = "colTongTien";
+            // 
+            // colNgayNhap
+            // 
+            colNgayNhap.HeaderText = "Ngày nhập";
+            colNgayNhap.Name = "colNgayNhap";
             // 
             // tableLayoutPanel2
             // 
@@ -111,12 +226,12 @@
             tableLayoutPanel2.Controls.Add(groupBox2, 0, 0);
             tableLayoutPanel2.Controls.Add(tableLayoutPanel3, 0, 1);
             tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(425, 3);
+            tableLayoutPanel2.Location = new Point(453, 3);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 2;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 26.10687F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 73.89313F));
-            tableLayoutPanel2.Size = new Size(856, 655);
+            tableLayoutPanel2.Size = new Size(943, 724);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // groupBox2
@@ -133,15 +248,14 @@
             groupBox2.Dock = DockStyle.Fill;
             groupBox2.Location = new Point(3, 3);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(850, 165);
+            groupBox2.Size = new Size(937, 183);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             // 
             // label9
             // 
-            label9.Anchor = AnchorStyles.None;
             label9.AutoSize = true;
-            label9.Location = new Point(455, 62);
+            label9.Location = new Point(521, 69);
             label9.Name = "label9";
             label9.Size = new Size(72, 18);
             label9.TabIndex = 8;
@@ -149,17 +263,15 @@
             // 
             // textBox5
             // 
-            textBox5.Anchor = AnchorStyles.None;
-            textBox5.Location = new Point(533, 58);
+            textBox5.Location = new Point(599, 65);
             textBox5.Name = "textBox5";
-            textBox5.Size = new Size(100, 26);
+            textBox5.Size = new Size(135, 26);
             textBox5.TabIndex = 9;
             // 
             // label8
             // 
-            label8.Anchor = AnchorStyles.None;
             label8.AutoSize = true;
-            label8.Location = new Point(6, 15);
+            label8.Location = new Point(6, 22);
             label8.Name = "label8";
             label8.Size = new Size(86, 18);
             label8.TabIndex = 6;
@@ -167,10 +279,9 @@
             // 
             // dateTimePicker3
             // 
-            dateTimePicker3.Anchor = AnchorStyles.None;
             dateTimePicker3.CustomFormat = "dd/MM/yyyy";
             dateTimePicker3.Format = DateTimePickerFormat.Custom;
-            dateTimePicker3.Location = new Point(98, 13);
+            dateTimePicker3.Location = new Point(97, 16);
             dateTimePicker3.Name = "dateTimePicker3";
             dateTimePicker3.Size = new Size(101, 26);
             dateTimePicker3.TabIndex = 7;
@@ -187,9 +298,10 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(303, 68);
+            comboBox1.Items.AddRange(new object[] { "Nhập kho", "Nhập điều chỉnh" });
+            comboBox1.Location = new Point(305, 65);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 26);
+            comboBox1.Size = new Size(212, 26);
             comboBox1.TabIndex = 4;
             // 
             // textBox2
@@ -206,9 +318,9 @@
             flowLayoutPanel2.Controls.Add(button6);
             flowLayoutPanel2.Controls.Add(checkBox1);
             flowLayoutPanel2.Dock = DockStyle.Bottom;
-            flowLayoutPanel2.Location = new Point(3, 132);
+            flowLayoutPanel2.Location = new Point(3, 150);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(844, 30);
+            flowLayoutPanel2.Size = new Size(931, 30);
             flowLayoutPanel2.TabIndex = 0;
             // 
             // button1
@@ -268,13 +380,13 @@
             tableLayoutPanel3.Controls.Add(flowLayoutPanel3, 0, 0);
             tableLayoutPanel3.Controls.Add(flowLayoutPanel4, 0, 2);
             tableLayoutPanel3.Dock = DockStyle.Fill;
-            tableLayoutPanel3.Location = new Point(3, 174);
+            tableLayoutPanel3.Location = new Point(3, 192);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 3;
             tableLayoutPanel3.RowStyles.Add(new RowStyle());
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle());
-            tableLayoutPanel3.Size = new Size(850, 478);
+            tableLayoutPanel3.Size = new Size(937, 529);
             tableLayoutPanel3.TabIndex = 2;
             // 
             // dataGridView1
@@ -285,7 +397,7 @@
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.Location = new Point(3, 45);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(844, 390);
+            dataGridView1.Size = new Size(931, 441);
             dataGridView1.TabIndex = 2;
             // 
             // colMaPhieu1
@@ -336,7 +448,7 @@
             flowLayoutPanel3.Dock = DockStyle.Fill;
             flowLayoutPanel3.Location = new Point(3, 3);
             flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new Size(844, 36);
+            flowLayoutPanel3.Size = new Size(931, 36);
             flowLayoutPanel3.TabIndex = 0;
             // 
             // label3
@@ -410,7 +522,7 @@
             flowLayoutPanel4.Controls.Add(button5);
             flowLayoutPanel4.Controls.Add(label6);
             flowLayoutPanel4.Controls.Add(textBox4);
-            flowLayoutPanel4.Location = new Point(3, 441);
+            flowLayoutPanel4.Location = new Point(3, 492);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
             flowLayoutPanel4.Size = new Size(806, 34);
             flowLayoutPanel4.TabIndex = 1;
@@ -443,110 +555,21 @@
             textBox4.Size = new Size(100, 26);
             textBox4.TabIndex = 2;
             // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(dgvTimPhieuNhap);
-            groupBox1.Controls.Add(flowLayoutPanel1);
-            groupBox1.Location = new Point(3, 3);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(416, 550);
-            groupBox1.TabIndex = 1;
-            groupBox1.TabStop = false;
-            // 
-            // dgvTimPhieuNhap
-            // 
-            dgvTimPhieuNhap.BackgroundColor = Color.White;
-            dgvTimPhieuNhap.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTimPhieuNhap.Columns.AddRange(new DataGridViewColumn[] { colMaPhieu, colLyDoNhap, colTongTien, colNgayNhap });
-            dgvTimPhieuNhap.Dock = DockStyle.Fill;
-            dgvTimPhieuNhap.Location = new Point(3, 165);
-            dgvTimPhieuNhap.Name = "dgvTimPhieuNhap";
-            dgvTimPhieuNhap.Size = new Size(410, 382);
-            dgvTimPhieuNhap.TabIndex = 1;
-            // 
-            // colMaPhieu
-            // 
-            colMaPhieu.HeaderText = "Mã phiếu";
-            colMaPhieu.Name = "colMaPhieu";
-            // 
-            // colLyDoNhap
-            // 
-            colLyDoNhap.HeaderText = "Lý do nhập";
-            colLyDoNhap.Name = "colLyDoNhap";
-            // 
-            // colTongTien
-            // 
-            colTongTien.HeaderText = "Tổng tiền";
-            colTongTien.Name = "colTongTien";
-            // 
-            // colNgayNhap
-            // 
-            colNgayNhap.HeaderText = "Ngày nhập";
-            colNgayNhap.Name = "colNgayNhap";
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.Controls.Add(label1);
-            flowLayoutPanel1.Controls.Add(dateTimePicker1);
-            flowLayoutPanel1.Controls.Add(label2);
-            flowLayoutPanel1.Controls.Add(dateTimePicker2);
-            flowLayoutPanel1.Dock = DockStyle.Top;
-            flowLayoutPanel1.Location = new Point(3, 22);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(410, 143);
-            flowLayoutPanel1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.None;
-            label1.AutoSize = true;
-            label1.Location = new Point(3, 7);
-            label1.Name = "label1";
-            label1.Size = new Size(69, 18);
-            label1.TabIndex = 0;
-            label1.Text = "Từ ngày:";
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Anchor = AnchorStyles.None;
-            dateTimePicker1.CustomFormat = "dd/MM/yyyy";
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new Point(78, 3);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(116, 26);
-            dateTimePicker1.TabIndex = 1;
-            // 
-            // label2
-            // 
-            label2.Anchor = AnchorStyles.None;
-            label2.AutoSize = true;
-            label2.Location = new Point(200, 7);
-            label2.Name = "label2";
-            label2.Size = new Size(78, 18);
-            label2.TabIndex = 2;
-            label2.Text = "Đến ngày:";
-            // 
-            // dateTimePicker2
-            // 
-            dateTimePicker2.Anchor = AnchorStyles.None;
-            dateTimePicker2.CustomFormat = "dd/MM/yyyy";
-            dateTimePicker2.Format = DateTimePickerFormat.Custom;
-            dateTimePicker2.Location = new Point(284, 3);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(116, 26);
-            dateTimePicker2.TabIndex = 3;
-            // 
             // frmNhapKho
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1284, 661);
+            ClientSize = new Size(1399, 730);
             Controls.Add(tableLayoutPanel1);
             Name = "frmNhapKho";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmNhapKho";
             WindowState = FormWindowState.Maximized;
             tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel4.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvTimPhieuNhap).EndInit();
             tableLayoutPanel2.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
@@ -558,10 +581,6 @@
             flowLayoutPanel3.PerformLayout();
             flowLayoutPanel4.ResumeLayout(false);
             flowLayoutPanel4.PerformLayout();
-            groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvTimPhieuNhap).EndInit();
-            flowLayoutPanel1.ResumeLayout(false);
-            flowLayoutPanel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -569,8 +588,6 @@
 
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tableLayoutPanel2;
-        private GroupBox groupBox1;
-        private FlowLayoutPanel flowLayoutPanel1;
         private Label label1;
         private DateTimePicker dateTimePicker1;
         private Label label2;
@@ -616,5 +633,9 @@
         private Label label10;
         private DateTimePicker dateTimePicker4;
         private TabPage tabPage1;
+        private TableLayoutPanel tableLayoutPanel4;
+        private Label label11;
+        private TextBox textBox6;
+        private Panel panel1;
     }
 }
