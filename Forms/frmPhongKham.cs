@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Linq;
@@ -9,6 +10,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FastReport.Export.PdfSimple;
+using FastReport;
 using MySqlConnector;
 
 namespace NhaThuoc_BSPhong.Forms
@@ -45,6 +48,7 @@ namespace NhaThuoc_BSPhong.Forms
                 {
                     ma_thuoc = row["ma_thuoc"].ToString();
                     txtTimThuocUong.Text = row["ten_thuoc"].ToString();
+                    labelSoLuongTon.Text = row["ton_kho"].ToString();
                     ucSearchCD.Visible = false;
 
                     txtSoLuong.Focus();
@@ -138,6 +142,7 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
                     ma_toa,
                     ma_thuoc,
                     ten_thuoc,
+                    hoat_chat,
                     ham_luong,
                     cach_dung,
                     so_luong,
@@ -219,8 +224,12 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
                 return;
             }
             loadThongTinBN();
+            loadDanhSachToaThuocUong();
+            loadChiTietToaThuocUong();
+        }
 
-            // load danh sách toa thuốc uống
+        private void loadDanhSachToaThuocUong()
+        {
             cboxToaThuocUong.DataSource = Helpers.MySqlHelper.ExecuteDataTable(
                 @"SELECT ma_toa from tbl_tu where ma_bn = @ma_bn order by ma_toa desc;",
                 new MySqlParameter("@ma_bn", txtMaBN.Text.Trim()));
@@ -228,6 +237,31 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
             cboxToaThuocUong.DisplayMember = "ma_toa";
             cboxToaThuocUong.ValueMember = "ma_toa";
             cboxToaThuocUong.SelectedIndex = 0;
+        }
+
+        private void loadChiTietToaThuocUong()
+        {
+            dgvToaThuocUong.DataSource = Helpers.MySqlHelper.ExecuteDataTable(
+                @"SELECT 
+                    auto_id,
+                    ma_bn,
+                    ma_toa,
+                    ma_thuoc,
+                    ten_thuoc,
+                    hoat_chat, 
+                    ham_luong,
+                    don_vi, 
+                    cach_dung,
+                    so_luong,
+                    don_gia,
+                    thanh_tien
+                FROM
+                    tbl_tu_ct
+                WHERE ma_bn = @ma_bn AND ma_toa = @ma_toa AND 
+                    delete_at IS NULL;",
+                new MySqlParameter("@ma_bn", txtMaBN.Text.Trim()),
+                new MySqlParameter("@ma_toa", cboxToaThuocUong.SelectedValue)
+            );
         }
 
         private void loadThongTinBN()
@@ -271,6 +305,7 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
                 return;
             }
             themToaThuocUong();
+            loadChiTietToaThuocUong();
         }
 
         private void themToaThuocUong()
@@ -353,15 +388,13 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
             DataTable dtTimThuocUong = Helpers.MySqlHelper.ExecuteDataTable(
                 @"SELECT
     ma_thuoc,
-    ten_thuoc ,
+    ten_thuoc,
     hoat_chat,
-    ham_luong,
-    gia_ban
-FROM dm_thuoc
+    ton_kho 
+FROM vw_ton_kho 
 WHERE
     (ten_thuoc like @ten_thuoc
-     OR hoat_chat like @ten_thuoc)
-    AND nhom_thuoc <> 'Thuốc tiêm '
+     OR hoat_chat like @ten_thuoc) AND ton_kho > 0 
 ORDER BY ten_thuoc ASC;",
                 new MySqlParameter("@ten_thuoc", timThuocUong)
             );
@@ -369,7 +402,7 @@ ORDER BY ten_thuoc ASC;",
             if (dtTimThuocUong != null && dtTimThuocUong.Rows.Count > 0)
             {
                 // 1. Điền dữ liệu và định dạng
-                var widths = new Dictionary<string, int> { { "ten_thuoc", 100 }, { "hoat_chat", 400 } };
+                var widths = new Dictionary<string, int> { { "ma_thuoc", 100 }, { "ten_thuoc", 400 }, { "hoat_chat", 400 }, { "ton_kho", 100 } };
                 //var formats = new Dictionary<string, string> { { "Gia", "#,###" } };
                 ucSearchCD.FillData(dtTimThuocUong, widths, null);
 
@@ -380,7 +413,7 @@ ORDER BY ten_thuoc ASC;",
 
                 ucSearchCD.Left = locationOnForm.X;
                 ucSearchCD.Top = locationOnForm.Y + txtTimThuocUong.Height;
-                ucSearchCD.Width = 500; // Độ rộng của bảng kết quả
+                ucSearchCD.Width = 1020; // Độ rộng của bảng kết quả
                 ucSearchCD.Height = 150; // Chiều cao của bảng kết quả
 
                 ucSearchCD.Visible = true;
@@ -391,6 +424,7 @@ ORDER BY ten_thuoc ASC;",
                 ucSearchCD.Visible = false;
             }
         }
+
 
         private void txtTimThuocUong_KeyDown(object sender, KeyEventArgs e)
         {
@@ -430,7 +464,7 @@ ORDER BY ten_thuoc ASC;",
 
                 ucSearchCD.Left = locationOnForm.X;
                 ucSearchCD.Top = locationOnForm.Y + txtCachDung.Height;
-                ucSearchCD.Width = 500; // Độ rộng của bảng kết quả
+                ucSearchCD.Width = 520; // Độ rộng của bảng kết quả
                 ucSearchCD.Height = 150; // Chiều cao của bảng kết quả
 
                 ucSearchCD.Visible = true;
@@ -452,7 +486,338 @@ ORDER BY ten_thuoc ASC;",
 
         private void btnThemThuocUong_Click(object sender, EventArgs e)
         {
+            themThuocUong();
+            txtTimThuocUong.Clear();
+            labelSoLuongTon.Text = "0";
+            txtSoLuong.Clear();
+            loadChiTietToaThuocUong();
+        }
 
+        private void themThuocUong()
+        {
+            if (string.IsNullOrWhiteSpace(txtTimThuocUong.Text))
+            {
+                MessageBox.Show("Vui lòng chọn thuốc uống trước khi thêm!",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                txtTimThuocUong.Focus();
+                return;
+            }
+
+            if (!int.TryParse(txtSoLuong.Text.Trim(), out int soLuong) || soLuong <= 0)
+            {
+                MessageBox.Show("Vui lòng nhập số lượng hợp lệ!",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                txtSoLuong.Focus();
+                return;
+            }
+
+            string sql = @"
+    INSERT INTO tbl_tu_ct
+    (
+        ma_bn,
+        ma_toa,
+        ma_thuoc,
+        ten_thuoc,
+        hoat_chat,
+        ham_luong,
+        don_vi,
+        cach_dung,
+        so_luong,
+        don_gia,
+        thanh_tien
+    )
+    SELECT
+        @ma_bn,
+        @ma_toa,
+        dm.ma_thuoc,
+        dm.ten_thuoc,
+        dm.hoat_chat,
+        dm.ham_luong,
+        dm.don_vi,
+        @cach_dung,
+        @so_luong,
+        dm.gia_ban,
+        dm.gia_ban * @so_luong
+    FROM dm_thuoc dm
+    WHERE dm.ma_thuoc = @ma_thuoc;";
+
+            Helpers.MySqlHelper.ExecuteNonQuery(
+                sql,
+                new MySqlParameter("@ma_bn", txtMaBN.Text.Trim()),
+                new MySqlParameter("@ma_toa", cboxToaThuocUong.SelectedValue),
+                new MySqlParameter("@ma_thuoc", ma_thuoc),
+                new MySqlParameter("@cach_dung", txtCachDung.Text.Trim()),
+                new MySqlParameter("@so_luong", soLuong)
+            );
+        }
+
+        private void txtNgayHenTaiKham_TextChanged(object sender, EventArgs e)
+        {
+            if (int.TryParse(txtNgayHenTaiKham.Text.Trim(), out int ngayHen))
+            {
+                dtpNgayHenTaiKham.Value = DateTime.Today.AddDays(ngayHen);
+            }
+        }
+
+        private void cboxToaThuocUong_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //loadToaThuocUongChiTiet();
+        }
+
+        private void cboxToaThuocUong_TextUpdate(object sender, EventArgs e)
+        {
+        }
+
+        private void cboxToaThuocUong_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            loadToaThuocUongChiTiet();
+        }
+
+        private void btnInToaThuocUong_Click(object sender, EventArgs e)
+        {
+            inToaThuocUong();
+        }
+
+        private void inToaThuocUong()
+        {
+            Helpers.MySqlHelper.DownloadReportFile(
+                1,
+                @"report.frx");
+
+            Report report = new Report();
+            report.Load(@"report.frx");
+
+            report.SetParameterValue("paraHoTen", txtHoTen.Text.Trim());
+            report.SetParameterValue("paraTuoi", txtNamSinh.Text.Trim());
+            report.SetParameterValue("paraDiaChi", txtDiaChi.Text.Trim());
+            report.SetParameterValue("paraGioiTinh", cbxGioiTinh.Text.Trim());
+            report.SetParameterValue("paraChanDoan", txtChanDoan.Text.Trim());
+            report.SetParameterValue("paraGhiChu", txtGhiChu.Text.Trim());
+
+
+            report.SetParameterValue("paraHenTaiKham",
+                dtpNgayHenTaiKham.Value.ToString("dd/MM/yyyy"));
+
+            DataTable dt = taoDataInToaThuocUong();
+            dt.TableName = "ToaThuocUong";
+
+            report.RegisterData(dt, "ToaThuocUong");
+
+            DataBand data = report.FindObject("Data1") as DataBand;
+            if (data != null)
+            {
+                data.DataSource =
+                    report.GetDataSource("ToaThuocUong");
+            }
+
+            report.GetDataSource("ToaThuocUong").Enabled = true;
+
+            report.Prepare();
+
+            string tenFile = $"ToaThuoc.pdf";
+            string filePdf = Path.Combine(
+                Application.StartupPath,
+                "temp",
+                tenFile);
+
+            Directory.CreateDirectory(
+                Path.GetDirectoryName(filePdf));
+
+            PDFSimpleExport pdf = new PDFSimpleExport();
+
+            report.Export(pdf, filePdf);
+
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = filePdf,
+                UseShellExecute = true
+            });
+        }
+        private DataTable taoDataInToaThuocUong()
+        {
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("stt");
+            dt.Columns.Add("ten_thuoc");
+            dt.Columns.Add("ham_luong");
+            dt.Columns.Add("cach_dung");
+            dt.Columns.Add("so_luong");
+
+            int stt = 1;
+
+            foreach (DataGridViewRow row in dgvToaThuocUong.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                dt.Rows.Add(
+                    stt++,
+                    row.Cells["colTenThuoc"].Value,
+                    row.Cells["colHamLuong"].Value,
+                    row.Cells["colCachDung"].Value,
+                    row.Cells["colSoLuong"].Value
+                );
+            }
+            return dt;
+        }
+
+        private void btnXoaThuocUong_Click(object sender, EventArgs e)
+        {
+            xoaThuocToaUong();
+        }
+
+        private void xoaThuocToaUong()
+        {
+            try
+            {
+                List<(int AutoId, string MaPhieu, string MaThuoc)> dsCanXoa = new();
+
+                foreach (DataGridViewRow row in dgvToaThuocUong.Rows)
+                {
+                    if (row.IsNewRow)
+                        continue;
+
+                    bool isChecked = false;
+
+                    if (row.Cells["colSelect"].Value != null)
+                        bool.TryParse(row.Cells["colSelect"].Value.ToString(), out isChecked);
+
+                    if (!isChecked)
+                        continue;
+
+                    int autoId = Convert.ToInt32(row.Cells["colAuto_id"].Value);
+                    string maPhieu = row.Cells["colMaToa"].Value?.ToString();
+                    string maThuoc = row.Cells["colMaThuoc"].Value?.ToString();
+
+                    dsCanXoa.Add((autoId, maPhieu, maThuoc));
+                }
+
+                if (dsCanXoa.Count == 0)
+                {
+                    MessageBox.Show(
+                        "Vui lòng chọn thuốc cần xóa.",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    return;
+                }
+
+                if (MessageBox.Show(
+                    $"Bạn có chắc muốn xóa {dsCanXoa.Count} thuốc khỏi toa?",
+                    "Xác nhận",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question) != DialogResult.Yes)
+                    return;
+
+                foreach (var item in dsCanXoa)
+                {
+                    Helpers.MySqlHelper.ExecuteNonQuery(
+                        @"UPDATE tbl_tu_ct
+                  SET delete_at = NOW()
+                  WHERE auto_id = @auto_id
+                    AND ma_toa = @ma_toa
+                    AND ma_thuoc = @ma_thuoc
+                    AND delete_at IS NULL",
+                        new MySqlParameter("@auto_id", item.AutoId),
+                        new MySqlParameter("@ma_toa", item.MaPhieu),
+                        new MySqlParameter("@ma_thuoc", item.MaThuoc)
+                    );
+                }
+
+                MessageBox.Show(
+                    $"Đã xóa {dsCanXoa.Count} thuốc.",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                loadChiTietToaThuocUong();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnXoaToa_Click(object sender, EventArgs e)
+        {
+            xoaToaThuocUong();
+        }
+
+        private void xoaToaThuocUong()
+        {
+            if (string.IsNullOrWhiteSpace(cboxToaThuocUong.Text))
+            {
+                MessageBox.Show(
+                    "Chưa chọn toa cần xóa.",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+
+            if (MessageBox.Show(
+                $"Bạn có chắc muốn xóa toa {cboxToaThuocUong.Text} ?",
+                "Xác nhận",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+
+            try
+            {
+                // Xóa mềm chi tiết toa
+                Helpers.MySqlHelper.ExecuteNonQuery(
+                    @"UPDATE tbl_tu_ct
+              SET delete_at = NOW()
+              WHERE ma_toa = @ma_toa
+                AND delete_at IS NULL",
+                    new MySqlParameter("@ma_toa", cboxToaThuocUong.Text.Trim()));
+
+                // Xóa mềm toa
+                int rows = Helpers.MySqlHelper.ExecuteNonQuery(
+                    @"UPDATE tbl_tu
+              SET delete_at = NOW()
+              WHERE ma_toa = @ma_toa
+                AND delete_at IS NULL",
+                    new MySqlParameter("@ma_toa", cboxToaThuocUong.Text.Trim()));
+
+                if (rows > 0)
+                {
+                    MessageBox.Show(
+                        "Đã xóa toa thuốc.",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                    // Load lại danh sách
+                    loadDanhSachToaThuocUong();
+                    loadChiTietToaThuocUong();
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "Không tìm thấy toa hoặc toa đã bị xóa.",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void txtSoLuong_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtCachDung.Focus();
+            }
         }
     }
 }

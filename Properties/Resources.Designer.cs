@@ -59,5 +59,15 @@ namespace NhaThuoc_BSPhong.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_an_thịnh {
+            get {
+                object obj = ResourceManager.GetObject("logo an thịnh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

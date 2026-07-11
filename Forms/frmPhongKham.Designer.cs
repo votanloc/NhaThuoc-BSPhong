@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
             groupBox2 = new GroupBox();
@@ -58,6 +60,7 @@
             label12 = new Label();
             txtTimThuocUong = new TextBox();
             label18 = new Label();
+            labelSoLuongTon = new Label();
             label14 = new Label();
             txtSoLuong = new TextBox();
             label15 = new Label();
@@ -65,12 +68,17 @@
             btnThemThuocUong = new Button();
             dgvToaThuocUong = new DataGridView();
             colSelect = new DataGridViewCheckBoxColumn();
+            colAuto_id = new DataGridViewTextBoxColumn();
+            colMaBn1 = new DataGridViewTextBoxColumn();
+            colMaToa = new DataGridViewTextBoxColumn();
             colMaThuoc = new DataGridViewTextBoxColumn();
             colTenThuoc = new DataGridViewTextBoxColumn();
             colHoatChat = new DataGridViewTextBoxColumn();
             colHamLuong = new DataGridViewTextBoxColumn();
+            colDonVi = new DataGridViewTextBoxColumn();
             colCachDung = new DataGridViewTextBoxColumn();
             colSoLuong = new DataGridViewTextBoxColumn();
+            colDonGia = new DataGridViewTextBoxColumn();
             colThanhTien = new DataGridViewTextBoxColumn();
             flowLayoutPanel3 = new FlowLayoutPanel();
             btnThemToaThuocUong = new Button();
@@ -80,9 +88,10 @@
             label13 = new Label();
             txtTongTienThuocUong = new TextBox();
             btnXoaThuocUong = new Button();
-            button1 = new Button();
+            btnXoaToa = new Button();
             tabToaThuocTiem = new TabPage();
             groupBox3 = new GroupBox();
+            txtNgayHenTaiKham = new TextBox();
             textBox1 = new TextBox();
             label19 = new Label();
             btnToaThuocMau = new Button();
@@ -144,7 +153,7 @@
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(1284, 661);
+            tableLayoutPanel1.Size = new Size(1319, 682);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -161,7 +170,7 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 150F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 128F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(858, 655);
+            tableLayoutPanel2.Size = new Size(893, 676);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // groupBox2
@@ -185,7 +194,7 @@
             groupBox2.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             groupBox2.Location = new Point(3, 3);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(852, 144);
+            groupBox2.Size = new Size(887, 144);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             // 
@@ -321,7 +330,7 @@
             flowLayoutPanel1.Dock = DockStyle.Bottom;
             flowLayoutPanel1.Location = new Point(3, 109);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(846, 32);
+            flowLayoutPanel1.Size = new Size(881, 32);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // btnThemMoi
@@ -381,7 +390,7 @@
             tabControl1.Location = new Point(3, 281);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(852, 371);
+            tabControl1.Size = new Size(887, 392);
             tabControl1.TabIndex = 1;
             // 
             // tabToaThuocUong
@@ -390,7 +399,7 @@
             tabToaThuocUong.Location = new Point(4, 27);
             tabToaThuocUong.Name = "tabToaThuocUong";
             tabToaThuocUong.Padding = new Padding(3);
-            tabToaThuocUong.Size = new Size(844, 340);
+            tabToaThuocUong.Size = new Size(879, 361);
             tabToaThuocUong.TabIndex = 0;
             tabToaThuocUong.Text = "Toa thuốc uống";
             tabToaThuocUong.UseVisualStyleBackColor = true;
@@ -409,7 +418,7 @@
             tableLayoutPanel4.RowStyles.Add(new RowStyle());
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 44F));
-            tableLayoutPanel4.Size = new Size(838, 334);
+            tableLayoutPanel4.Size = new Size(873, 355);
             tableLayoutPanel4.TabIndex = 0;
             // 
             // flowLayoutPanel2
@@ -417,6 +426,7 @@
             flowLayoutPanel2.Controls.Add(label12);
             flowLayoutPanel2.Controls.Add(txtTimThuocUong);
             flowLayoutPanel2.Controls.Add(label18);
+            flowLayoutPanel2.Controls.Add(labelSoLuongTon);
             flowLayoutPanel2.Controls.Add(label14);
             flowLayoutPanel2.Controls.Add(txtSoLuong);
             flowLayoutPanel2.Controls.Add(label15);
@@ -424,7 +434,7 @@
             flowLayoutPanel2.Controls.Add(btnThemThuocUong);
             flowLayoutPanel2.Location = new Point(3, 3);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(832, 34);
+            flowLayoutPanel2.Size = new Size(861, 34);
             flowLayoutPanel2.TabIndex = 0;
             // 
             // label12
@@ -457,11 +467,21 @@
             label18.TabIndex = 5;
             label18.Text = "SL tồn:";
             // 
+            // labelSoLuongTon
+            // 
+            labelSoLuongTon.Anchor = AnchorStyles.None;
+            labelSoLuongTon.AutoSize = true;
+            labelSoLuongTon.Location = new Point(355, 7);
+            labelSoLuongTon.Name = "labelSoLuongTon";
+            labelSoLuongTon.Size = new Size(17, 18);
+            labelSoLuongTon.TabIndex = 6;
+            labelSoLuongTon.Text = "0";
+            // 
             // label14
             // 
             label14.Anchor = AnchorStyles.None;
             label14.AutoSize = true;
-            label14.Location = new Point(355, 7);
+            label14.Location = new Point(378, 7);
             label14.Name = "label14";
             label14.Size = new Size(74, 18);
             label14.TabIndex = 3;
@@ -470,16 +490,17 @@
             // txtSoLuong
             // 
             txtSoLuong.Anchor = AnchorStyles.None;
-            txtSoLuong.Location = new Point(435, 3);
+            txtSoLuong.Location = new Point(458, 3);
             txtSoLuong.Name = "txtSoLuong";
             txtSoLuong.Size = new Size(100, 26);
             txtSoLuong.TabIndex = 4;
+            txtSoLuong.KeyDown += txtSoLuong_KeyDown;
             // 
             // label15
             // 
             label15.Anchor = AnchorStyles.None;
             label15.AutoSize = true;
-            label15.Location = new Point(541, 7);
+            label15.Location = new Point(564, 7);
             label15.Name = "label15";
             label15.Size = new Size(83, 18);
             label15.TabIndex = 2;
@@ -488,9 +509,9 @@
             // txtCachDung
             // 
             txtCachDung.Anchor = AnchorStyles.None;
-            txtCachDung.Location = new Point(630, 3);
+            txtCachDung.Location = new Point(653, 3);
             txtCachDung.Name = "txtCachDung";
-            txtCachDung.Size = new Size(100, 26);
+            txtCachDung.Size = new Size(118, 26);
             txtCachDung.TabIndex = 3;
             txtCachDung.TextChanged += txtCachDung_TextChanged;
             txtCachDung.KeyDown += txtCachDung_KeyDown;
@@ -498,7 +519,7 @@
             // btnThemThuocUong
             // 
             btnThemThuocUong.Anchor = AnchorStyles.None;
-            btnThemThuocUong.Location = new Point(736, 3);
+            btnThemThuocUong.Location = new Point(777, 3);
             btnThemThuocUong.Name = "btnThemThuocUong";
             btnThemThuocUong.Size = new Size(81, 25);
             btnThemThuocUong.TabIndex = 2;
@@ -511,12 +532,12 @@
             dgvToaThuocUong.AllowUserToAddRows = false;
             dgvToaThuocUong.BackgroundColor = Color.White;
             dgvToaThuocUong.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvToaThuocUong.Columns.AddRange(new DataGridViewColumn[] { colSelect, colMaThuoc, colTenThuoc, colHoatChat, colHamLuong, colCachDung, colSoLuong, colThanhTien });
+            dgvToaThuocUong.Columns.AddRange(new DataGridViewColumn[] { colSelect, colAuto_id, colMaBn1, colMaToa, colMaThuoc, colTenThuoc, colHoatChat, colHamLuong, colDonVi, colCachDung, colSoLuong, colDonGia, colThanhTien });
             dgvToaThuocUong.Dock = DockStyle.Fill;
             dgvToaThuocUong.Location = new Point(3, 43);
             dgvToaThuocUong.Name = "dgvToaThuocUong";
             dgvToaThuocUong.RowHeadersVisible = false;
-            dgvToaThuocUong.Size = new Size(832, 244);
+            dgvToaThuocUong.Size = new Size(867, 265);
             dgvToaThuocUong.TabIndex = 1;
             // 
             // colSelect
@@ -524,35 +545,69 @@
             colSelect.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colSelect.HeaderText = "CH";
             colSelect.Name = "colSelect";
-            colSelect.Width = 70;
+            colSelect.Width = 40;
+            // 
+            // colAuto_id
+            // 
+            colAuto_id.DataPropertyName = "auto_id";
+            colAuto_id.HeaderText = "auto id";
+            colAuto_id.Name = "colAuto_id";
+            colAuto_id.Visible = false;
+            // 
+            // colMaBn1
+            // 
+            colMaBn1.DataPropertyName = "ma_bn";
+            colMaBn1.HeaderText = "Mã BN";
+            colMaBn1.Name = "colMaBn1";
+            colMaBn1.Visible = false;
+            // 
+            // colMaToa
+            // 
+            colMaToa.DataPropertyName = "ma_toa";
+            colMaToa.HeaderText = "Mã toa";
+            colMaToa.Name = "colMaToa";
+            colMaToa.Visible = false;
             // 
             // colMaThuoc
             // 
+            colMaThuoc.DataPropertyName = "ma_thuoc";
             colMaThuoc.HeaderText = "Mã Thuốc";
             colMaThuoc.Name = "colMaThuoc";
             colMaThuoc.Visible = false;
             // 
             // colTenThuoc
             // 
-            colTenThuoc.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colTenThuoc.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colTenThuoc.DataPropertyName = "ten_thuoc";
             colTenThuoc.HeaderText = "Tên Thuốc";
             colTenThuoc.Name = "colTenThuoc";
+            colTenThuoc.Width = 150;
             // 
             // colHoatChat
             // 
+            colHoatChat.DataPropertyName = "hoat_chat";
             colHoatChat.HeaderText = "Hoạt chất";
             colHoatChat.Name = "colHoatChat";
             // 
             // colHamLuong
             // 
             colHamLuong.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colHamLuong.DataPropertyName = "ham_luong";
             colHamLuong.HeaderText = "Hàm lượng";
             colHamLuong.Name = "colHamLuong";
             colHamLuong.Width = 120;
             // 
+            // colDonVi
+            // 
+            colDonVi.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colDonVi.DataPropertyName = "don_vi";
+            colDonVi.HeaderText = "Đơn vị";
+            colDonVi.Name = "colDonVi";
+            // 
             // colCachDung
             // 
             colCachDung.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colCachDung.DataPropertyName = "cach_dung";
             colCachDung.HeaderText = "Cách dùng";
             colCachDung.Name = "colCachDung";
             colCachDung.Width = 120;
@@ -560,13 +615,25 @@
             // colSoLuong
             // 
             colSoLuong.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colSoLuong.DataPropertyName = "so_luong";
             colSoLuong.HeaderText = "SL";
             colSoLuong.Name = "colSoLuong";
             colSoLuong.Width = 70;
             // 
+            // colDonGia
+            // 
+            colDonGia.DataPropertyName = "don_gia";
+            dataGridViewCellStyle1.Format = "#,###";
+            colDonGia.DefaultCellStyle = dataGridViewCellStyle1;
+            colDonGia.HeaderText = "Đơn giá";
+            colDonGia.Name = "colDonGia";
+            // 
             // colThanhTien
             // 
             colThanhTien.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colThanhTien.DataPropertyName = "thanh_tien";
+            dataGridViewCellStyle2.Format = "#,###";
+            colThanhTien.DefaultCellStyle = dataGridViewCellStyle2;
             colThanhTien.HeaderText = "Thành tiền";
             colThanhTien.Name = "colThanhTien";
             colThanhTien.ReadOnly = true;
@@ -581,8 +648,8 @@
             flowLayoutPanel3.Controls.Add(label13);
             flowLayoutPanel3.Controls.Add(txtTongTienThuocUong);
             flowLayoutPanel3.Controls.Add(btnXoaThuocUong);
-            flowLayoutPanel3.Controls.Add(button1);
-            flowLayoutPanel3.Location = new Point(3, 293);
+            flowLayoutPanel3.Controls.Add(btnXoaToa);
+            flowLayoutPanel3.Location = new Point(3, 314);
             flowLayoutPanel3.Name = "flowLayoutPanel3";
             flowLayoutPanel3.Size = new Size(832, 38);
             flowLayoutPanel3.TabIndex = 2;
@@ -605,6 +672,9 @@
             cboxToaThuocUong.Name = "cboxToaThuocUong";
             cboxToaThuocUong.Size = new Size(63, 26);
             cboxToaThuocUong.TabIndex = 6;
+            cboxToaThuocUong.SelectedIndexChanged += cboxToaThuocUong_SelectedIndexChanged;
+            cboxToaThuocUong.SelectionChangeCommitted += cboxToaThuocUong_SelectionChangeCommitted;
+            cboxToaThuocUong.TextUpdate += cboxToaThuocUong_TextUpdate;
             // 
             // btnInToaThuocUong
             // 
@@ -615,6 +685,7 @@
             btnInToaThuocUong.TabIndex = 0;
             btnInToaThuocUong.Text = "In toa";
             btnInToaThuocUong.UseVisualStyleBackColor = true;
+            btnInToaThuocUong.Click += btnInToaThuocUong_Click;
             // 
             // btnInToaKhongThuocUong
             // 
@@ -653,29 +724,32 @@
             btnXoaThuocUong.TabIndex = 3;
             btnXoaThuocUong.Text = "Xóa thuốc";
             btnXoaThuocUong.UseVisualStyleBackColor = true;
+            btnXoaThuocUong.Click += btnXoaThuocUong_Click;
             // 
-            // button1
+            // btnXoaToa
             // 
-            button1.Anchor = AnchorStyles.None;
-            button1.Location = new Point(712, 3);
-            button1.Name = "button1";
-            button1.Size = new Size(87, 26);
-            button1.TabIndex = 7;
-            button1.Text = "Xóa toa";
-            button1.UseVisualStyleBackColor = true;
+            btnXoaToa.Anchor = AnchorStyles.None;
+            btnXoaToa.Location = new Point(712, 3);
+            btnXoaToa.Name = "btnXoaToa";
+            btnXoaToa.Size = new Size(87, 26);
+            btnXoaToa.TabIndex = 7;
+            btnXoaToa.Text = "Xóa toa";
+            btnXoaToa.UseVisualStyleBackColor = true;
+            btnXoaToa.Click += btnXoaToa_Click;
             // 
             // tabToaThuocTiem
             // 
             tabToaThuocTiem.Location = new Point(4, 27);
             tabToaThuocTiem.Name = "tabToaThuocTiem";
             tabToaThuocTiem.Padding = new Padding(3);
-            tabToaThuocTiem.Size = new Size(844, 340);
+            tabToaThuocTiem.Size = new Size(879, 361);
             tabToaThuocTiem.TabIndex = 1;
             tabToaThuocTiem.Text = "Toa thuốc tiêm";
             tabToaThuocTiem.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(txtNgayHenTaiKham);
             groupBox3.Controls.Add(textBox1);
             groupBox3.Controls.Add(label19);
             groupBox3.Controls.Add(btnToaThuocMau);
@@ -688,21 +762,30 @@
             groupBox3.Dock = DockStyle.Fill;
             groupBox3.Location = new Point(3, 153);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(852, 122);
+            groupBox3.Size = new Size(887, 122);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
             // 
+            // txtNgayHenTaiKham
+            // 
+            txtNgayHenTaiKham.Location = new Point(142, 77);
+            txtNgayHenTaiKham.Name = "txtNgayHenTaiKham";
+            txtNgayHenTaiKham.Size = new Size(37, 26);
+            txtNgayHenTaiKham.TabIndex = 15;
+            txtNgayHenTaiKham.Text = "0";
+            txtNgayHenTaiKham.TextChanged += txtNgayHenTaiKham_TextChanged;
+            // 
             // textBox1
             // 
-            textBox1.Location = new Point(520, 74);
+            textBox1.Location = new Point(533, 77);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(321, 26);
+            textBox1.Size = new Size(308, 26);
             textBox1.TabIndex = 14;
             // 
             // label19
             // 
             label19.AutoSize = true;
-            label19.Location = new Point(451, 77);
+            label19.Location = new Point(472, 80);
             label19.Name = "label19";
             label19.Size = new Size(55, 18);
             label19.TabIndex = 13;
@@ -710,11 +793,11 @@
             // 
             // btnToaThuocMau
             // 
-            btnToaThuocMau.Location = new Point(306, 76);
+            btnToaThuocMau.Location = new Point(329, 77);
             btnToaThuocMau.Name = "btnToaThuocMau";
             btnToaThuocMau.Size = new Size(133, 26);
             btnToaThuocMau.TabIndex = 12;
-            btnToaThuocMau.Text = "Toa thuốc mẫu";
+            btnToaThuocMau.Text = "Toa uống mẫu";
             btnToaThuocMau.UseVisualStyleBackColor = true;
             // 
             // txtGhiChu
@@ -747,7 +830,7 @@
             // 
             dtpNgayHenTaiKham.CustomFormat = "dd/MM/yyyy";
             dtpNgayHenTaiKham.Format = DateTimePickerFormat.Custom;
-            dtpNgayHenTaiKham.Location = new Point(157, 76);
+            dtpNgayHenTaiKham.Location = new Point(185, 77);
             dtpNgayHenTaiKham.Name = "dtpNgayHenTaiKham";
             dtpNgayHenTaiKham.Size = new Size(138, 26);
             dtpNgayHenTaiKham.TabIndex = 9;
@@ -783,7 +866,7 @@
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle());
-            tableLayoutPanel3.Size = new Size(414, 655);
+            tableLayoutPanel3.Size = new Size(414, 676);
             tableLayoutPanel3.TabIndex = 1;
             // 
             // dgvTimBenhNhan
@@ -797,7 +880,7 @@
             dgvTimBenhNhan.Name = "dgvTimBenhNhan";
             dgvTimBenhNhan.ReadOnly = true;
             dgvTimBenhNhan.RowHeadersVisible = false;
-            dgvTimBenhNhan.Size = new Size(408, 513);
+            dgvTimBenhNhan.Size = new Size(408, 534);
             dgvTimBenhNhan.TabIndex = 1;
             dgvTimBenhNhan.CellMouseClick += dgvTimBenhNhan_CellMouseClick;
             // 
@@ -954,7 +1037,7 @@
             flowLayoutPanel4.Controls.Add(rdoTatCa);
             flowLayoutPanel4.Controls.Add(rdoDaKham);
             flowLayoutPanel4.Controls.Add(rdoChoKham);
-            flowLayoutPanel4.Location = new Point(3, 622);
+            flowLayoutPanel4.Location = new Point(3, 643);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
             flowLayoutPanel4.Size = new Size(340, 30);
             flowLayoutPanel4.TabIndex = 2;
@@ -997,7 +1080,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1284, 661);
+            ClientSize = new Size(1319, 682);
             Controls.Add(tableLayoutPanel1);
             Name = "frmPhongKham";
             Text = "frmPhongKham";
@@ -1099,15 +1182,7 @@
         private ComboBox cboxToaThuocUong;
         private TextBox textBox1;
         private Label label19;
-        private DataGridViewCheckBoxColumn colSelect;
-        private DataGridViewTextBoxColumn colMaThuoc;
-        private DataGridViewTextBoxColumn colTenThuoc;
-        private DataGridViewTextBoxColumn colHoatChat;
-        private DataGridViewTextBoxColumn colHamLuong;
-        private DataGridViewTextBoxColumn colCachDung;
-        private DataGridViewTextBoxColumn colSoLuong;
-        private DataGridViewTextBoxColumn colThanhTien;
-        private Button button1;
+        private Button btnXoaToa;
         private DataGridViewTextBoxColumn colMaBN;
         private DataGridViewTextBoxColumn colHoTen;
         private DataGridViewTextBoxColumn colNamSinh;
@@ -1117,5 +1192,20 @@
         private DataGridViewTextBoxColumn colNgayNhap;
         private DataGridViewCheckBoxColumn colDaKham;
         private DataGridViewCheckBoxColumn colKhoa;
+        private Label labelSoLuongTon;
+        private TextBox txtNgayHenTaiKham;
+        private DataGridViewCheckBoxColumn colSelect;
+        private DataGridViewTextBoxColumn colAuto_id;
+        private DataGridViewTextBoxColumn colMaBn1;
+        private DataGridViewTextBoxColumn colMaToa;
+        private DataGridViewTextBoxColumn colMaThuoc;
+        private DataGridViewTextBoxColumn colTenThuoc;
+        private DataGridViewTextBoxColumn colHoatChat;
+        private DataGridViewTextBoxColumn colHamLuong;
+        private DataGridViewTextBoxColumn colDonVi;
+        private DataGridViewTextBoxColumn colCachDung;
+        private DataGridViewTextBoxColumn colSoLuong;
+        private DataGridViewTextBoxColumn colDonGia;
+        private DataGridViewTextBoxColumn colThanhTien;
     }
 }
