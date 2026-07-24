@@ -638,7 +638,7 @@
             // 
             cboxToaThuocUong.Anchor = AnchorStyles.None;
             cboxToaThuocUong.FormattingEnabled = true;
-            cboxToaThuocUong.Location = new Point(128, 4);
+            cboxToaThuocUong.Location = new Point(128, 3);
             cboxToaThuocUong.Name = "cboxToaThuocUong";
             cboxToaThuocUong.Size = new Size(63, 26);
             cboxToaThuocUong.TabIndex = 6;
