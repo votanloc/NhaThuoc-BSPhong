@@ -1,4 +1,4 @@
-﻿namespace NhaThuoc_BSPhong.Forms
+﻿namespace PhongKham.Forms
 {
     partial class frmHome
     {
@@ -58,7 +58,7 @@
             pnlMain.Font = new Font("Arial", 15.75F, FontStyle.Bold);
             pnlMain.Location = new Point(0, 0);
             pnlMain.Name = "pnlMain";
-            pnlMain.Size = new Size(1373, 763);
+            pnlMain.Size = new Size(1284, 661);
             pnlMain.TabIndex = 1;
             // 
             // tableLayoutPanel1
@@ -75,7 +75,7 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.Size = new Size(1373, 763);
+            tableLayoutPanel1.Size = new Size(1284, 661);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
@@ -88,9 +88,9 @@
             panel1.Controls.Add(label1);
             panel1.Controls.Add(btnNhapKho1);
             panel1.Controls.Add(dateTimePicker1);
-            panel1.Location = new Point(403, 269);
+            panel1.Location = new Point(358, 223);
             panel1.Name = "panel1";
-            panel1.Size = new Size(567, 223);
+            panel1.Size = new Size(567, 214);
             panel1.TabIndex = 6;
             // 
             // btnDanhMuc
@@ -171,7 +171,7 @@
             panel2.Controls.Add(label3);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(label2);
-            panel2.Location = new Point(214, 3);
+            panel2.Location = new Point(170, 3);
             panel2.Name = "panel2";
             panel2.Size = new Size(944, 141);
             panel2.TabIndex = 7;
@@ -231,11 +231,12 @@
             // 
             AutoScaleDimensions = new SizeF(9F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1373, 763);
+            ClientSize = new Size(1284, 661);
             Controls.Add(pnlMain);
             Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4);
             Name = "frmHome";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "frmHome";
             WindowState = FormWindowState.Maximized;
             Load += frmHome_Load;

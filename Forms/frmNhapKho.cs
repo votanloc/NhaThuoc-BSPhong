@@ -1,7 +1,7 @@
 ﻿using MySqlConnector;
 using System.Data;
 
-namespace NhaThuoc_BSPhong.Forms
+namespace PhongKham.Forms
 {
     public partial class frmNhapKho : Form
     {
@@ -35,7 +35,7 @@ namespace NhaThuoc_BSPhong.Forms
                     txtTimThuoc.Text = row["ten_thuoc"].ToString();
                     ucSearchCD.Visible = false;
 
-                    txtSoLuong.Focus();
+                    txtLSX.Focus();
 
                 }
                 //else if (activeTextBox == txtDiaChi)
@@ -232,9 +232,9 @@ order by ngay_nhap asc";
             }
 
             DataTable dtDiachi = Helpers.MySqlHelper.ExecuteDataTable(
-                @"use nhathuoc_bsphong;
+                @"
 SELECT 
-    ma_thuoc, ten_thuoc, hoat_chat, don_vi, gia_nhap 
+    ma_thuoc, ten_thuoc, hoat_chat, don_vi_le, gia_nhap 
 FROM
     dm_thuoc
 WHERE
@@ -286,6 +286,7 @@ WHERE
             txtTimThuoc.Text = "";
             txtSoLuong.Text = "";
             dtpHSD.Value = DateTime.Now;
+            txtTimThuoc.Focus();
         }
 
         private void themThuocVaoPhieuNK()
@@ -311,7 +312,8 @@ WHERE
         ma_phieu_nhap,
         ma_thuoc,
         ten_thuoc,
-        don_vi,
+        lsx,
+        don_vi_le,
         so_luong,
         don_gia,
         thanh_tien,
@@ -321,7 +323,8 @@ WHERE
         @ma_phieu_nhap,
         dm.ma_thuoc,
         dm.ten_thuoc,
-        dm.don_vi,
+        @lsx,
+        dm.don_vi_le,
         @so_luong,
         dm.gia_nhap,
         dm.gia_nhap * @so_luong,
@@ -333,6 +336,7 @@ WHERE
                 query,
                 new MySqlParameter("@ma_phieu_nhap", txtMaPhieuNhap.Text.Trim()),
                 new MySqlParameter("@ma_thuoc", ma_thuoc),
+                new MySqlParameter("@lsx", txtLSX.Text.Trim()),
                 new MySqlParameter("@so_luong", soLuong),
                 new MySqlParameter("@hsd", dtpHSD.Value.Date)
             );
@@ -342,11 +346,11 @@ WHERE
         {
             dgvNhapKhoChiTiet.DataSource = Helpers.MySqlHelper.ExecuteDataTable(
                 @"SELECT 
-                    auto_id,ma_phieu_nhap,ma_thuoc, ten_thuoc, don_vi, so_luong, don_gia , thanh_tien , hsd 
+                    auto_id,ma_phieu_nhap,ma_thuoc, ten_thuoc, don_vi_le, so_luong, don_gia , thanh_tien , hsd , lsx 
                 FROM 
                     tbl_nk_ct 
                 WHERE 
-                    ma_phieu_nhap = @ma_phieu_nhap and delete_at is null",
+                    ma_phieu_nhap = @ma_phieu_nhap and delete_at is null order by date_in desc",
                 new MySqlParameter("@ma_phieu_nhap", txtMaPhieuNhap.Text.Trim())
             );
 
@@ -442,6 +446,14 @@ WHERE
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void txtLSX_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                txtSoLuong.Focus();
             }
         }
     }

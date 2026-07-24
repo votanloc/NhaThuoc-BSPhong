@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySqlConnector;
 
-namespace NhaThuoc_BSPhong.Helpers
+namespace PhongKham.Helpers
 {
     internal class MySqlHelper
     {
@@ -25,7 +26,17 @@ namespace NhaThuoc_BSPhong.Helpers
         {
             using var conn = new MySqlConnection(MYSQL_CONN);
             using var cmd = new MySqlCommand(sql, conn);
-            if (prms != null) cmd.Parameters.AddRange(prms);
+
+            if (prms != null)
+            {
+                cmd.Parameters.AddRange(prms);
+
+                foreach (MySqlParameter p in cmd.Parameters)
+                {
+                    Debug.WriteLine($"{p.ParameterName} = [{p.Value}] ({p.Value?.GetType().Name})");
+                }
+            }
+
             conn.Open();
             return cmd.ExecuteNonQuery();
         }

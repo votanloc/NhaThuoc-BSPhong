@@ -63,15 +63,26 @@ namespace LPsoft.Helpers
                 else
                     col.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-                // 2. Xử lý định dạng (QUAN TRỌNG: reset về mặc định nếu không có format)
-                if (colFormats != null && colFormats.ContainsKey(col.Name))
+                // 2. Xử lý định dạng (Cả Số/Giá tiền lẫn Ngày tháng)
+                if (colFormats != null && colFormats.TryGetValue(col.Name, out string format))
                 {
-                    col.DefaultCellStyle.Format = colFormats[col.Name];
-                    col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    col.DefaultCellStyle.Format = format;
+                    col.DefaultCellStyle.FormatProvider = System.Globalization.CultureInfo.InvariantCulture;
+
+                    // TỰ ĐỘNG CĂN LỀ DỰA TRÊN CHUỖI FORMAT:
+                    // Nếu format chứa các ký tự ngày tháng (d, M, y, H, m) -> Căn giữa
+                    if (format.Contains("d") || format.Contains("M") || format.Contains("y") || format.Contains("H"))
+                    {
+                        col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    }
+                    else // Ngược lại là format số / giá tiền (#,###, N0...) -> Căn phải
+                    {
+                        col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    }
                 }
                 else
                 {
-                    // Nếu không yêu cầu format, trả về mặc định để tránh dính định dạng của bảng trước
+                    // Trả về mặc định (chữ/chuỗi) -> Căn trái
                     col.DefaultCellStyle.Format = "";
                     col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
                 }

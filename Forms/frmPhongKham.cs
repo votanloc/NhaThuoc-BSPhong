@@ -14,7 +14,7 @@ using FastReport.Export.PdfSimple;
 using FastReport;
 using MySqlConnector;
 
-namespace NhaThuoc_BSPhong.Forms
+namespace PhongKham.Forms
 {
     public partial class frmPhongKham : Form
     {
@@ -47,11 +47,11 @@ namespace NhaThuoc_BSPhong.Forms
                 if (activeTextBox == txtTimThuocUong)
                 {
                     ma_thuoc = row["ma_thuoc"].ToString();
-                    txtTimThuocUong.Text = row["ten_thuoc"].ToString();
-                    labelSoLuongTon.Text = row["ton_kho"].ToString();
+                    txtTimThuocUong.Text = row["Tên thuốc"].ToString();
+                    labelSoLuongTon.Text = row["Tồn kho"].ToString();
                     ucSearchCD.Visible = false;
 
-                    txtSoLuong.Focus();
+                    txtNgayDung.Focus();
 
                 }
                 else if (activeTextBox == txtCachDung)
@@ -60,7 +60,7 @@ namespace NhaThuoc_BSPhong.Forms
 
                     ucSearchCD.Visible = false;
 
-                    btnThemThuocUong.Focus();
+                    txtSoLuong.Focus();
                 }
                 ucSearchCD.Visible = false;
             };
@@ -138,16 +138,24 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
         {
             dgvToaThuocUong.DataSource = Helpers.MySqlHelper.ExecuteDataTable(
                 @"SELECT 
+                    auto_id,
                     ma_bn,
                     ma_toa,
                     ma_thuoc,
                     ten_thuoc,
                     hoat_chat,
                     ham_luong,
+                    don_vi_le,
+                    ngay_dung,
+                    sang,
+                    trua,
+                    chieu,
+                    toi,
                     cach_dung,
                     so_luong,
                     don_gia,
-                    thanh_tien
+                    thanh_tien,
+                    khong_lay 
                 FROM
                     tbl_tu_ct
                 WHERE ma_bn = @ma_bn AND ma_toa = @ma_toa AND 
@@ -250,7 +258,7 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
                     ten_thuoc,
                     hoat_chat, 
                     ham_luong,
-                    don_vi, 
+                    don_vi_le, 
                     cach_dung,
                     so_luong,
                     don_gia,
@@ -386,34 +394,42 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
             }
 
             DataTable dtTimThuocUong = Helpers.MySqlHelper.ExecuteDataTable(
-                @"SELECT
-    ma_thuoc,
-    ten_thuoc,
-    hoat_chat,
-    ton_kho 
-FROM vw_ton_kho 
+                @"
+SELECT 
+    t1.ma_thuoc,
+    t1.ten_thuoc as 'Tên thuốc',
+    t1.hoat_chat as 'Hoạt chất',
+    t1.don_vi_le as 'Đơn vị',
+    ROUND(t2.ton_kho, 0) AS 'Tồn kho',
+    t2.hsd as 'HSD'
+FROM
+    dm_thuoc t1
+        LEFT JOIN
+    tbl_ton_kho t2 ON t1.ma_thuoc = t2.ma_thuoc
 WHERE
-    (ten_thuoc like @ten_thuoc
-     OR hoat_chat like @ten_thuoc) AND ton_kho > 0 
-ORDER BY ten_thuoc ASC;",
+    (ten_thuoc LIKE @ten_thuoc
+        OR hoat_chat LIKE @ten_thuoc)
+        AND t1.khoa = '0'
+        AND t2.ton_kho > 0
+ORDER BY t2.hsd ASC;",
                 new MySqlParameter("@ten_thuoc", timThuocUong)
             );
 
+
             if (dtTimThuocUong != null && dtTimThuocUong.Rows.Count > 0)
             {
-                // 1. Điền dữ liệu và định dạng
-                var widths = new Dictionary<string, int> { { "ma_thuoc", 100 }, { "ten_thuoc", 400 }, { "hoat_chat", 400 }, { "ton_kho", 100 } };
-                //var formats = new Dictionary<string, string> { { "Gia", "#,###" } };
-                ucSearchCD.FillData(dtTimThuocUong, widths, null);
+                var widths = new Dictionary<string, int> { { "ma_thuoc", 0 }, { "Tên thuốc", 300 }, { "Hoạt chất", 300 }, { "Đơn vị", 70 }, { "Tồn kho", 100 }, { "HSD", 100 } };
 
-                // 2. TÍNH TOÁN VỊ TRÍ ĐỂ VẼ NGAY DƯỚI TEXTBOX
-                // Lấy tọa độ của TextBox so với Form chính (bất kể nó nằm trong Panel nào)
+                var formats = new Dictionary<string, string> { { "HSD", "dd/MM/yyyy" } };
+
+                ucSearchCD.FillData(dtTimThuocUong, widths, formats);
+
                 Point locationOnForm = txtTimThuocUong.Parent.PointToScreen(txtTimThuocUong.Location);
                 locationOnForm = this.PointToClient(locationOnForm);
 
                 ucSearchCD.Left = locationOnForm.X;
                 ucSearchCD.Top = locationOnForm.Y + txtTimThuocUong.Height;
-                ucSearchCD.Width = 1020; // Độ rộng của bảng kết quả
+                ucSearchCD.Width = 900; // Độ rộng của bảng kết quả
                 ucSearchCD.Height = 150; // Chiều cao của bảng kết quả
 
                 ucSearchCD.Visible = true;
@@ -486,11 +502,98 @@ ORDER BY ten_thuoc ASC;",
 
         private void btnThemThuocUong_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtTimThuocUong.Text))
+            {
+                MessageBox.Show("Vui lòng chọn thuốc uống trước khi thêm!",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtTimThuocUong.Focus();
+                return;
+            }
+
+            double soLuong = ParseSoLuong(txtSoLuong.Text);
+            double soLuongTon = ParseSoLuong(labelSoLuongTon.Text);
+
+            if (soLuong <= 0)
+            {
+                MessageBox.Show("Vui lòng nhập số lượng hợp lệ!",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSoLuong.Focus();
+                return;
+            }
+
+            if (soLuong > soLuongTon)
+            {
+                MessageBox.Show(
+                    $"Số lượng xuất ({soLuong}) vượt quá số lượng tồn ({soLuongTon})!",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                txtSoLuong.Focus();
+                txtSoLuong.SelectAll();
+                return;
+            }
             themThuocUong();
+            txtSang.Clear();
+            txtTrua.Clear();
+            txtChieu.Clear();
+            txtToi.Clear();
+            txtCachDung.Clear();
+            txtSoLuong.Clear();
             txtTimThuocUong.Clear();
             labelSoLuongTon.Text = "0";
-            txtSoLuong.Clear();
+
             loadChiTietToaThuocUong();
+
+            txtTimThuocUong.Focus();
+        }
+        private double ParseSoLuong(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+                return 0;
+
+            input = input.Trim().Replace(',', '.');
+
+            // Hỗ trợ phân số: 1/2, 1/3...
+            if (input.Contains("/"))
+            {
+                string[] parts = input.Split('/');
+
+                if (parts.Length == 2 &&
+                    double.TryParse(parts[0], out double tu) &&
+                    double.TryParse(parts[1], out double mau) &&
+                    mau != 0)
+                {
+                    return tu / mau;
+                }
+            }
+
+            // Hỗ trợ số thập phân
+            if (double.TryParse(
+                input,
+                System.Globalization.NumberStyles.Any,
+                System.Globalization.CultureInfo.InvariantCulture,
+                out double value))
+            {
+                return value;
+            }
+
+            return 0;
+        }
+
+        private void tinhToanSoLuongThuocXuat()
+        {
+            double soNgayDung = ParseSoLuong(txtNgayDung.Text);
+
+            double soLuongSang = ParseSoLuong(txtSang.Text);
+            double soLuongTrua = ParseSoLuong(txtTrua.Text);
+            double soLuongChieu = ParseSoLuong(txtChieu.Text);
+            double soLuongToi = ParseSoLuong(txtToi.Text);
+
+            double tongSoLuong =
+                (soLuongSang + soLuongTrua + soLuongChieu + soLuongToi) * soNgayDung;
+
+            txtSoLuong.Text = tongSoLuong.ToString("0.##");
         }
 
         private void themThuocUong()
@@ -526,7 +629,7 @@ ORDER BY ten_thuoc ASC;",
         ten_thuoc,
         hoat_chat,
         ham_luong,
-        don_vi,
+        don_vi_le,
         cach_dung,
         so_luong,
         don_gia,
@@ -539,7 +642,7 @@ ORDER BY ten_thuoc ASC;",
         dm.ten_thuoc,
         dm.hoat_chat,
         dm.ham_luong,
-        dm.don_vi,
+        dm.don_vi_le,
         @cach_dung,
         @so_luong,
         dm.gia_ban,
@@ -562,16 +665,8 @@ ORDER BY ten_thuoc ASC;",
             if (int.TryParse(txtNgayHenTaiKham.Text.Trim(), out int ngayHen))
             {
                 dtpNgayHenTaiKham.Value = DateTime.Today.AddDays(ngayHen);
+                txtNgayDung.Text = txtNgayHenTaiKham.Text.Trim();
             }
-        }
-
-        private void cboxToaThuocUong_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //loadToaThuocUongChiTiet();
-        }
-
-        private void cboxToaThuocUong_TextUpdate(object sender, EventArgs e)
-        {
         }
 
         private void cboxToaThuocUong_SelectionChangeCommitted(object sender, EventArgs e)
@@ -813,6 +908,135 @@ ORDER BY ten_thuoc ASC;",
         }
 
         private void txtSoLuong_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnThemThuocUong.Focus();
+            }
+        }
+
+        private void dgvToaThuocUong_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            DataGridViewRow row = dgvToaThuocUong.Rows[e.RowIndex];
+
+            string colName = dgvToaThuocUong.Columns[e.ColumnIndex].Name;
+
+
+            double ngayDung = ParseSoLuong(row.Cells["colNgayDung"].Value?.ToString());
+            double sang = ParseSoLuong(row.Cells["colSang"].Value?.ToString());
+            double trua = ParseSoLuong(row.Cells["colTrua"].Value?.ToString());
+            double chieu = ParseSoLuong(row.Cells["colChieu"].Value?.ToString());
+            double toi = ParseSoLuong(row.Cells["colToi"].Value?.ToString());
+
+            if (colName == "colNgayDung" ||
+                colName == "colSang" ||
+                colName == "colTrua" ||
+                colName == "colChieu" ||
+                colName == "colToi")
+            {
+                double soLuong = (sang + trua + chieu + toi) * ngayDung;
+
+                row.Cells["colSoLuong"].Value = soLuong % 1 == 0
+                    ? soLuong.ToString("0")
+                    : soLuong.ToString("0.##");
+            }
+
+
+            // Tính thành tiền
+            double sl = ParseSoLuong(Convert.ToString(row.Cells["colSoLuong"].Value));
+
+            decimal.TryParse(Convert.ToString(row.Cells["colDonGia"].Value), out decimal donGia);
+
+            decimal thanhTien = (decimal)sl * donGia;
+
+            row.Cells["colThanhTien"].Value = thanhTien;
+
+            // Update Database
+            Helpers.MySqlHelper.ExecuteNonQuery(
+            @"UPDATE tbl_tu_ct
+      SET
+            ngay_dung = @ngay_dung,
+            sang      = @sang,
+            trua      = @trua,
+            chieu     = @chieu,
+            toi       = @toi,
+            so_luong  = @so_luong,
+            thanh_tien= @thanh_tien
+      WHERE auto_id=@auto_id",
+
+              new MySqlParameter("@ngay_dung", ngayDung),
+              new MySqlParameter("@sang", sang),
+              new MySqlParameter("@trua", trua),
+              new MySqlParameter("@chieu", chieu),
+              new MySqlParameter("@toi", toi),
+              new MySqlParameter("@so_luong", sl),
+              new MySqlParameter("@thanh_tien", thanhTien),
+              new MySqlParameter("@auto_id", row.Cells["colAuto_id"].Value));
+        }
+
+        private void txtNgayDung_TextChanged(object sender, EventArgs e)
+        {
+            tinhToanSoLuongThuocXuat();
+        }
+
+        private void txtSang_TextChanged(object sender, EventArgs e)
+        {
+            tinhToanSoLuongThuocXuat();
+        }
+
+        private void txtTrua_TextChanged(object sender, EventArgs e)
+        {
+            tinhToanSoLuongThuocXuat();
+
+        }
+
+        private void txtChieu_TextChanged(object sender, EventArgs e)
+        {
+            tinhToanSoLuongThuocXuat();
+
+        }
+
+        private void txtToi_TextChanged(object sender, EventArgs e)
+        {
+            tinhToanSoLuongThuocXuat();
+
+        }
+
+        private void txtNgayDung_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtSang.Focus();
+            }
+        }
+
+        private void txtSang_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtTrua.Focus();
+            }
+        }
+
+        private void txtTrua_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtChieu.Focus();
+            }
+        }
+
+        private void txtChieu_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtToi.Focus();
+            }
+        }
+
+        private void txtToi_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {

@@ -47,4 +47,17 @@ Danh mục
 		+ xóa report
 
 
+hoàn thành - sửa update
+
+hoàn thành - danh mục có giá lẻ
+hoàn thành - nhập thuốc bị lỗi
+hoàn thành - chẩn đoán xuất excel
+
+
+hoàn thiện thêm toa thuốc
+thêm hoàn thuốc
+
+
+
+
 	

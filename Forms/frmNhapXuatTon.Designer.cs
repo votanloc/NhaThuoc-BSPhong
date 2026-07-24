@@ -1,4 +1,4 @@
-﻿namespace NhaThuoc_BSPhong.Forms
+﻿namespace PhongKham.Forms
 {
     partial class frmNhapXuatTon
     {

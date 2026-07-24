@@ -5,7 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Windows.Forms;
 
-namespace NhaThuoc_BSPhong
+namespace PhongKham
 {
     public class Export
     {
@@ -48,7 +48,7 @@ namespace NhaThuoc_BSPhong
 
                 string fileName = Path.Combine(
                     Path.GetTempPath(),
-                    "BookLPsoft.xlsx");
+                    "Book1.xlsx");
 
                 using (XLWorkbook wb = new XLWorkbook())
                 {

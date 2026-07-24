@@ -1,4 +1,4 @@
-﻿namespace NhaThuoc_BSPhong.Forms
+﻿namespace PhongKham.Forms
 {
     partial class frmDangNhap
     {
@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDangNhap));
             tableLayoutPanel1 = new TableLayoutPanel();
             groupBox1 = new GroupBox();
-            label1 = new Label();
-            label2 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            checkBox1 = new CheckBox();
-            btnDangNhap = new Button();
             btnThoat = new Button();
+            btnDangNhap = new Button();
+            checkBox1 = new CheckBox();
+            textBox2 = new TextBox();
+            textBox1 = new TextBox();
+            label2 = new Label();
+            label1 = new Label();
             tableLayoutPanel1.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -50,7 +51,7 @@
             tableLayoutPanel1.Controls.Add(groupBox1, 1, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
-            tableLayoutPanel1.Margin = new Padding(4, 4, 4, 4);
+            tableLayoutPanel1.Margin = new Padding(4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
@@ -69,22 +70,65 @@
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(97, 36);
-            groupBox1.Margin = new Padding(4, 4, 4, 4);
+            groupBox1.Margin = new Padding(4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(4, 4, 4, 4);
+            groupBox1.Padding = new Padding(4);
             groupBox1.Size = new Size(258, 176);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             // 
-            // label1
+            // btnThoat
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(22, 23);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(80, 18);
-            label1.TabIndex = 0;
-            label1.Text = "Tài khoản:";
+            btnThoat.Location = new Point(141, 121);
+            btnThoat.Margin = new Padding(4);
+            btnThoat.Name = "btnThoat";
+            btnThoat.Size = new Size(96, 28);
+            btnThoat.TabIndex = 6;
+            btnThoat.Text = "Thoát";
+            btnThoat.UseVisualStyleBackColor = true;
+            // 
+            // btnDangNhap
+            // 
+            btnDangNhap.Location = new Point(22, 121);
+            btnDangNhap.Margin = new Padding(4);
+            btnDangNhap.Name = "btnDangNhap";
+            btnDangNhap.Size = new Size(111, 28);
+            btnDangNhap.TabIndex = 5;
+            btnDangNhap.Text = "Đăng nhập";
+            btnDangNhap.UseVisualStyleBackColor = true;
+            btnDangNhap.Click += btnDangNhap_Click;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Checked = true;
+            checkBox1.CheckState = CheckState.Checked;
+            checkBox1.Location = new Point(22, 91);
+            checkBox1.Margin = new Padding(4);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(122, 22);
+            checkBox1.TabIndex = 4;
+            checkBox1.Text = "Lưu mật khẩu";
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(110, 57);
+            textBox2.Margin = new Padding(4);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(127, 26);
+            textBox2.TabIndex = 3;
+            textBox2.Text = "lpsoft.com";
+            textBox2.UseSystemPasswordChar = true;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(110, 20);
+            textBox1.Margin = new Padding(4);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(127, 26);
+            textBox1.TabIndex = 2;
+            textBox1.Text = "admin";
             // 
             // label2
             // 
@@ -96,58 +140,15 @@
             label2.TabIndex = 1;
             label2.Text = "Mật khẩu:";
             // 
-            // textBox1
+            // label1
             // 
-            textBox1.Location = new Point(110, 20);
-            textBox1.Margin = new Padding(4, 4, 4, 4);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(127, 26);
-            textBox1.TabIndex = 2;
-            textBox1.Text = "admin";
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(110, 57);
-            textBox2.Margin = new Padding(4, 4, 4, 4);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(127, 26);
-            textBox2.TabIndex = 3;
-            textBox2.Text = "lpsoft.com";
-            textBox2.UseSystemPasswordChar = true;
-            // 
-            // checkBox1
-            // 
-            checkBox1.AutoSize = true;
-            checkBox1.Checked = true;
-            checkBox1.CheckState = CheckState.Checked;
-            checkBox1.Location = new Point(22, 91);
-            checkBox1.Margin = new Padding(4, 4, 4, 4);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(122, 22);
-            checkBox1.TabIndex = 4;
-            checkBox1.Text = "Lưu mật khẩu";
-            checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // btnDangNhap
-            // 
-            btnDangNhap.Location = new Point(22, 121);
-            btnDangNhap.Margin = new Padding(4, 4, 4, 4);
-            btnDangNhap.Name = "btnDangNhap";
-            btnDangNhap.Size = new Size(111, 28);
-            btnDangNhap.TabIndex = 5;
-            btnDangNhap.Text = "Đăng nhập";
-            btnDangNhap.UseVisualStyleBackColor = true;
-            btnDangNhap.Click += btnDangNhap_Click;
-            // 
-            // btnThoat
-            // 
-            btnThoat.Location = new Point(141, 121);
-            btnThoat.Margin = new Padding(4, 4, 4, 4);
-            btnThoat.Name = "btnThoat";
-            btnThoat.Size = new Size(96, 28);
-            btnThoat.TabIndex = 6;
-            btnThoat.Text = "Thoát";
-            btnThoat.UseVisualStyleBackColor = true;
+            label1.AutoSize = true;
+            label1.Location = new Point(22, 23);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(80, 18);
+            label1.TabIndex = 0;
+            label1.Text = "Tài khoản:";
             // 
             // frmDangNhap
             // 
@@ -156,7 +157,8 @@
             ClientSize = new Size(452, 248);
             Controls.Add(tableLayoutPanel1);
             Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Margin = new Padding(4, 4, 4, 4);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(4);
             Name = "frmDangNhap";
             Text = "Đăng nhập";
             WindowState = FormWindowState.Maximized;

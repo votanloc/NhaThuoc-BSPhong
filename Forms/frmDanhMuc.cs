@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace NhaThuoc_BSPhong.Forms
+namespace PhongKham.Forms
 {
     public partial class frmDanhMuc : Form
     {
@@ -32,7 +32,8 @@ namespace NhaThuoc_BSPhong.Forms
             }
             else if (tabDanhMuc.SelectedTab == tabDanhMucThuoc)
             {
-                loadDanhMucThuoc();
+                Helpers.DebounceManager.Execute("loadDanhMucThuoc", 100, loadDanhMucThuoc);
+                loadNhomThuoc();
             }
             else if (tabDanhMuc.SelectedTab == tabCachDung)
             {
@@ -44,19 +45,70 @@ namespace NhaThuoc_BSPhong.Forms
             }
         }
 
-        private void loadNhomThuoc() 
-        { 
-            
-        }
-
-        private void loadDanhMucThuoc() 
+        private void loadNhomThuoc()
         {
-            
+            var dt = Helpers.MySqlHelper.ExecuteDataTable(@"
+                SELECT DISTINCT nhom_thuoc
+                FROM dm_nhom 
+                WHERE nhom_thuoc IS NOT NULL AND nhom_thuoc <> ''
+                ORDER BY nhom_thuoc;");
+
+            // cbox tìm kiếm
+            cboxTimNhomThuoc.DropDownWidth = 200;
+            cboxTimNhomThuoc.DropDownHeight = 200;
+            cboxTimNhomThuoc.DataSource = dt.Copy();
+            cboxTimNhomThuoc.DisplayMember = "nhom_thuoc";
+            cboxTimNhomThuoc.ValueMember = "nhom_thuoc";
+            cboxTimNhomThuoc.SelectedIndex = -1;
+
+            // cbox Nhóm thuốc
+            cboxNhomThuoc.DropDownWidth = 200;
+            cboxNhomThuoc.DropDownHeight = 200;
+            cboxNhomThuoc.DataSource = dt;
+            cboxNhomThuoc.DisplayMember = "nhom_thuoc";
+            cboxNhomThuoc.ValueMember = "nhom_thuoc";
+            cboxNhomThuoc.SelectedIndex = -1;
+
         }
 
-        private void loadCachDung() 
-        { 
-            
+        private void loadDanhMucThuoc()
+        {
+            string timtenThuoc = "%" + txtTimThuoc.Text.Trim() + "%";
+            string timNhomThuoc = "%" + cboxTimNhomThuoc.Text.Trim() + "%";
+
+            string rdoTUFilter = rdoTatCaThuoc.Checked ? "" : (rdoThuocTiem.Checked ? "AND thuoc_tiem = '1'" : "AND (thuoc_tiem IS NULL OR thuoc_tiem = '0')");
+
+            string rdoKhoaFilter = rdoTatCaThuocDanhMuc.Checked ? "" : (rdoThuocKhoa.Checked ? "AND khoa = '1'" : "AND (khoa IS NULL OR khoa = '0')");
+
+            dgvDanhMucThuoc.DataSource = Helpers.MySqlHelper.ExecuteDataTable($@"
+                SELECT 
+                    ma_thuoc,
+                    ten_thuoc,
+                    hoat_chat,
+                    ham_luong,
+                    don_vi_chan,
+                    he_so,
+                    don_vi_le,
+                    nhom_thuoc,
+                    thuoc_tiem,
+                    gia_nhap,
+                    gia_ban,
+                    cach_dung,
+                    khoa 
+                FROM dm_thuoc
+                where 
+                (ten_thuoc LIKE @ten_thuoc or hoat_chat LIKE @ten_thuoc) 
+                    AND nhom_thuoc LIKE @nhom_thuoc
+                    {rdoTUFilter}
+                    {rdoKhoaFilter}
+                ORDER BY ma_thuoc;",
+                new MySqlParameter("@ten_thuoc", timtenThuoc),
+                new MySqlParameter("@nhom_thuoc", timNhomThuoc));
+        }
+
+        private void loadCachDung()
+        {
+
         }
 
         private void btnThemReport_Click(object sender, EventArgs e)
@@ -182,6 +234,164 @@ namespace NhaThuoc_BSPhong.Forms
             catch (Exception ex)
             {
                 return;
+            }
+        }
+
+        private void rdoTatCaThuoc_CheckedChanged(object sender, EventArgs e)
+        {
+            Helpers.DebounceManager.Execute("loadDanhMucThuoc", 100, loadDanhMucThuoc);
+
+        }
+
+        private void rdoThuocUong_CheckedChanged(object sender, EventArgs e)
+        {
+            Helpers.DebounceManager.Execute("loadDanhMucThuoc", 100, loadDanhMucThuoc);
+
+        }
+
+        private void rdoThuocTiem_CheckedChanged(object sender, EventArgs e)
+        {
+            Helpers.DebounceManager.Execute("loadDanhMucThuoc", 100, loadDanhMucThuoc);
+
+        }
+
+        private void rdoTatCaThuocDanhMuc_CheckedChanged(object sender, EventArgs e)
+        {
+            Helpers.DebounceManager.Execute("loadDanhMucThuoc", 100, loadDanhMucThuoc);
+
+        }
+
+        private void rdoThuocDangSuDung_CheckedChanged(object sender, EventArgs e)
+        {
+            Helpers.DebounceManager.Execute("loadDanhMucThuoc", 100, loadDanhMucThuoc);
+
+        }
+
+        private void rdoThuocKhoa_CheckedChanged(object sender, EventArgs e)
+        {
+            Helpers.DebounceManager.Execute("loadDanhMucThuoc", 100, loadDanhMucThuoc);
+
+        }
+
+        private void txtTimThuoc_TextChanged(object sender, EventArgs e)
+        {
+            Helpers.DebounceManager.Execute("loadDanhMucThuoc", 100, loadDanhMucThuoc);
+        }
+
+        private void txtTimNhom_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void btnXuatExcel_dgvDanhMucThuoc_Click(object sender, EventArgs e)
+        {
+            Export.ExportExcel(dgvDanhMucThuoc);
+        }
+
+        private void cboxTimNhomThuoc_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            Helpers.DebounceManager.Execute("loadDanhMucThuoc", 100, loadDanhMucThuoc);
+        }
+
+        private void cboxTimNhomThuoc_TextChanged(object sender, EventArgs e)
+        {
+            if (cboxTimNhomThuoc.SelectedIndex == -1)
+            {
+                Helpers.DebounceManager.Execute("loadDanhMucThuoc", 100, loadDanhMucThuoc);
+            }
+        }
+
+        private void btnThemMoi_Click(object sender, EventArgs e)
+        {
+            ThemThuocMoi();
+            xoaThongTinTrenNhapMoi();
+            txtTenThuoc.Focus();
+            MessageBox.Show("Thêm thuốc mới thành công.");
+        }
+
+        private void ThemThuocMoi()
+        {
+            string query = @"
+        INSERT INTO dm_thuoc
+        (
+            ten_thuoc,
+            hoat_chat,
+            ham_luong,
+            don_vi,
+            nhom_thuoc,
+            thuoc_tiem,
+            gia_nhap,
+            gia_ban,
+            cach_dung
+        )
+        VALUES
+        (
+            @ten_thuoc,
+            @hoat_chat,
+            @ham_luong,
+            @don_vi,
+            @nhom_thuoc,
+            @thuoc_tiem,
+            @gia_nhap,
+            @gia_ban,
+            @cach_dung
+        );";
+
+            Helpers.MySqlHelper.ExecuteNonQuery(query,
+                new MySqlParameter("@ten_thuoc", txtTenThuoc.Text.Trim()),
+                new MySqlParameter("@hoat_chat", txtHoatChat.Text.Trim()),
+                new MySqlParameter("@ham_luong", txtHamLuong.Text.Trim()),
+                new MySqlParameter("@don_vi", txtDonVi.Text.Trim()),
+                new MySqlParameter("@nhom_thuoc", cboxNhomThuoc.Text.Trim()),
+                new MySqlParameter("@thuoc_tiem", checkBoxThuocTiem.Checked ? 1 : 0),
+                new MySqlParameter("@gia_nhap", decimal.TryParse(txtGiaNhap.Text, out decimal giaNhap) ? giaNhap : 0),
+                new MySqlParameter("@gia_ban", decimal.TryParse(txtGiaBan.Text, out decimal giaBan) ? giaBan : 0),
+                new MySqlParameter("@cach_dung", txtCachDung.Text.Trim())
+            );
+        }
+
+        private void xoaThongTinTrenNhapMoi()
+        {
+            txtTenThuoc.Clear();
+            txtHoatChat.Clear();
+            txtHamLuong.Clear();
+            txtDonVi.Clear();
+            cboxNhomThuoc.SelectedIndex = -1;
+            checkBoxThuocTiem.Checked = false;
+            txtGiaNhap.Clear();
+            txtGiaBan.Clear();
+            txtCachDung.Clear();
+        }
+
+        private void dgvDanhMucThuoc_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
+
+            try
+            {
+                DataGridViewRow row = dgvDanhMucThuoc.Rows[e.RowIndex];
+
+                string ma_thuoc = row.Cells["colMaThuoc"].Value?.ToString();
+
+                if (string.IsNullOrWhiteSpace(ma_thuoc))
+                    return;
+
+                string columnName = dgvDanhMucThuoc.Columns[e.ColumnIndex].DataPropertyName;
+
+                object value = row.Cells[e.ColumnIndex].Value ?? DBNull.Value;
+
+                string sql = $"UPDATE dm_thuoc SET {columnName}=@value WHERE ma_thuoc=@ma_thuoc";
+
+                Helpers.MySqlHelper.ExecuteNonQuery(
+                    sql,
+                    new MySqlParameter("@value", value),
+                    new MySqlParameter("@ma_thuoc", ma_thuoc)
+                );
+
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
             }
         }
     }

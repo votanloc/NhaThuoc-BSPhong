@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer;
 
-namespace NhaThuoc_BSPhong.Helpers
+namespace PhongKham.Helpers
 {
     public static class DebounceManager
     {

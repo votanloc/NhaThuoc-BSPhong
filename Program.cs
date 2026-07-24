@@ -1,6 +1,6 @@
-using NhaThuoc_BSPhong.Forms;
+using PhongKham.Forms;
 
-namespace NhaThuoc_BSPhong
+namespace PhongKham
 {
     internal static class Program
     {

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 
 
-namespace NhaThuoc_BSPhong.Forms
+namespace PhongKham.Forms
 {
     public partial class frmMain : Form
     {

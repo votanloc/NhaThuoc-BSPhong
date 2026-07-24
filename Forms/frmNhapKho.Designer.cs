@@ -1,4 +1,4 @@
-﻿namespace NhaThuoc_BSPhong.Forms
+﻿namespace PhongKham.Forms
 {
     partial class frmNhapKho
     {
@@ -75,21 +75,25 @@
             colMaPhieu1 = new DataGridViewTextBoxColumn();
             colMaThuoc = new DataGridViewTextBoxColumn();
             colTenThuoc = new DataGridViewTextBoxColumn();
+            colLSX = new DataGridViewTextBoxColumn();
             colDonVi = new DataGridViewTextBoxColumn();
             colSoLuong = new DataGridViewTextBoxColumn();
             colGia = new DataGridViewTextBoxColumn();
             colThanhTien = new DataGridViewTextBoxColumn();
             colHSD = new DataGridViewTextBoxColumn();
-            flowLayoutPanel3 = new FlowLayoutPanel();
-            label3 = new Label();
-            txtTimThuoc = new TextBox();
-            label5 = new Label();
-            txtSoLuong = new TextBox();
-            label10 = new Label();
-            dtpHSD = new DateTimePicker();
-            btnThemThuocVaoPhieuNhapKho = new Button();
             flowLayoutPanel4 = new FlowLayoutPanel();
             btnXoaThuocPhieuNhapKho = new Button();
+            panel2 = new Panel();
+            groupBox1 = new GroupBox();
+            btnThemThuocVaoPhieuNhapKho = new Button();
+            groupBox6 = new GroupBox();
+            dtpHSD = new DateTimePicker();
+            groupBox5 = new GroupBox();
+            txtSoLuong = new TextBox();
+            groupBox4 = new GroupBox();
+            txtLSX = new TextBox();
+            groupBox3 = new GroupBox();
+            txtTimThuoc = new TextBox();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
             panel1.SuspendLayout();
@@ -99,8 +103,13 @@
             flowLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvNhapKhoChiTiet).BeginInit();
-            flowLayoutPanel3.SuspendLayout();
             flowLayoutPanel4.SuspendLayout();
+            panel2.SuspendLayout();
+            groupBox1.SuspendLayout();
+            groupBox6.SuspendLayout();
+            groupBox5.SuspendLayout();
+            groupBox4.SuspendLayout();
+            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -116,7 +125,7 @@
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(1399, 730);
+            tableLayoutPanel1.Size = new Size(1488, 745);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel4
@@ -132,7 +141,7 @@
             tableLayoutPanel4.RowStyles.Add(new RowStyle());
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle());
-            tableLayoutPanel4.Size = new Size(444, 724);
+            tableLayoutPanel4.Size = new Size(444, 739);
             tableLayoutPanel4.TabIndex = 2;
             // 
             // panel1
@@ -234,7 +243,7 @@
             dgvTimPhieuNhap.Location = new Point(3, 134);
             dgvTimPhieuNhap.Name = "dgvTimPhieuNhap";
             dgvTimPhieuNhap.ReadOnly = true;
-            dgvTimPhieuNhap.Size = new Size(438, 587);
+            dgvTimPhieuNhap.Size = new Size(438, 602);
             dgvTimPhieuNhap.TabIndex = 1;
             dgvTimPhieuNhap.CellMouseClick += dgvTimPhieuNhap_CellMouseClick;
             // 
@@ -295,7 +304,7 @@
             tableLayoutPanel2.RowCount = 2;
             tableLayoutPanel2.RowStyles.Add(new RowStyle());
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(943, 724);
+            tableLayoutPanel2.Size = new Size(1032, 739);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // groupBox2
@@ -314,7 +323,7 @@
             groupBox2.Dock = DockStyle.Top;
             groupBox2.Location = new Point(3, 3);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(937, 182);
+            groupBox2.Size = new Size(1026, 182);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             // 
@@ -404,7 +413,7 @@
             flowLayoutPanel2.Dock = DockStyle.Bottom;
             flowLayoutPanel2.Location = new Point(3, 149);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(931, 30);
+            flowLayoutPanel2.Size = new Size(1020, 30);
             flowLayoutPanel2.TabIndex = 0;
             // 
             // btnThemPhieuNhapKho
@@ -463,8 +472,8 @@
             tableLayoutPanel3.ColumnCount = 1;
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel3.Controls.Add(dgvNhapKhoChiTiet, 0, 1);
-            tableLayoutPanel3.Controls.Add(flowLayoutPanel3, 0, 0);
             tableLayoutPanel3.Controls.Add(flowLayoutPanel4, 0, 2);
+            tableLayoutPanel3.Controls.Add(panel2, 0, 0);
             tableLayoutPanel3.Dock = DockStyle.Fill;
             tableLayoutPanel3.Location = new Point(3, 191);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -472,7 +481,7 @@
             tableLayoutPanel3.RowStyles.Add(new RowStyle());
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle());
-            tableLayoutPanel3.Size = new Size(937, 530);
+            tableLayoutPanel3.Size = new Size(1026, 545);
             tableLayoutPanel3.TabIndex = 2;
             // 
             // dgvNhapKhoChiTiet
@@ -480,12 +489,12 @@
             dgvNhapKhoChiTiet.AllowUserToAddRows = false;
             dgvNhapKhoChiTiet.BackgroundColor = Color.White;
             dgvNhapKhoChiTiet.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvNhapKhoChiTiet.Columns.AddRange(new DataGridViewColumn[] { colSelect, colAuto_id, colMaPhieu1, colMaThuoc, colTenThuoc, colDonVi, colSoLuong, colGia, colThanhTien, colHSD });
+            dgvNhapKhoChiTiet.Columns.AddRange(new DataGridViewColumn[] { colSelect, colAuto_id, colMaPhieu1, colMaThuoc, colTenThuoc, colLSX, colDonVi, colSoLuong, colGia, colThanhTien, colHSD });
             dgvNhapKhoChiTiet.Dock = DockStyle.Fill;
-            dgvNhapKhoChiTiet.Location = new Point(3, 45);
+            dgvNhapKhoChiTiet.Location = new Point(3, 66);
             dgvNhapKhoChiTiet.Name = "dgvNhapKhoChiTiet";
             dgvNhapKhoChiTiet.RowHeadersVisible = false;
-            dgvNhapKhoChiTiet.Size = new Size(931, 442);
+            dgvNhapKhoChiTiet.Size = new Size(1020, 436);
             dgvNhapKhoChiTiet.TabIndex = 2;
             // 
             // colSelect
@@ -510,6 +519,7 @@
             colMaPhieu1.HeaderText = "Mã Phiếu";
             colMaPhieu1.Name = "colMaPhieu1";
             colMaPhieu1.ReadOnly = true;
+            colMaPhieu1.Visible = false;
             // 
             // colMaThuoc
             // 
@@ -525,9 +535,15 @@
             colTenThuoc.Name = "colTenThuoc";
             colTenThuoc.Width = 200;
             // 
+            // colLSX
+            // 
+            colLSX.DataPropertyName = "lsx";
+            colLSX.HeaderText = "LSX";
+            colLSX.Name = "colLSX";
+            // 
             // colDonVi
             // 
-            colDonVi.DataPropertyName = "don_vi";
+            colDonVi.DataPropertyName = "don_vi_le";
             colDonVi.HeaderText = "Đơn vị";
             colDonVi.Name = "colDonVi";
             // 
@@ -566,96 +582,10 @@
             colHSD.HeaderText = "HSD";
             colHSD.Name = "colHSD";
             // 
-            // flowLayoutPanel3
-            // 
-            flowLayoutPanel3.Controls.Add(label3);
-            flowLayoutPanel3.Controls.Add(txtTimThuoc);
-            flowLayoutPanel3.Controls.Add(label5);
-            flowLayoutPanel3.Controls.Add(txtSoLuong);
-            flowLayoutPanel3.Controls.Add(label10);
-            flowLayoutPanel3.Controls.Add(dtpHSD);
-            flowLayoutPanel3.Controls.Add(btnThemThuocVaoPhieuNhapKho);
-            flowLayoutPanel3.Dock = DockStyle.Fill;
-            flowLayoutPanel3.Location = new Point(3, 3);
-            flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new Size(931, 36);
-            flowLayoutPanel3.TabIndex = 0;
-            // 
-            // label3
-            // 
-            label3.Anchor = AnchorStyles.None;
-            label3.AutoSize = true;
-            label3.Location = new Point(3, 7);
-            label3.Name = "label3";
-            label3.Size = new Size(50, 18);
-            label3.TabIndex = 0;
-            label3.Text = "Thuốc";
-            // 
-            // txtTimThuoc
-            // 
-            txtTimThuoc.Anchor = AnchorStyles.None;
-            txtTimThuoc.Location = new Point(59, 3);
-            txtTimThuoc.Name = "txtTimThuoc";
-            txtTimThuoc.Size = new Size(178, 26);
-            txtTimThuoc.TabIndex = 1;
-            txtTimThuoc.TextChanged += txtTimThuoc_TextChanged;
-            txtTimThuoc.KeyDown += txtTimThuoc_KeyDown;
-            // 
-            // label5
-            // 
-            label5.Anchor = AnchorStyles.None;
-            label5.AutoSize = true;
-            label5.Location = new Point(243, 7);
-            label5.Name = "label5";
-            label5.Size = new Size(112, 18);
-            label5.TabIndex = 2;
-            label5.Text = "Số lượng nhập";
-            // 
-            // txtSoLuong
-            // 
-            txtSoLuong.Anchor = AnchorStyles.None;
-            txtSoLuong.Location = new Point(361, 3);
-            txtSoLuong.Name = "txtSoLuong";
-            txtSoLuong.Size = new Size(60, 26);
-            txtSoLuong.TabIndex = 3;
-            txtSoLuong.KeyDown += txtSoLuong_KeyDown;
-            // 
-            // label10
-            // 
-            label10.Anchor = AnchorStyles.None;
-            label10.AutoSize = true;
-            label10.Location = new Point(427, 7);
-            label10.Name = "label10";
-            label10.Size = new Size(46, 18);
-            label10.TabIndex = 8;
-            label10.Text = "HSD:";
-            // 
-            // dtpHSD
-            // 
-            dtpHSD.Anchor = AnchorStyles.None;
-            dtpHSD.CustomFormat = "dd/MM/yyyy";
-            dtpHSD.Format = DateTimePickerFormat.Custom;
-            dtpHSD.Location = new Point(479, 3);
-            dtpHSD.Name = "dtpHSD";
-            dtpHSD.Size = new Size(101, 26);
-            dtpHSD.TabIndex = 9;
-            dtpHSD.KeyDown += dtpHSD_KeyDown;
-            // 
-            // btnThemThuocVaoPhieuNhapKho
-            // 
-            btnThemThuocVaoPhieuNhapKho.Anchor = AnchorStyles.None;
-            btnThemThuocVaoPhieuNhapKho.Location = new Point(586, 3);
-            btnThemThuocVaoPhieuNhapKho.Name = "btnThemThuocVaoPhieuNhapKho";
-            btnThemThuocVaoPhieuNhapKho.Size = new Size(119, 25);
-            btnThemThuocVaoPhieuNhapKho.TabIndex = 4;
-            btnThemThuocVaoPhieuNhapKho.Text = "Thêm";
-            btnThemThuocVaoPhieuNhapKho.UseVisualStyleBackColor = true;
-            btnThemThuocVaoPhieuNhapKho.Click += btnThemThuocVaoPhieuNhapKho_Click;
-            // 
             // flowLayoutPanel4
             // 
             flowLayoutPanel4.Controls.Add(btnXoaThuocPhieuNhapKho);
-            flowLayoutPanel4.Location = new Point(3, 493);
+            flowLayoutPanel4.Location = new Point(3, 508);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
             flowLayoutPanel4.Size = new Size(806, 34);
             flowLayoutPanel4.TabIndex = 1;
@@ -671,11 +601,127 @@
             btnXoaThuocPhieuNhapKho.UseVisualStyleBackColor = true;
             btnXoaThuocPhieuNhapKho.Click += btnXoaThuocPhieuNhapKho_Click;
             // 
+            // panel2
+            // 
+            panel2.Controls.Add(groupBox1);
+            panel2.Controls.Add(groupBox6);
+            panel2.Controls.Add(groupBox5);
+            panel2.Controls.Add(groupBox4);
+            panel2.Controls.Add(groupBox3);
+            panel2.Location = new Point(3, 3);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1017, 57);
+            panel2.TabIndex = 3;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(btnThemThuocVaoPhieuNhapKho);
+            groupBox1.Dock = DockStyle.Left;
+            groupBox1.Location = new Point(798, 0);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(105, 57);
+            groupBox1.TabIndex = 5;
+            groupBox1.TabStop = false;
+            // 
+            // btnThemThuocVaoPhieuNhapKho
+            // 
+            btnThemThuocVaoPhieuNhapKho.Dock = DockStyle.Fill;
+            btnThemThuocVaoPhieuNhapKho.Location = new Point(3, 22);
+            btnThemThuocVaoPhieuNhapKho.Name = "btnThemThuocVaoPhieuNhapKho";
+            btnThemThuocVaoPhieuNhapKho.Size = new Size(99, 32);
+            btnThemThuocVaoPhieuNhapKho.TabIndex = 4;
+            btnThemThuocVaoPhieuNhapKho.Text = "Thêm";
+            btnThemThuocVaoPhieuNhapKho.UseVisualStyleBackColor = true;
+            btnThemThuocVaoPhieuNhapKho.Click += btnThemThuocVaoPhieuNhapKho_Click;
+            // 
+            // groupBox6
+            // 
+            groupBox6.Controls.Add(dtpHSD);
+            groupBox6.Dock = DockStyle.Left;
+            groupBox6.Location = new Point(670, 0);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Size = new Size(128, 57);
+            groupBox6.TabIndex = 3;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "HSD";
+            // 
+            // dtpHSD
+            // 
+            dtpHSD.CustomFormat = "dd/MM/yyyy";
+            dtpHSD.Dock = DockStyle.Fill;
+            dtpHSD.Format = DateTimePickerFormat.Custom;
+            dtpHSD.Location = new Point(3, 22);
+            dtpHSD.Name = "dtpHSD";
+            dtpHSD.Size = new Size(122, 26);
+            dtpHSD.TabIndex = 9;
+            dtpHSD.KeyDown += dtpHSD_KeyDown;
+            // 
+            // groupBox5
+            // 
+            groupBox5.Controls.Add(txtSoLuong);
+            groupBox5.Dock = DockStyle.Left;
+            groupBox5.Location = new Point(470, 0);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Size = new Size(200, 57);
+            groupBox5.TabIndex = 2;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "Số lượng nhập";
+            // 
+            // txtSoLuong
+            // 
+            txtSoLuong.Dock = DockStyle.Fill;
+            txtSoLuong.Location = new Point(3, 22);
+            txtSoLuong.Name = "txtSoLuong";
+            txtSoLuong.Size = new Size(194, 26);
+            txtSoLuong.TabIndex = 3;
+            txtSoLuong.KeyDown += txtSoLuong_KeyDown;
+            // 
+            // groupBox4
+            // 
+            groupBox4.Controls.Add(txtLSX);
+            groupBox4.Dock = DockStyle.Left;
+            groupBox4.Location = new Point(270, 0);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(200, 57);
+            groupBox4.TabIndex = 1;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "LSX";
+            // 
+            // txtLSX
+            // 
+            txtLSX.Dock = DockStyle.Fill;
+            txtLSX.Location = new Point(3, 22);
+            txtLSX.Name = "txtLSX";
+            txtLSX.Size = new Size(194, 26);
+            txtLSX.TabIndex = 11;
+            txtLSX.KeyDown += txtLSX_KeyDown;
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(txtTimThuoc);
+            groupBox3.Dock = DockStyle.Left;
+            groupBox3.Location = new Point(0, 0);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(270, 57);
+            groupBox3.TabIndex = 0;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Tên thuốc/ hoạt chất";
+            // 
+            // txtTimThuoc
+            // 
+            txtTimThuoc.Dock = DockStyle.Fill;
+            txtTimThuoc.Location = new Point(3, 22);
+            txtTimThuoc.Name = "txtTimThuoc";
+            txtTimThuoc.Size = new Size(264, 26);
+            txtTimThuoc.TabIndex = 1;
+            txtTimThuoc.TextChanged += txtTimThuoc_TextChanged;
+            txtTimThuoc.KeyDown += txtTimThuoc_KeyDown;
+            // 
             // frmNhapKho
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1399, 730);
+            ClientSize = new Size(1488, 745);
             Controls.Add(tableLayoutPanel1);
             Name = "frmNhapKho";
             StartPosition = FormStartPosition.CenterScreen;
@@ -694,9 +740,16 @@
             flowLayoutPanel2.PerformLayout();
             tableLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvNhapKhoChiTiet).EndInit();
-            flowLayoutPanel3.ResumeLayout(false);
-            flowLayoutPanel3.PerformLayout();
             flowLayoutPanel4.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            groupBox1.ResumeLayout(false);
+            groupBox6.ResumeLayout(false);
+            groupBox5.ResumeLayout(false);
+            groupBox5.PerformLayout();
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -715,10 +768,7 @@
         private TextBox txtMaPhieuNhap;
         private Button btnCapNhatPhieuNhapKho;
         private Label label4;
-        private FlowLayoutPanel flowLayoutPanel3;
-        private Label label3;
         private TextBox txtTimThuoc;
-        private Label label5;
         private TextBox txtSoLuong;
         private Button btnThemThuocVaoPhieuNhapKho;
         private Button btnXoaPhieuNhapKho;
@@ -733,7 +783,6 @@
         private DateTimePicker dtpNgayNhap;
         private Label label7;
         private ComboBox cboxLyDoNhap;
-        private Label label10;
         private DateTimePicker dtpHSD;
         private TabPage tabPage1;
         private TableLayoutPanel tableLayoutPanel4;
@@ -749,15 +798,23 @@
         private DataGridViewTextBoxColumn colNgayNhap;
         private TextBox txtDienGiai;
         private Label label13;
+        private TextBox txtLSX;
+        private Panel panel2;
+        private GroupBox groupBox5;
+        private GroupBox groupBox4;
+        private GroupBox groupBox3;
+        private GroupBox groupBox6;
         private DataGridViewCheckBoxColumn colSelect;
         private DataGridViewTextBoxColumn colAuto_id;
         private DataGridViewTextBoxColumn colMaPhieu1;
         private DataGridViewTextBoxColumn colMaThuoc;
         private DataGridViewTextBoxColumn colTenThuoc;
+        private DataGridViewTextBoxColumn colLSX;
         private DataGridViewTextBoxColumn colDonVi;
         private DataGridViewTextBoxColumn colSoLuong;
         private DataGridViewTextBoxColumn colGia;
         private DataGridViewTextBoxColumn colThanhTien;
         private DataGridViewTextBoxColumn colHSD;
+        private GroupBox groupBox1;
     }
 }

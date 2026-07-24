@@ -3,10 +3,14 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net9.0-windows</TargetFramework>
-    <RootNamespace>NhaThuoc_BSPhong</RootNamespace>
+    <RootNamespace>PhongKham</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
+	  <AssemblyName>PhongKham</AssemblyName>
+	  <RootNamespace>PhongKham</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
+	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	  <ApplicationIcon>iconLPsoft.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +20,10 @@
 
   <ItemGroup>
     <EmbeddedResource Remove="Form1.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="iconLPsoft.ico" />
   </ItemGroup>
 
   <ItemGroup>
