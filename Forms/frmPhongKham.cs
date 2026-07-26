@@ -169,7 +169,7 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
         AND ma_toa=@ma_toa
         AND delete_at IS NULL",
     new MySqlParameter("@ma_bn", txtMaBN.Text.Trim()),
-    new MySqlParameter("@ma_toa", cboxToaThuocUong.SelectedValue)
+    new MySqlParameter( "@ma_toa", cboxToaThuocUong.SelectedValue ?? cboxToaThuocUong.Text.Trim())
 );
 
             //if (dt.Rows.Count > 0)
@@ -1109,13 +1109,8 @@ ORDER BY t2.hsd ASC;",
                     Helpers.MySqlHelper.ExecuteNonQuery(
                         @"UPDATE tbl_tu_ct
                   SET delete_at = NOW()
-                  WHERE auto_id = @auto_id
-                    AND ma_toa = @ma_toa
-                    AND ma_thuoc = @ma_thuoc
-                    AND delete_at IS NULL",
-                        new MySqlParameter("@auto_id", item.AutoId),
-                        new MySqlParameter("@ma_toa", item.MaPhieu),
-                        new MySqlParameter("@ma_thuoc", item.MaThuoc)
+                  WHERE auto_id = @auto_id",
+                        new MySqlParameter("@auto_id", item.AutoId)
                     );
                 }
 
@@ -1125,7 +1120,7 @@ ORDER BY t2.hsd ASC;",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
-                CapNhatTongTienVaoDB(txtMaBN.Text, cboxToaThuocUong.Text);
+                CapNhatTongTienVaoDB(txtMaBN.Text.Trim(), cboxToaThuocUong.Text.Trim());
                 loadChiTietToaThuocUong();
             }
             catch (Exception ex)

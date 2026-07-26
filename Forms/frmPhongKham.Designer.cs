@@ -1042,6 +1042,7 @@
             // cboxBacSi
             // 
             cboxBacSi.FormattingEnabled = true;
+            cboxBacSi.Items.AddRange(new object[] { "Bs CKI Nguyễn Thanh Phong", "Bs Đỗ Hoài Anh Thư", "Bs Nguyễn Thị Minh Huyền", "Bs Tô Thành Trung" });
             cboxBacSi.Location = new Point(520, 80);
             cboxBacSi.Name = "cboxBacSi";
             cboxBacSi.Size = new Size(321, 26);

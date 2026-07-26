@@ -62,28 +62,7 @@ namespace PhongKham.Forms
 
         private void btnCapNhat_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string updateExe = Path.Combine(
-                    Application.StartupPath,
-                    "update.exe");
 
-                if (!File.Exists(updateExe))
-                {
-                    MessageBox.Show(
-                        "Không tìm thấy update.exe",
-                        "Thông báo");
-                    return;
-                }
-
-                Process.Start(updateExe);
-
-                Application.Exit();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         private void btnNhapXuatTon_Click(object sender, EventArgs e)
@@ -99,6 +78,33 @@ namespace PhongKham.Forms
         private void btnDanhMuc_Click(object sender, EventArgs e)
         {
             OpenForm(new frmDanhMuc());
+        }
+
+        private void btnCapNhat_Click_1(object sender, EventArgs e)
+        {
+            CheckForUpdate();
+        }
+
+        private void CheckForUpdate()
+        {
+            try
+            {
+                string updateExe = Path.Combine(
+                    Application.StartupPath,
+                    "update.exe");
+
+                if (!File.Exists(updateExe))
+                {
+                    return;
+                }
+                Process updateProcess = Process.Start(updateExe);
+
+                //updateProcess.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
