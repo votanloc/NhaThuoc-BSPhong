@@ -296,7 +296,11 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
             txtChanDoan.Text = row["chan_doan"]?.ToString() ?? "";
             txtGhiChu.Text = row["ghi_chu"]?.ToString() ?? "";
             cboxBacSi.Text = row["bac_si"]?.ToString() ?? "";
-            txtTongTienThuocUong.Text = row["tong_tien"]?.ToString() ?? "0";
+            // Hiển thị tổng tiền đúng định dạng #,##0
+            if (decimal.TryParse(row["tong_tien"]?.ToString() ?? "0", out decimal tong_tien_db))
+                txtTongTienThuocUong.Text = tong_tien_db.ToString("#,##0");
+            else
+                txtTongTienThuocUong.Text = "0";
 
             if (row["tai_kham"] != DBNull.Value)
                 dtpNgayHenTaiKham.Value = Convert.ToDateTime(row["tai_kham"]);
@@ -322,7 +326,8 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
                 new MySqlParameter("@ghi_chu", txtGhiChu.Text.Trim()),
                 new MySqlParameter("@bac_si", cboxBacSi.Text.Trim()),
                 new MySqlParameter("@tai_kham", dtpNgayHenTaiKham.Value),
-                new MySqlParameter("@tong_tien", txtTongTienThuocUong),
+                // Tính lại tổng tiền từ lưới trước khi lưu, tránh lưu sai giá trị
+                new MySqlParameter("@tong_tien", TinhTongTienThuocUongLocal()),
                 new MySqlParameter("@auto_id", auto_id_toa_uong)
             );
         }
@@ -911,6 +916,8 @@ ORDER BY t2.hsd ASC;",
 
         private void cboxToaThuocUong_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            // Tải lại thông tin đầu toa (kể cả tổng tiền) khi chuyển sang toa khác
+            loadThongTinToaThuocUong();
             loadToaThuocUongChiTiet();
         }
 
