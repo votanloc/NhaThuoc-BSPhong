@@ -95,23 +95,24 @@
             btnXoaThuocUong = new Button();
             btnXoaToa = new Button();
             panel1 = new Panel();
-            tableLayoutPanel5 = new TableLayoutPanel();
-            txtDonVi = new TextBox();
-            label25 = new Label();
-            txtToi = new TextBox();
-            txtChieu = new TextBox();
+            panel2 = new Panel();
+            groupBox12 = new GroupBox();
             btnThemThuocUong = new Button();
+            groupBox11 = new GroupBox();
             txtSoLuong = new TextBox();
-            label14 = new Label();
-            txtTrua = new TextBox();
-            label15 = new Label();
+            groupBox10 = new GroupBox();
             txtCachDung = new TextBox();
+            groupBox9 = new GroupBox();
+            txtDonVi = new TextBox();
+            groupBox8 = new GroupBox();
+            txtToi = new TextBox();
+            groupBox7 = new GroupBox();
+            txtChieu = new TextBox();
+            groupBox6 = new GroupBox();
+            txtTrua = new TextBox();
+            groupBox5 = new GroupBox();
             txtSang = new TextBox();
-            label24 = new Label();
-            label23 = new Label();
-            label22 = new Label();
-            label21 = new Label();
-            label20 = new Label();
+            groupBox4 = new GroupBox();
             txtNgayDung = new TextBox();
             flowLayoutPanel2 = new FlowLayoutPanel();
             label12 = new Label();
@@ -162,7 +163,16 @@
             ((System.ComponentModel.ISupportInitialize)dgvToaThuocUong).BeginInit();
             flowLayoutPanel3.SuspendLayout();
             panel1.SuspendLayout();
-            tableLayoutPanel5.SuspendLayout();
+            panel2.SuspendLayout();
+            groupBox12.SuspendLayout();
+            groupBox11.SuspendLayout();
+            groupBox10.SuspendLayout();
+            groupBox9.SuspendLayout();
+            groupBox8.SuspendLayout();
+            groupBox7.SuspendLayout();
+            groupBox6.SuspendLayout();
+            groupBox5.SuspendLayout();
+            groupBox4.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             groupBox3.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
@@ -460,10 +470,10 @@
             dgvToaThuocUong.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvToaThuocUong.Columns.AddRange(new DataGridViewColumn[] { colSelect, colAuto_id, colMaBN1, colMaToa, colMaThuoc, colTenThuoc, colHoatChat, colHamLuong, colNgayDung, colSang, colTrua, colChieu, colToi, colSoLuong, colDonGia, colThanhTien, colDonViLe, colCachDung, colKhongLay, colNgayCapNhat });
             dgvToaThuocUong.Dock = DockStyle.Fill;
-            dgvToaThuocUong.Location = new Point(3, 116);
+            dgvToaThuocUong.Location = new Point(3, 96);
             dgvToaThuocUong.Name = "dgvToaThuocUong";
             dgvToaThuocUong.RowHeadersVisible = false;
-            dgvToaThuocUong.Size = new Size(955, 236);
+            dgvToaThuocUong.Size = new Size(955, 256);
             dgvToaThuocUong.TabIndex = 1;
             dgvToaThuocUong.CellEndEdit += dgvToaThuocUong_CellEndEdit;
             // 
@@ -738,216 +748,212 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(tableLayoutPanel5);
+            panel1.Controls.Add(panel2);
             panel1.Controls.Add(flowLayoutPanel2);
             panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(867, 107);
+            panel1.Size = new Size(955, 87);
             panel1.TabIndex = 3;
             // 
-            // tableLayoutPanel5
+            // panel2
             // 
-            tableLayoutPanel5.ColumnCount = 9;
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel5.Controls.Add(txtDonVi, 5, 1);
-            tableLayoutPanel5.Controls.Add(label25, 5, 0);
-            tableLayoutPanel5.Controls.Add(txtToi, 4, 1);
-            tableLayoutPanel5.Controls.Add(txtChieu, 3, 1);
-            tableLayoutPanel5.Controls.Add(btnThemThuocUong, 8, 1);
-            tableLayoutPanel5.Controls.Add(txtSoLuong, 7, 1);
-            tableLayoutPanel5.Controls.Add(label14, 7, 0);
-            tableLayoutPanel5.Controls.Add(txtTrua, 2, 1);
-            tableLayoutPanel5.Controls.Add(label15, 6, 0);
-            tableLayoutPanel5.Controls.Add(txtCachDung, 6, 1);
-            tableLayoutPanel5.Controls.Add(txtSang, 1, 1);
-            tableLayoutPanel5.Controls.Add(label24, 4, 0);
-            tableLayoutPanel5.Controls.Add(label23, 3, 0);
-            tableLayoutPanel5.Controls.Add(label22, 2, 0);
-            tableLayoutPanel5.Controls.Add(label21, 1, 0);
-            tableLayoutPanel5.Controls.Add(label20, 0, 0);
-            tableLayoutPanel5.Controls.Add(txtNgayDung, 0, 1);
-            tableLayoutPanel5.Dock = DockStyle.Top;
-            tableLayoutPanel5.Location = new Point(0, 39);
-            tableLayoutPanel5.Name = "tableLayoutPanel5";
-            tableLayoutPanel5.RowCount = 2;
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel5.Size = new Size(867, 59);
-            tableLayoutPanel5.TabIndex = 1;
+            panel2.Controls.Add(groupBox12);
+            panel2.Controls.Add(groupBox11);
+            panel2.Controls.Add(groupBox10);
+            panel2.Controls.Add(groupBox9);
+            panel2.Controls.Add(groupBox8);
+            panel2.Controls.Add(groupBox7);
+            panel2.Controls.Add(groupBox6);
+            panel2.Controls.Add(groupBox5);
+            panel2.Controls.Add(groupBox4);
+            panel2.Dock = DockStyle.Top;
+            panel2.Location = new Point(0, 34);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(955, 50);
+            panel2.TabIndex = 1;
             // 
-            // txtDonVi
+            // groupBox12
             // 
-            txtDonVi.Anchor = AnchorStyles.None;
-            txtDonVi.Location = new Point(283, 32);
-            txtDonVi.Name = "txtDonVi";
-            txtDonVi.Size = new Size(56, 26);
-            txtDonVi.TabIndex = 36;
-            // 
-            // label25
-            // 
-            label25.Anchor = AnchorStyles.None;
-            label25.AutoSize = true;
-            label25.Location = new Point(284, 5);
-            label25.Name = "label25";
-            label25.Size = new Size(54, 18);
-            label25.TabIndex = 11;
-            label25.Text = "Đơn vị";
-            // 
-            // txtToi
-            // 
-            txtToi.Anchor = AnchorStyles.None;
-            txtToi.Location = new Point(244, 32);
-            txtToi.Name = "txtToi";
-            txtToi.Size = new Size(33, 26);
-            txtToi.TabIndex = 35;
-            txtToi.TextChanged += txtToi_TextChanged;
-            txtToi.KeyDown += txtToi_KeyDown;
-            // 
-            // txtChieu
-            // 
-            txtChieu.Anchor = AnchorStyles.None;
-            txtChieu.Location = new Point(197, 32);
-            txtChieu.Name = "txtChieu";
-            txtChieu.Size = new Size(33, 26);
-            txtChieu.TabIndex = 34;
-            txtChieu.TextChanged += txtChieu_TextChanged;
-            txtChieu.KeyDown += txtChieu_KeyDown;
+            groupBox12.Controls.Add(btnThemThuocUong);
+            groupBox12.Dock = DockStyle.Left;
+            groupBox12.Location = new Point(712, 0);
+            groupBox12.Name = "groupBox12";
+            groupBox12.Size = new Size(102, 50);
+            groupBox12.TabIndex = 8;
+            groupBox12.TabStop = false;
             // 
             // btnThemThuocUong
             // 
-            btnThemThuocUong.Anchor = AnchorStyles.None;
-            btnThemThuocUong.Location = new Point(760, 32);
+            btnThemThuocUong.Dock = DockStyle.Fill;
+            btnThemThuocUong.Location = new Point(3, 22);
             btnThemThuocUong.Name = "btnThemThuocUong";
-            btnThemThuocUong.Size = new Size(81, 24);
+            btnThemThuocUong.Size = new Size(96, 25);
             btnThemThuocUong.TabIndex = 39;
             btnThemThuocUong.Text = "Thêm";
             btnThemThuocUong.UseVisualStyleBackColor = true;
             btnThemThuocUong.Click += btnThemThuocUong_Click;
             // 
+            // groupBox11
+            // 
+            groupBox11.Controls.Add(txtSoLuong);
+            groupBox11.Dock = DockStyle.Left;
+            groupBox11.Location = new Point(616, 0);
+            groupBox11.Name = "groupBox11";
+            groupBox11.Size = new Size(96, 50);
+            groupBox11.TabIndex = 7;
+            groupBox11.TabStop = false;
+            groupBox11.Text = "Số lượng";
+            // 
             // txtSoLuong
             // 
-            txtSoLuong.Anchor = AnchorStyles.None;
-            txtSoLuong.Location = new Point(672, 32);
+            txtSoLuong.Dock = DockStyle.Fill;
+            txtSoLuong.Location = new Point(3, 22);
             txtSoLuong.Name = "txtSoLuong";
-            txtSoLuong.Size = new Size(45, 26);
+            txtSoLuong.Size = new Size(90, 26);
             txtSoLuong.TabIndex = 38;
             txtSoLuong.KeyDown += txtSoLuong_KeyDown;
             // 
-            // label14
+            // groupBox10
             // 
-            label14.Anchor = AnchorStyles.None;
-            label14.AutoSize = true;
-            label14.Location = new Point(658, 5);
-            label14.Name = "label14";
-            label14.Size = new Size(74, 18);
-            label14.TabIndex = 3;
-            label14.Text = "Số lượng";
-            // 
-            // txtTrua
-            // 
-            txtTrua.Anchor = AnchorStyles.None;
-            txtTrua.Location = new Point(146, 32);
-            txtTrua.Name = "txtTrua";
-            txtTrua.Size = new Size(33, 26);
-            txtTrua.TabIndex = 33;
-            txtTrua.TextChanged += txtTrua_TextChanged;
-            txtTrua.KeyDown += txtTrua_KeyDown;
-            // 
-            // label15
-            // 
-            label15.Anchor = AnchorStyles.None;
-            label15.AutoSize = true;
-            label15.Location = new Point(457, 5);
-            label15.Name = "label15";
-            label15.Size = new Size(83, 18);
-            label15.TabIndex = 2;
-            label15.Text = "Cách dùng";
+            groupBox10.Controls.Add(txtCachDung);
+            groupBox10.Dock = DockStyle.Left;
+            groupBox10.Location = new Point(403, 0);
+            groupBox10.Name = "groupBox10";
+            groupBox10.Size = new Size(213, 50);
+            groupBox10.TabIndex = 6;
+            groupBox10.TabStop = false;
+            groupBox10.Text = "Cách dùng";
             // 
             // txtCachDung
             // 
-            txtCachDung.Anchor = AnchorStyles.None;
-            txtCachDung.Location = new Point(345, 32);
+            txtCachDung.Dock = DockStyle.Fill;
+            txtCachDung.Location = new Point(3, 22);
             txtCachDung.Name = "txtCachDung";
-            txtCachDung.Size = new Size(307, 26);
+            txtCachDung.Size = new Size(207, 26);
             txtCachDung.TabIndex = 37;
             txtCachDung.TextChanged += txtCachDung_TextChanged;
             txtCachDung.KeyDown += txtCachDung_KeyDown;
             // 
+            // groupBox9
+            // 
+            groupBox9.Controls.Add(txtDonVi);
+            groupBox9.Dock = DockStyle.Left;
+            groupBox9.Location = new Point(336, 0);
+            groupBox9.Name = "groupBox9";
+            groupBox9.Size = new Size(67, 50);
+            groupBox9.TabIndex = 5;
+            groupBox9.TabStop = false;
+            groupBox9.Text = "Đơn vị";
+            // 
+            // txtDonVi
+            // 
+            txtDonVi.Dock = DockStyle.Fill;
+            txtDonVi.Location = new Point(3, 22);
+            txtDonVi.Name = "txtDonVi";
+            txtDonVi.Size = new Size(61, 26);
+            txtDonVi.TabIndex = 36;
+            // 
+            // groupBox8
+            // 
+            groupBox8.Controls.Add(txtToi);
+            groupBox8.Dock = DockStyle.Left;
+            groupBox8.Location = new Point(287, 0);
+            groupBox8.Name = "groupBox8";
+            groupBox8.Size = new Size(49, 50);
+            groupBox8.TabIndex = 4;
+            groupBox8.TabStop = false;
+            groupBox8.Text = "Tối";
+            // 
+            // txtToi
+            // 
+            txtToi.Dock = DockStyle.Fill;
+            txtToi.Location = new Point(3, 22);
+            txtToi.Name = "txtToi";
+            txtToi.Size = new Size(43, 26);
+            txtToi.TabIndex = 35;
+            txtToi.TextChanged += txtToi_TextChanged;
+            txtToi.KeyDown += txtToi_KeyDown;
+            // 
+            // groupBox7
+            // 
+            groupBox7.Controls.Add(txtChieu);
+            groupBox7.Dock = DockStyle.Left;
+            groupBox7.Location = new Point(219, 0);
+            groupBox7.Name = "groupBox7";
+            groupBox7.Size = new Size(68, 50);
+            groupBox7.TabIndex = 3;
+            groupBox7.TabStop = false;
+            groupBox7.Text = "Chiều";
+            // 
+            // txtChieu
+            // 
+            txtChieu.Dock = DockStyle.Fill;
+            txtChieu.Location = new Point(3, 22);
+            txtChieu.Name = "txtChieu";
+            txtChieu.Size = new Size(62, 26);
+            txtChieu.TabIndex = 34;
+            txtChieu.TextChanged += txtChieu_TextChanged;
+            txtChieu.KeyDown += txtChieu_KeyDown;
+            // 
+            // groupBox6
+            // 
+            groupBox6.Controls.Add(txtTrua);
+            groupBox6.Dock = DockStyle.Left;
+            groupBox6.Location = new Point(160, 0);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Size = new Size(59, 50);
+            groupBox6.TabIndex = 2;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "Trưa";
+            // 
+            // txtTrua
+            // 
+            txtTrua.Dock = DockStyle.Fill;
+            txtTrua.Location = new Point(3, 22);
+            txtTrua.Name = "txtTrua";
+            txtTrua.Size = new Size(53, 26);
+            txtTrua.TabIndex = 33;
+            txtTrua.TextChanged += txtTrua_TextChanged;
+            txtTrua.KeyDown += txtTrua_KeyDown;
+            // 
+            // groupBox5
+            // 
+            groupBox5.Controls.Add(txtSang);
+            groupBox5.Dock = DockStyle.Left;
+            groupBox5.Location = new Point(99, 0);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Size = new Size(61, 50);
+            groupBox5.TabIndex = 1;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "Sáng";
+            // 
             // txtSang
             // 
-            txtSang.Anchor = AnchorStyles.None;
-            txtSang.Location = new Point(97, 32);
+            txtSang.Dock = DockStyle.Fill;
+            txtSang.Location = new Point(3, 22);
             txtSang.Name = "txtSang";
-            txtSang.Size = new Size(33, 26);
+            txtSang.Size = new Size(55, 26);
             txtSang.TabIndex = 32;
             txtSang.TextChanged += txtSang_TextChanged;
             txtSang.KeyDown += txtSang_KeyDown;
             // 
-            // label24
+            // groupBox4
             // 
-            label24.Anchor = AnchorStyles.None;
-            label24.AutoSize = true;
-            label24.Location = new Point(245, 5);
-            label24.Name = "label24";
-            label24.Size = new Size(30, 18);
-            label24.TabIndex = 5;
-            label24.Text = "Tối";
-            // 
-            // label23
-            // 
-            label23.Anchor = AnchorStyles.None;
-            label23.AutoSize = true;
-            label23.Location = new Point(189, 5);
-            label23.Name = "label23";
-            label23.Size = new Size(49, 18);
-            label23.TabIndex = 4;
-            label23.Text = "Chiều";
-            // 
-            // label22
-            // 
-            label22.Anchor = AnchorStyles.None;
-            label22.AutoSize = true;
-            label22.Location = new Point(142, 5);
-            label22.Name = "label22";
-            label22.Size = new Size(41, 18);
-            label22.TabIndex = 3;
-            label22.Text = "Trưa";
-            // 
-            // label21
-            // 
-            label21.Anchor = AnchorStyles.None;
-            label21.AutoSize = true;
-            label21.Location = new Point(91, 5);
-            label21.Name = "label21";
-            label21.Size = new Size(45, 18);
-            label21.TabIndex = 2;
-            label21.Text = "Sáng";
-            // 
-            // label20
-            // 
-            label20.Anchor = AnchorStyles.None;
-            label20.AutoSize = true;
-            label20.BackColor = Color.Transparent;
-            label20.Location = new Point(3, 5);
-            label20.Name = "label20";
-            label20.Size = new Size(82, 18);
-            label20.TabIndex = 0;
-            label20.Text = "Ngày dùng";
+            groupBox4.Controls.Add(txtNgayDung);
+            groupBox4.Dock = DockStyle.Left;
+            groupBox4.Location = new Point(0, 0);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(99, 50);
+            groupBox4.TabIndex = 0;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Ngày dùng";
             // 
             // txtNgayDung
             // 
-            txtNgayDung.Anchor = AnchorStyles.None;
-            txtNgayDung.Location = new Point(22, 32);
+            txtNgayDung.Dock = DockStyle.Fill;
+            txtNgayDung.Location = new Point(3, 22);
             txtNgayDung.Name = "txtNgayDung";
-            txtNgayDung.Size = new Size(44, 26);
+            txtNgayDung.Size = new Size(93, 26);
             txtNgayDung.TabIndex = 31;
             txtNgayDung.TextChanged += txtNgayDung_TextChanged;
             txtNgayDung.KeyDown += txtNgayDung_KeyDown;
@@ -961,7 +967,7 @@
             flowLayoutPanel2.Dock = DockStyle.Top;
             flowLayoutPanel2.Location = new Point(0, 0);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(867, 39);
+            flowLayoutPanel2.Size = new Size(955, 34);
             flowLayoutPanel2.TabIndex = 0;
             // 
             // label12
@@ -1372,8 +1378,24 @@
             flowLayoutPanel3.ResumeLayout(false);
             flowLayoutPanel3.PerformLayout();
             panel1.ResumeLayout(false);
-            tableLayoutPanel5.ResumeLayout(false);
-            tableLayoutPanel5.PerformLayout();
+            panel2.ResumeLayout(false);
+            groupBox12.ResumeLayout(false);
+            groupBox11.ResumeLayout(false);
+            groupBox11.PerformLayout();
+            groupBox10.ResumeLayout(false);
+            groupBox10.PerformLayout();
+            groupBox9.ResumeLayout(false);
+            groupBox9.PerformLayout();
+            groupBox8.ResumeLayout(false);
+            groupBox8.PerformLayout();
+            groupBox7.ResumeLayout(false);
+            groupBox7.PerformLayout();
+            groupBox6.ResumeLayout(false);
+            groupBox6.PerformLayout();
+            groupBox5.ResumeLayout(false);
+            groupBox5.PerformLayout();
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
             flowLayoutPanel2.ResumeLayout(false);
             flowLayoutPanel2.PerformLayout();
             groupBox3.ResumeLayout(false);
@@ -1436,9 +1458,7 @@
         private Button btnInToaThuocUong;
         private Label label13;
         private TextBox txtTongTienThuocUong;
-        private Label label14;
         private TextBox txtSoLuong;
-        private Label label15;
         private TextBox txtCachDung;
         private Button btnXoaThuocUong;
         private TextBox txtTimHoTen;
@@ -1469,18 +1489,11 @@
         private Label labelSoLuongTon;
         private TextBox txtNgayHenTaiKham;
         private Panel panel1;
-        private TableLayoutPanel tableLayoutPanel5;
-        private Label label20;
         private TextBox txtDonVi;
-        private Label label25;
         private TextBox txtToi;
         private TextBox txtChieu;
         private TextBox txtTrua;
         private TextBox txtSang;
-        private Label label24;
-        private Label label23;
-        private Label label22;
-        private Label label21;
         private TextBox txtNgayDung;
         private DataGridViewCheckBoxColumn colSelect;
         private DataGridViewTextBoxColumn colAuto_id;
@@ -1504,5 +1517,15 @@
         private DataGridViewTextBoxColumn colNgayCapNhat;
         private ComboBox cboxBacSi;
         private Button btnCapNhatToaUong;
+        private Panel panel2;
+        private GroupBox groupBox5;
+        private GroupBox groupBox4;
+        private GroupBox groupBox12;
+        private GroupBox groupBox11;
+        private GroupBox groupBox10;
+        private GroupBox groupBox9;
+        private GroupBox groupBox8;
+        private GroupBox groupBox7;
+        private GroupBox groupBox6;
     }
 }

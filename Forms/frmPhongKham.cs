@@ -327,32 +327,104 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
             );
         }
 
-        private void  TinhTongTienThuocUong()
+        // ===== PHƯƠNG PHÁP 1: Tính toán Local (NHANH NHẤT) =====
+        private decimal TinhTongTienThuocUongLocal()
         {
+            decimal tongTien = 0;
 
-            decimal tong_tien = Convert.ToDecimal(
-                Helpers.MySqlHelper.ExecuteScalar(
-                    @"SELECT SUM(thanh_tien) FROM tbl_tu_ct WHERE ma_bn = @ma_bn AND ma_toa = @ma_toa AND delete_at IS NULL and khong_lay = '0' ",
-                    new MySqlParameter("@ma_bn", txtMaBN.Text.Trim()),
-                    new MySqlParameter("@ma_toa", cboxToaThuocUong.Text.Trim())
-                ) ?? 0);
+            foreach (DataGridViewRow row in dgvToaThuocUong.Rows)
+            {
+                if (row.IsNewRow)
+                    continue;
 
-            // Hiển thị lên textbox
-            txtTongTienThuocUong.Text = tong_tien.ToString("#,##0");
+                // Kiểm tra không phải hàng xóa
+                if (row.Cells["colKhongLay"].Value != null &&
+                    Convert.ToBoolean(row.Cells["colKhongLay"].Value))
+                    continue;
 
-            // Cập nhật vào tbl_benhnhan_chitiet
-            Helpers.MySqlHelper.ExecuteNonQuery(
-                @"UPDATE tbl_tu
-          SET tong_tien = @tong_tien
-          WHERE ma_bn = @ma_bn
-            AND ma_toa = @ma_toa
-            AND delete_at IS NULL and khong_lay = '0'",
-                new MySqlParameter("@tong_tien", tong_tien),
-                new MySqlParameter("@ma_bn", txtMaBN.Text.Trim()),
-                new MySqlParameter("@ma_toa", cboxToaThuocUong.Text.Trim())
-            );
+                if (decimal.TryParse(row.Cells["colThanhTien"].Value?.ToString() ?? "0", out decimal thanhTien))
+                {
+                    tongTien += thanhTien;
+                }
+            }
+
+            txtTongTienThuocUong.Text = tongTien.ToString("#,##0");
+            return tongTien;
         }
 
+        // ===== PHƯƠNG PHÁP 2: Database (AN TOÀN HƠN) =====
+        private bool CapNhatTongTienVaoDB(string maBN, string maToaUong)
+        {
+            try
+            {
+                // Tính tổng từ database
+                object result = Helpers.MySqlHelper.ExecuteScalar(
+                    @"SELECT COALESCE(SUM(thanh_tien), 0) 
+              FROM tbl_tu_ct 
+              WHERE ma_bn = @ma_bn 
+                AND ma_toa = @ma_toa 
+                AND delete_at IS NULL 
+                AND khong_lay = 0",
+                    new MySqlParameter("@ma_bn", maBN.Trim()),
+                    new MySqlParameter("@ma_toa", maToaUong.Trim())
+                );
+
+                if (!decimal.TryParse(result?.ToString() ?? "0", out decimal tongTien))
+                    tongTien = 0;
+
+                // Cập nhật vào DB
+                int rowsAffected = Helpers.MySqlHelper.ExecuteNonQuery(
+                    @"UPDATE tbl_tu
+              SET tong_tien = @tong_tien
+              WHERE ma_bn = @ma_bn
+                AND ma_toa = @ma_toa
+                AND delete_at IS NULL",
+                    new MySqlParameter("@tong_tien", tongTien),
+                    new MySqlParameter("@ma_bn", maBN.Trim()),
+                    new MySqlParameter("@ma_toa", maToaUong.Trim())
+                );
+
+                // Cập nhật UI
+                txtTongTienThuocUong.Text = tongTien.ToString("#,##0");
+
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi cập nhật tổng tiền: {ex.Message}", "Lỗi");
+                return false;
+            }
+        }
+
+        // ===== PHƯƠNG PHÁP 3: Batch Update (CHO NHIỀU TRECORD) =====
+        private void CapNhatTongTienBatch(DataTable dtToaUong)
+        {
+            try
+            {
+                string sql = @"
+            UPDATE tbl_tu t
+            INNER JOIN (
+                SELECT ma_bn, ma_toa, SUM(thanh_tien) as tong_tien
+                FROM tbl_tu_ct
+                WHERE delete_at IS NULL AND khong_lay = 0
+                GROUP BY ma_bn, ma_toa
+            ) ct ON t.ma_bn = ct.ma_bn AND t.ma_toa = ct.ma_toa
+            SET t.tong_tien = ct.tong_tien
+            WHERE t.ma_bn = @ma_bn AND t.ma_toa = @ma_toa";
+
+                foreach (DataRow row in dtToaUong.Rows)
+                {
+                    Helpers.MySqlHelper.ExecuteNonQuery(sql,
+                        new MySqlParameter("@ma_bn", row["ma_bn"]),
+                        new MySqlParameter("@ma_toa", row["ma_toa"])
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi cập nhật batch: {ex.Message}", "Lỗi");
+            }
+        }
         private void dgvToaThuocUong_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
             if (dgvToaThuocUong.IsCurrentCellDirty)
@@ -654,51 +726,37 @@ ORDER BY t2.hsd ASC;",
 
         private void btnThemThuocUong_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtTimThuocUong.Text))
+            try
             {
-                MessageBox.Show("Vui lòng chọn thuốc uống trước khi thêm!",
-                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (string.IsNullOrWhiteSpace(txtTimThuocUong.Text))
+                {
+                    MessageBox.Show("Vui lòng chọn thuốc uống!",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                double soLuong = ParseSoLuong(txtSoLuong.Text);
+                double soLuongTon = ParseSoLuong(labelSoLuongTon.Text);
+
+                if (soLuong <= 0 || soLuong > soLuongTon)
+                {
+                    MessageBox.Show("Số lượng không hợp lệ!",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                themThuocUong();
+
+                TinhTongTienThuocUongLocal();
+
+                capNhatThongTinToaUong();
+                loadToaThuocUongChiTiet();
                 txtTimThuocUong.Focus();
-                return;
             }
-
-            double soLuong = ParseSoLuong(txtSoLuong.Text);
-            double soLuongTon = ParseSoLuong(labelSoLuongTon.Text);
-
-            if (soLuong <= 0)
+            catch (Exception ex)
             {
-                MessageBox.Show("Vui lòng nhập số lượng hợp lệ!",
-                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtSoLuong.Focus();
-                return;
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi");
             }
-
-            if (soLuong > soLuongTon)
-            {
-                MessageBox.Show(
-                    $"Số lượng xuất ({soLuong}) vượt quá số lượng tồn ({soLuongTon})!",
-                    "Thông báo",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-
-                txtSoLuong.Focus();
-                txtSoLuong.SelectAll();
-                return;
-            }
-            themThuocUong();
-            txtSang.Clear();
-            txtTrua.Clear();
-            txtChieu.Clear();
-            txtToi.Clear();
-            txtCachDung.Clear();
-            txtSoLuong.Clear();
-            txtTimThuocUong.Clear();
-            labelSoLuongTon.Text = "0";
-
-            TinhTongTienThuocUong();
-            capNhatThongTinToaUong();
-            loadToaThuocUongChiTiet();
-            txtTimThuocUong.Focus();
         }
         private double ParseSoLuong(string input)
         {
@@ -1067,9 +1125,7 @@ ORDER BY t2.hsd ASC;",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
-                // tính tổng tiền
-                TinhTongTienThuocUong();
-
+                CapNhatTongTienVaoDB(txtMaBN.Text, cboxToaThuocUong.Text);
                 loadChiTietToaThuocUong();
             }
             catch (Exception ex)
@@ -1221,7 +1277,46 @@ ORDER BY t2.hsd ASC;",
                 new MySqlParameter("@khong_lay", Convert.ToBoolean(row.Cells["colKhongLay"].Value ?? false)),
                 new MySqlParameter("@auto_id", row.Cells["colAuto_id"].Value)
             );
-            TinhTongTienThuocUong();
+
+            TinhTongTienThuocUongLocal();
+        }
+
+        private void UpdateRowCalculations(DataGridViewRow row)
+        {
+            double ngayDung = ParseSoLuong(row.Cells["colNgayDung"].Value?.ToString() ?? "0");
+            double sang = ParseSoLuong(row.Cells["colSang"].Value?.ToString() ?? "0");
+            double trua = ParseSoLuong(row.Cells["colTrua"].Value?.ToString() ?? "0");
+            double chieu = ParseSoLuong(row.Cells["colChieu"].Value?.ToString() ?? "0");
+            double toi = ParseSoLuong(row.Cells["colToi"].Value?.ToString() ?? "0");
+
+            double soLuong = (sang + trua + chieu + toi) * ngayDung;
+            row.Cells["colSoLuong"].Value = soLuong % 1 == 0 ? soLuong.ToString("0") : soLuong.ToString("0.##");
+
+            decimal.TryParse(row.Cells["colDonGia"].Value?.ToString() ?? "0", out decimal donGia);
+            decimal thanhTien = (decimal)soLuong * donGia;
+            row.Cells["colThanhTien"].Value = thanhTien;
+        }
+
+        private void SaveRowToDatabase(DataGridViewRow row, int autoId)
+        {
+            Helpers.MySqlHelper.ExecuteNonQuery(
+                @"UPDATE tbl_tu_ct
+          SET ngay_dung = @ngay_dung, sang = @sang, trua = @trua,
+              chieu = @chieu, toi = @toi, so_luong = @so_luong,
+              thanh_tien = @thanh_tien, cach_dung = @cach_dung,
+              khong_lay = @khong_lay, date_in = NOW()
+          WHERE auto_id = @auto_id",
+                new MySqlParameter("@ngay_dung", ParseSoLuong(row.Cells["colNgayDung"].Value?.ToString() ?? "0")),
+                new MySqlParameter("@sang", ParseSoLuong(row.Cells["colSang"].Value?.ToString() ?? "0")),
+                new MySqlParameter("@trua", ParseSoLuong(row.Cells["colTrua"].Value?.ToString() ?? "0")),
+                new MySqlParameter("@chieu", ParseSoLuong(row.Cells["colChieu"].Value?.ToString() ?? "0")),
+                new MySqlParameter("@toi", ParseSoLuong(row.Cells["colToi"].Value?.ToString() ?? "0")),
+                new MySqlParameter("@so_luong", ParseSoLuong(row.Cells["colSoLuong"].Value?.ToString() ?? "0")),
+                new MySqlParameter("@thanh_tien", row.Cells["colThanhTien"].Value),
+                new MySqlParameter("@cach_dung", row.Cells["colCachDung"].Value?.ToString() ?? ""),
+                new MySqlParameter("@khong_lay", Convert.ToBoolean(row.Cells["colKhongLay"].Value ?? false)),
+                new MySqlParameter("@auto_id", autoId)
+            );
         }
 
         private void txtNgayDung_TextChanged(object sender, EventArgs e)
