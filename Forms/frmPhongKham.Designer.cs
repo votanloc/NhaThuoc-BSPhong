@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPhongKham));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
@@ -63,6 +64,23 @@
             tabControl1 = new TabControl();
             tabToaThuocUong = new TabPage();
             tableLayoutPanel4 = new TableLayoutPanel();
+            toolStrip1 = new ToolStrip();
+            btnThemToaThuocUong = new ToolStripButton();
+            toolStripSeparator1 = new ToolStripSeparator();
+            cboxToaThuocUong = new ToolStripComboBox();
+            toolStripSeparator2 = new ToolStripSeparator();
+            btnCapNhatToaUong = new ToolStripButton();
+            toolStripSeparator3 = new ToolStripSeparator();
+            btnInToaThuocUong = new ToolStripButton();
+            toolStripSeparator4 = new ToolStripSeparator();
+            btnInToaKhongThuocUong = new ToolStripButton();
+            toolStripSeparator5 = new ToolStripSeparator();
+            toolStripLabel1 = new ToolStripLabel();
+            txtTongTienThuocUong = new ToolStripTextBox();
+            toolStripSeparator6 = new ToolStripSeparator();
+            btnXoaThuocUong = new ToolStripButton();
+            toolStripSeparator7 = new ToolStripSeparator();
+            btnXoaToa = new ToolStripButton();
             dgvToaThuocUong = new DataGridView();
             colSelect = new DataGridViewCheckBoxColumn();
             colAuto_id = new DataGridViewTextBoxColumn();
@@ -84,16 +102,6 @@
             colCachDung = new DataGridViewTextBoxColumn();
             colKhongLay = new DataGridViewCheckBoxColumn();
             colNgayCapNhat = new DataGridViewTextBoxColumn();
-            flowLayoutPanel3 = new FlowLayoutPanel();
-            btnThemToaThuocUong = new Button();
-            cboxToaThuocUong = new ComboBox();
-            btnCapNhatToaUong = new Button();
-            btnInToaThuocUong = new Button();
-            btnInToaKhongThuocUong = new Button();
-            label13 = new Label();
-            txtTongTienThuocUong = new TextBox();
-            btnXoaThuocUong = new Button();
-            btnXoaToa = new Button();
             panel1 = new Panel();
             panel2 = new Panel();
             groupBox12 = new GroupBox();
@@ -160,8 +168,8 @@
             tabControl1.SuspendLayout();
             tabToaThuocUong.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
+            toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvToaThuocUong).BeginInit();
-            flowLayoutPanel3.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             groupBox12.SuspendLayout();
@@ -194,7 +202,7 @@
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(1407, 718);
+            tableLayoutPanel1.Size = new Size(1380, 736);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -211,7 +219,7 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 150F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 128F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(981, 712);
+            tableLayoutPanel2.Size = new Size(954, 730);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // groupBox2
@@ -235,7 +243,7 @@
             groupBox2.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             groupBox2.Location = new Point(3, 3);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(975, 144);
+            groupBox2.Size = new Size(948, 144);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             // 
@@ -372,7 +380,7 @@
             flowLayoutPanel1.Dock = DockStyle.Bottom;
             flowLayoutPanel1.Location = new Point(3, 109);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(969, 32);
+            flowLayoutPanel1.Size = new Size(942, 32);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // btnThemMoi
@@ -432,7 +440,7 @@
             tabControl1.Location = new Point(3, 281);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(975, 428);
+            tabControl1.Size = new Size(948, 446);
             tabControl1.TabIndex = 1;
             // 
             // tabToaThuocUong
@@ -441,7 +449,7 @@
             tabToaThuocUong.Location = new Point(4, 27);
             tabToaThuocUong.Name = "tabToaThuocUong";
             tabToaThuocUong.Padding = new Padding(3);
-            tabToaThuocUong.Size = new Size(967, 397);
+            tabToaThuocUong.Size = new Size(940, 415);
             tabToaThuocUong.TabIndex = 0;
             tabToaThuocUong.Text = "Toa thuốc uống";
             tabToaThuocUong.UseVisualStyleBackColor = true;
@@ -450,8 +458,8 @@
             // 
             tableLayoutPanel4.ColumnCount = 1;
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel4.Controls.Add(toolStrip1, 0, 2);
             tableLayoutPanel4.Controls.Add(dgvToaThuocUong, 0, 1);
-            tableLayoutPanel4.Controls.Add(flowLayoutPanel3, 0, 2);
             tableLayoutPanel4.Controls.Add(panel1, 0, 0);
             tableLayoutPanel4.Dock = DockStyle.Fill;
             tableLayoutPanel4.Location = new Point(3, 3);
@@ -460,8 +468,126 @@
             tableLayoutPanel4.RowStyles.Add(new RowStyle());
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle());
-            tableLayoutPanel4.Size = new Size(961, 391);
+            tableLayoutPanel4.Size = new Size(934, 409);
             tableLayoutPanel4.TabIndex = 0;
+            // 
+            // toolStrip1
+            // 
+            toolStrip1.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btnThemToaThuocUong, toolStripSeparator1, cboxToaThuocUong, toolStripSeparator2, btnCapNhatToaUong, toolStripSeparator3, btnInToaThuocUong, toolStripSeparator4, btnInToaKhongThuocUong, toolStripSeparator5, toolStripLabel1, txtTongTienThuocUong, toolStripSeparator6, btnXoaThuocUong, toolStripSeparator7, btnXoaToa });
+            toolStrip1.Location = new Point(0, 383);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(934, 26);
+            toolStrip1.TabIndex = 17;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // btnThemToaThuocUong
+            // 
+            btnThemToaThuocUong.Image = Properties.Resources.plus;
+            btnThemToaThuocUong.ImageTransparentColor = Color.Magenta;
+            btnThemToaThuocUong.Name = "btnThemToaThuocUong";
+            btnThemToaThuocUong.Size = new Size(93, 23);
+            btnThemToaThuocUong.Text = "Thêm toa";
+            btnThemToaThuocUong.Click += btnThemToaThuocUong_Click_1;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(6, 26);
+            // 
+            // cboxToaThuocUong
+            // 
+            cboxToaThuocUong.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cboxToaThuocUong.Name = "cboxToaThuocUong";
+            cboxToaThuocUong.Size = new Size(75, 26);
+            cboxToaThuocUong.SelectedIndexChanged += cboxToaThuocUong_SelectedIndexChanged;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(6, 26);
+            // 
+            // btnCapNhatToaUong
+            // 
+            btnCapNhatToaUong.Image = Properties.Resources.update;
+            btnCapNhatToaUong.ImageTransparentColor = Color.Magenta;
+            btnCapNhatToaUong.Name = "btnCapNhatToaUong";
+            btnCapNhatToaUong.Size = new Size(91, 23);
+            btnCapNhatToaUong.Text = "Cập nhật";
+            btnCapNhatToaUong.Click += btnCapNhatToaUong_Click_1;
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(6, 26);
+            // 
+            // btnInToaThuocUong
+            // 
+            btnInToaThuocUong.Image = Properties.Resources.printing;
+            btnInToaThuocUong.ImageTransparentColor = Color.Magenta;
+            btnInToaThuocUong.Name = "btnInToaThuocUong";
+            btnInToaThuocUong.Size = new Size(65, 23);
+            btnInToaThuocUong.Text = "In toa";
+            btnInToaThuocUong.Click += btnInToaThuocUong_Click_1;
+            // 
+            // toolStripSeparator4
+            // 
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new Size(6, 26);
+            // 
+            // btnInToaKhongThuocUong
+            // 
+            btnInToaKhongThuocUong.Image = Properties.Resources.printing;
+            btnInToaKhongThuocUong.ImageTransparentColor = Color.Magenta;
+            btnInToaKhongThuocUong.Name = "btnInToaKhongThuocUong";
+            btnInToaKhongThuocUong.Size = new Size(152, 23);
+            btnInToaKhongThuocUong.Text = "In toa không thuốc";
+            // 
+            // toolStripSeparator5
+            // 
+            toolStripSeparator5.Name = "toolStripSeparator5";
+            toolStripSeparator5.Size = new Size(6, 26);
+            // 
+            // toolStripLabel1
+            // 
+            toolStripLabel1.Name = "toolStripLabel1";
+            toolStripLabel1.Size = new Size(76, 23);
+            toolStripLabel1.Text = "Tổng tiền:";
+            // 
+            // txtTongTienThuocUong
+            // 
+            txtTongTienThuocUong.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtTongTienThuocUong.Name = "txtTongTienThuocUong";
+            txtTongTienThuocUong.Size = new Size(100, 26);
+            txtTongTienThuocUong.TextBoxTextAlign = HorizontalAlignment.Right;
+            // 
+            // toolStripSeparator6
+            // 
+            toolStripSeparator6.Name = "toolStripSeparator6";
+            toolStripSeparator6.Size = new Size(6, 26);
+            // 
+            // btnXoaThuocUong
+            // 
+            btnXoaThuocUong.Image = (Image)resources.GetObject("btnXoaThuocUong.Image");
+            btnXoaThuocUong.ImageTransparentColor = Color.Magenta;
+            btnXoaThuocUong.Name = "btnXoaThuocUong";
+            btnXoaThuocUong.Size = new Size(98, 23);
+            btnXoaThuocUong.Text = "Xóa thuốc";
+            btnXoaThuocUong.Click += btnXoaThuocUong_Click_1;
+            // 
+            // toolStripSeparator7
+            // 
+            toolStripSeparator7.Name = "toolStripSeparator7";
+            toolStripSeparator7.Size = new Size(6, 26);
+            // 
+            // btnXoaToa
+            // 
+            btnXoaToa.Image = Properties.Resources.delete;
+            btnXoaToa.ImageTransparentColor = Color.Magenta;
+            btnXoaToa.Name = "btnXoaToa";
+            btnXoaToa.Size = new Size(83, 23);
+            btnXoaToa.Text = "Xóa toa";
+            btnXoaToa.Click += btnXoaToa_Click_1;
             // 
             // dgvToaThuocUong
             // 
@@ -473,7 +599,7 @@
             dgvToaThuocUong.Location = new Point(3, 96);
             dgvToaThuocUong.Name = "dgvToaThuocUong";
             dgvToaThuocUong.RowHeadersVisible = false;
-            dgvToaThuocUong.Size = new Size(955, 256);
+            dgvToaThuocUong.Size = new Size(928, 284);
             dgvToaThuocUong.TabIndex = 1;
             dgvToaThuocUong.CellEndEdit += dgvToaThuocUong_CellEndEdit;
             // 
@@ -638,121 +764,13 @@
             colNgayCapNhat.Name = "colNgayCapNhat";
             colNgayCapNhat.Width = 180;
             // 
-            // flowLayoutPanel3
-            // 
-            flowLayoutPanel3.Controls.Add(btnThemToaThuocUong);
-            flowLayoutPanel3.Controls.Add(cboxToaThuocUong);
-            flowLayoutPanel3.Controls.Add(btnCapNhatToaUong);
-            flowLayoutPanel3.Controls.Add(btnInToaThuocUong);
-            flowLayoutPanel3.Controls.Add(btnInToaKhongThuocUong);
-            flowLayoutPanel3.Controls.Add(label13);
-            flowLayoutPanel3.Controls.Add(txtTongTienThuocUong);
-            flowLayoutPanel3.Controls.Add(btnXoaThuocUong);
-            flowLayoutPanel3.Controls.Add(btnXoaToa);
-            flowLayoutPanel3.Location = new Point(3, 358);
-            flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new Size(912, 30);
-            flowLayoutPanel3.TabIndex = 2;
-            // 
-            // btnThemToaThuocUong
-            // 
-            btnThemToaThuocUong.Anchor = AnchorStyles.None;
-            btnThemToaThuocUong.Location = new Point(3, 3);
-            btnThemToaThuocUong.Name = "btnThemToaThuocUong";
-            btnThemToaThuocUong.Size = new Size(119, 26);
-            btnThemToaThuocUong.TabIndex = 5;
-            btnThemToaThuocUong.Text = "Thêm toa mới";
-            btnThemToaThuocUong.UseVisualStyleBackColor = true;
-            btnThemToaThuocUong.Click += btnThemToaThuocUong_Click;
-            // 
-            // cboxToaThuocUong
-            // 
-            cboxToaThuocUong.Anchor = AnchorStyles.None;
-            cboxToaThuocUong.FormattingEnabled = true;
-            cboxToaThuocUong.Location = new Point(128, 5);
-            cboxToaThuocUong.Name = "cboxToaThuocUong";
-            cboxToaThuocUong.Size = new Size(63, 26);
-            cboxToaThuocUong.TabIndex = 6;
-            cboxToaThuocUong.SelectionChangeCommitted += cboxToaThuocUong_SelectionChangeCommitted;
-            // 
-            // btnCapNhatToaUong
-            // 
-            btnCapNhatToaUong.Location = new Point(197, 3);
-            btnCapNhatToaUong.Name = "btnCapNhatToaUong";
-            btnCapNhatToaUong.Size = new Size(103, 27);
-            btnCapNhatToaUong.TabIndex = 17;
-            btnCapNhatToaUong.Text = "Cập nhật";
-            btnCapNhatToaUong.UseVisualStyleBackColor = true;
-            btnCapNhatToaUong.Click += btnCapNhatToaUong_Click;
-            // 
-            // btnInToaThuocUong
-            // 
-            btnInToaThuocUong.Anchor = AnchorStyles.None;
-            btnInToaThuocUong.Location = new Point(306, 3);
-            btnInToaThuocUong.Name = "btnInToaThuocUong";
-            btnInToaThuocUong.Size = new Size(73, 26);
-            btnInToaThuocUong.TabIndex = 0;
-            btnInToaThuocUong.Text = "In toa";
-            btnInToaThuocUong.UseVisualStyleBackColor = true;
-            btnInToaThuocUong.Click += btnInToaThuocUong_Click;
-            // 
-            // btnInToaKhongThuocUong
-            // 
-            btnInToaKhongThuocUong.Anchor = AnchorStyles.None;
-            btnInToaKhongThuocUong.Location = new Point(385, 3);
-            btnInToaKhongThuocUong.Name = "btnInToaKhongThuocUong";
-            btnInToaKhongThuocUong.Size = new Size(153, 26);
-            btnInToaKhongThuocUong.TabIndex = 4;
-            btnInToaKhongThuocUong.Text = "In toa không thuốc";
-            btnInToaKhongThuocUong.UseVisualStyleBackColor = true;
-            // 
-            // label13
-            // 
-            label13.Anchor = AnchorStyles.None;
-            label13.AutoSize = true;
-            label13.Location = new Point(544, 7);
-            label13.Name = "label13";
-            label13.Size = new Size(72, 18);
-            label13.TabIndex = 1;
-            label13.Text = "Tổng tiền";
-            // 
-            // txtTongTienThuocUong
-            // 
-            txtTongTienThuocUong.Anchor = AnchorStyles.None;
-            txtTongTienThuocUong.Location = new Point(622, 3);
-            txtTongTienThuocUong.Name = "txtTongTienThuocUong";
-            txtTongTienThuocUong.Size = new Size(100, 26);
-            txtTongTienThuocUong.TabIndex = 2;
-            // 
-            // btnXoaThuocUong
-            // 
-            btnXoaThuocUong.Anchor = AnchorStyles.None;
-            btnXoaThuocUong.Location = new Point(728, 3);
-            btnXoaThuocUong.Name = "btnXoaThuocUong";
-            btnXoaThuocUong.Size = new Size(87, 26);
-            btnXoaThuocUong.TabIndex = 3;
-            btnXoaThuocUong.Text = "Xóa thuốc";
-            btnXoaThuocUong.UseVisualStyleBackColor = true;
-            btnXoaThuocUong.Click += btnXoaThuocUong_Click;
-            // 
-            // btnXoaToa
-            // 
-            btnXoaToa.Anchor = AnchorStyles.None;
-            btnXoaToa.Location = new Point(821, 3);
-            btnXoaToa.Name = "btnXoaToa";
-            btnXoaToa.Size = new Size(87, 26);
-            btnXoaToa.TabIndex = 7;
-            btnXoaToa.Text = "Xóa toa";
-            btnXoaToa.UseVisualStyleBackColor = true;
-            btnXoaToa.Click += btnXoaToa_Click;
-            // 
             // panel1
             // 
             panel1.Controls.Add(panel2);
             panel1.Controls.Add(flowLayoutPanel2);
             panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(955, 87);
+            panel1.Size = new Size(928, 87);
             panel1.TabIndex = 3;
             // 
             // panel2
@@ -766,10 +784,10 @@
             panel2.Controls.Add(groupBox6);
             panel2.Controls.Add(groupBox5);
             panel2.Controls.Add(groupBox4);
-            panel2.Dock = DockStyle.Top;
+            panel2.Dock = DockStyle.Left;
             panel2.Location = new Point(0, 34);
             panel2.Name = "panel2";
-            panel2.Size = new Size(955, 50);
+            panel2.Size = new Size(955, 53);
             panel2.TabIndex = 1;
             // 
             // groupBox12
@@ -778,7 +796,7 @@
             groupBox12.Dock = DockStyle.Left;
             groupBox12.Location = new Point(712, 0);
             groupBox12.Name = "groupBox12";
-            groupBox12.Size = new Size(102, 50);
+            groupBox12.Size = new Size(102, 53);
             groupBox12.TabIndex = 8;
             groupBox12.TabStop = false;
             // 
@@ -787,7 +805,7 @@
             btnThemThuocUong.Dock = DockStyle.Fill;
             btnThemThuocUong.Location = new Point(3, 22);
             btnThemThuocUong.Name = "btnThemThuocUong";
-            btnThemThuocUong.Size = new Size(96, 25);
+            btnThemThuocUong.Size = new Size(96, 28);
             btnThemThuocUong.TabIndex = 39;
             btnThemThuocUong.Text = "Thêm";
             btnThemThuocUong.UseVisualStyleBackColor = true;
@@ -799,7 +817,7 @@
             groupBox11.Dock = DockStyle.Left;
             groupBox11.Location = new Point(616, 0);
             groupBox11.Name = "groupBox11";
-            groupBox11.Size = new Size(96, 50);
+            groupBox11.Size = new Size(96, 53);
             groupBox11.TabIndex = 7;
             groupBox11.TabStop = false;
             groupBox11.Text = "Số lượng";
@@ -819,7 +837,7 @@
             groupBox10.Dock = DockStyle.Left;
             groupBox10.Location = new Point(403, 0);
             groupBox10.Name = "groupBox10";
-            groupBox10.Size = new Size(213, 50);
+            groupBox10.Size = new Size(213, 53);
             groupBox10.TabIndex = 6;
             groupBox10.TabStop = false;
             groupBox10.Text = "Cách dùng";
@@ -840,7 +858,7 @@
             groupBox9.Dock = DockStyle.Left;
             groupBox9.Location = new Point(336, 0);
             groupBox9.Name = "groupBox9";
-            groupBox9.Size = new Size(67, 50);
+            groupBox9.Size = new Size(67, 53);
             groupBox9.TabIndex = 5;
             groupBox9.TabStop = false;
             groupBox9.Text = "Đơn vị";
@@ -859,7 +877,7 @@
             groupBox8.Dock = DockStyle.Left;
             groupBox8.Location = new Point(287, 0);
             groupBox8.Name = "groupBox8";
-            groupBox8.Size = new Size(49, 50);
+            groupBox8.Size = new Size(49, 53);
             groupBox8.TabIndex = 4;
             groupBox8.TabStop = false;
             groupBox8.Text = "Tối";
@@ -880,7 +898,7 @@
             groupBox7.Dock = DockStyle.Left;
             groupBox7.Location = new Point(219, 0);
             groupBox7.Name = "groupBox7";
-            groupBox7.Size = new Size(68, 50);
+            groupBox7.Size = new Size(68, 53);
             groupBox7.TabIndex = 3;
             groupBox7.TabStop = false;
             groupBox7.Text = "Chiều";
@@ -901,7 +919,7 @@
             groupBox6.Dock = DockStyle.Left;
             groupBox6.Location = new Point(160, 0);
             groupBox6.Name = "groupBox6";
-            groupBox6.Size = new Size(59, 50);
+            groupBox6.Size = new Size(59, 53);
             groupBox6.TabIndex = 2;
             groupBox6.TabStop = false;
             groupBox6.Text = "Trưa";
@@ -922,7 +940,7 @@
             groupBox5.Dock = DockStyle.Left;
             groupBox5.Location = new Point(99, 0);
             groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(61, 50);
+            groupBox5.Size = new Size(61, 53);
             groupBox5.TabIndex = 1;
             groupBox5.TabStop = false;
             groupBox5.Text = "Sáng";
@@ -943,7 +961,7 @@
             groupBox4.Dock = DockStyle.Left;
             groupBox4.Location = new Point(0, 0);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(99, 50);
+            groupBox4.Size = new Size(99, 53);
             groupBox4.TabIndex = 0;
             groupBox4.TabStop = false;
             groupBox4.Text = "Ngày dùng";
@@ -967,7 +985,7 @@
             flowLayoutPanel2.Dock = DockStyle.Top;
             flowLayoutPanel2.Location = new Point(0, 0);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(955, 34);
+            flowLayoutPanel2.Size = new Size(928, 34);
             flowLayoutPanel2.TabIndex = 0;
             // 
             // label12
@@ -1015,7 +1033,7 @@
             tabToaThuocTiem.Location = new Point(4, 27);
             tabToaThuocTiem.Name = "tabToaThuocTiem";
             tabToaThuocTiem.Padding = new Padding(3);
-            tabToaThuocTiem.Size = new Size(967, 397);
+            tabToaThuocTiem.Size = new Size(940, 415);
             tabToaThuocTiem.TabIndex = 1;
             tabToaThuocTiem.Text = "Toa thuốc tiêm";
             tabToaThuocTiem.UseVisualStyleBackColor = true;
@@ -1035,7 +1053,7 @@
             groupBox3.Dock = DockStyle.Fill;
             groupBox3.Location = new Point(3, 153);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(975, 122);
+            groupBox3.Size = new Size(948, 122);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
             // 
@@ -1145,7 +1163,7 @@
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle());
-            tableLayoutPanel3.Size = new Size(414, 712);
+            tableLayoutPanel3.Size = new Size(414, 730);
             tableLayoutPanel3.TabIndex = 1;
             // 
             // dgvTimBenhNhan
@@ -1159,7 +1177,7 @@
             dgvTimBenhNhan.Name = "dgvTimBenhNhan";
             dgvTimBenhNhan.ReadOnly = true;
             dgvTimBenhNhan.RowHeadersVisible = false;
-            dgvTimBenhNhan.Size = new Size(408, 570);
+            dgvTimBenhNhan.Size = new Size(408, 588);
             dgvTimBenhNhan.TabIndex = 1;
             dgvTimBenhNhan.CellMouseClick += dgvTimBenhNhan_CellMouseClick;
             // 
@@ -1316,7 +1334,7 @@
             flowLayoutPanel4.Controls.Add(rdoTatCa);
             flowLayoutPanel4.Controls.Add(rdoDaKham);
             flowLayoutPanel4.Controls.Add(rdoChoKham);
-            flowLayoutPanel4.Location = new Point(3, 679);
+            flowLayoutPanel4.Location = new Point(3, 697);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
             flowLayoutPanel4.Size = new Size(340, 30);
             flowLayoutPanel4.TabIndex = 2;
@@ -1359,7 +1377,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1407, 718);
+            BackColor = Color.White;
+            ClientSize = new Size(1380, 736);
             Controls.Add(tableLayoutPanel1);
             Name = "frmPhongKham";
             Text = "frmPhongKham";
@@ -1375,9 +1394,10 @@
             tabControl1.ResumeLayout(false);
             tabToaThuocUong.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
+            tableLayoutPanel4.PerformLayout();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvToaThuocUong).EndInit();
-            flowLayoutPanel3.ResumeLayout(false);
-            flowLayoutPanel3.PerformLayout();
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             groupBox12.ResumeLayout(false);
@@ -1455,13 +1475,8 @@
         private TextBox txtTimThuocUong;
         private Button btnThemThuocUong;
         private DataGridView dgvToaThuocUong;
-        private FlowLayoutPanel flowLayoutPanel3;
-        private Button btnInToaThuocUong;
-        private Label label13;
-        private TextBox txtTongTienThuocUong;
         private TextBox txtSoLuong;
         private TextBox txtCachDung;
-        private Button btnXoaThuocUong;
         private TextBox txtTimHoTen;
         private Label label16;
         private Button btnToaThuocMau;
@@ -1471,13 +1486,9 @@
         private RadioButton rdoTatCa;
         private RadioButton rdoDaKham;
         private Label label18;
-        private Button btnInToaKhongThuocUong;
         private CheckBox chkDaKham;
         private RadioButton rdoChoKham;
-        private Button btnThemToaThuocUong;
-        private ComboBox cboxToaThuocUong;
         private Label label19;
-        private Button btnXoaToa;
         private DataGridViewTextBoxColumn colMaBN;
         private DataGridViewTextBoxColumn colHoTen;
         private DataGridViewTextBoxColumn colNamSinh;
@@ -1517,7 +1528,6 @@
         private DataGridViewCheckBoxColumn colKhongLay;
         private DataGridViewTextBoxColumn colNgayCapNhat;
         private ComboBox cboxBacSi;
-        private Button btnCapNhatToaUong;
         private Panel panel2;
         private GroupBox groupBox5;
         private GroupBox groupBox4;
@@ -1528,5 +1538,22 @@
         private GroupBox groupBox8;
         private GroupBox groupBox7;
         private GroupBox groupBox6;
+        private ToolStrip toolStrip1;
+        private ToolStripButton btnThemToaThuocUong;
+        private ToolStripComboBox cboxToaThuocUong;
+        private ToolStripButton btnCapNhatToaUong;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripButton btnInToaThuocUong;
+        private ToolStripSeparator toolStripSeparator4;
+        private ToolStripButton btnInToaKhongThuocUong;
+        private ToolStripSeparator toolStripSeparator5;
+        private ToolStripLabel toolStripLabel1;
+        private ToolStripTextBox txtTongTienThuocUong;
+        private ToolStripSeparator toolStripSeparator6;
+        private ToolStripButton btnXoaThuocUong;
+        private ToolStripSeparator toolStripSeparator7;
+        private ToolStripButton btnXoaToa;
     }
 }
