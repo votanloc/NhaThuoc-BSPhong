@@ -33,9 +33,9 @@
             groupBox1 = new GroupBox();
             btnThoat = new Button();
             btnDangNhap = new Button();
-            checkBox1 = new CheckBox();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
+            checkboxSavePass = new CheckBox();
+            txtPW = new TextBox();
+            texUser = new TextBox();
             label2 = new Label();
             label1 = new Label();
             tableLayoutPanel1.SuspendLayout();
@@ -64,9 +64,9 @@
             // 
             groupBox1.Controls.Add(btnThoat);
             groupBox1.Controls.Add(btnDangNhap);
-            groupBox1.Controls.Add(checkBox1);
-            groupBox1.Controls.Add(textBox2);
-            groupBox1.Controls.Add(textBox1);
+            groupBox1.Controls.Add(checkboxSavePass);
+            groupBox1.Controls.Add(txtPW);
+            groupBox1.Controls.Add(texUser);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(97, 36);
@@ -98,37 +98,40 @@
             btnDangNhap.UseVisualStyleBackColor = true;
             btnDangNhap.Click += btnDangNhap_Click;
             // 
-            // checkBox1
+            // checkboxSavePass
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Checked = true;
-            checkBox1.CheckState = CheckState.Checked;
-            checkBox1.Location = new Point(22, 91);
-            checkBox1.Margin = new Padding(4);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(122, 22);
-            checkBox1.TabIndex = 4;
-            checkBox1.Text = "Lưu mật khẩu";
-            checkBox1.UseVisualStyleBackColor = true;
+            checkboxSavePass.AutoSize = true;
+            checkboxSavePass.Checked = true;
+            checkboxSavePass.CheckState = CheckState.Checked;
+            checkboxSavePass.Location = new Point(22, 91);
+            checkboxSavePass.Margin = new Padding(4);
+            checkboxSavePass.Name = "checkboxSavePass";
+            checkboxSavePass.Size = new Size(122, 22);
+            checkboxSavePass.TabIndex = 4;
+            checkboxSavePass.Text = "Lưu mật khẩu";
+            checkboxSavePass.UseVisualStyleBackColor = true;
+            checkboxSavePass.KeyDown += checkboxSavePass_KeyDown;
             // 
-            // textBox2
+            // txtPW
             // 
-            textBox2.Location = new Point(110, 57);
-            textBox2.Margin = new Padding(4);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(127, 26);
-            textBox2.TabIndex = 3;
-            textBox2.Text = "lpsoft.com";
-            textBox2.UseSystemPasswordChar = true;
+            txtPW.Location = new Point(110, 57);
+            txtPW.Margin = new Padding(4);
+            txtPW.Name = "txtPW";
+            txtPW.Size = new Size(127, 26);
+            txtPW.TabIndex = 3;
+            txtPW.Text = "lpsoft.com";
+            txtPW.UseSystemPasswordChar = true;
+            txtPW.KeyDown += txtPW_KeyDown;
             // 
-            // textBox1
+            // texUser
             // 
-            textBox1.Location = new Point(110, 20);
-            textBox1.Margin = new Padding(4);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(127, 26);
-            textBox1.TabIndex = 2;
-            textBox1.Text = "admin";
+            texUser.Location = new Point(110, 20);
+            texUser.Margin = new Padding(4);
+            texUser.Name = "texUser";
+            texUser.Size = new Size(127, 26);
+            texUser.TabIndex = 2;
+            texUser.Text = "admin";
+            texUser.KeyDown += textBox1_KeyDown;
             // 
             // label2
             // 
@@ -174,9 +177,9 @@
         private GroupBox groupBox1;
         private Button btnThoat;
         private Button btnDangNhap;
-        private CheckBox checkBox1;
-        private TextBox textBox2;
-        private TextBox textBox1;
+        private CheckBox checkboxSavePass;
+        private TextBox txtPW;
+        private TextBox texUser;
         private Label label2;
         private Label label1;
     }

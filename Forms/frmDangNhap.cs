@@ -36,5 +36,29 @@ namespace PhongKham.Forms
 
             this.Close();
         }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtPW.Focus();
+            }
+        }
+
+        private void txtPW_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                checkboxSavePass.Focus();
+            }
+        }
+
+        private void checkboxSavePass_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                btnDangNhap.Focus();
+            }
+        }
     }
 }

@@ -30,6 +30,13 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
             groupBox2 = new GroupBox();
@@ -59,7 +66,7 @@
             dgvToaThuocUong = new DataGridView();
             colSelect = new DataGridViewCheckBoxColumn();
             colAuto_id = new DataGridViewTextBoxColumn();
-            colMaBn1 = new DataGridViewTextBoxColumn();
+            colMaBN1 = new DataGridViewTextBoxColumn();
             colMaToa = new DataGridViewTextBoxColumn();
             colMaThuoc = new DataGridViewTextBoxColumn();
             colTenThuoc = new DataGridViewTextBoxColumn();
@@ -70,15 +77,17 @@
             colTrua = new DataGridViewTextBoxColumn();
             colChieu = new DataGridViewTextBoxColumn();
             colToi = new DataGridViewTextBoxColumn();
-            colDonVi = new DataGridViewTextBoxColumn();
-            colCachDung = new DataGridViewTextBoxColumn();
             colSoLuong = new DataGridViewTextBoxColumn();
             colDonGia = new DataGridViewTextBoxColumn();
             colThanhTien = new DataGridViewTextBoxColumn();
+            colDonViLe = new DataGridViewTextBoxColumn();
+            colCachDung = new DataGridViewTextBoxColumn();
             colKhongLay = new DataGridViewCheckBoxColumn();
+            colNgayCapNhat = new DataGridViewTextBoxColumn();
             flowLayoutPanel3 = new FlowLayoutPanel();
             btnThemToaThuocUong = new Button();
             cboxToaThuocUong = new ComboBox();
+            btnCapNhatToaUong = new Button();
             btnInToaThuocUong = new Button();
             btnInToaKhongThuocUong = new Button();
             label13 = new Label();
@@ -111,8 +120,8 @@
             labelSoLuongTon = new Label();
             tabToaThuocTiem = new TabPage();
             groupBox3 = new GroupBox();
+            cboxBacSi = new ComboBox();
             txtNgayHenTaiKham = new TextBox();
-            textBox1 = new TextBox();
             label19 = new Label();
             btnToaThuocMau = new Button();
             txtGhiChu = new TextBox();
@@ -175,7 +184,7 @@
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(1319, 682);
+            tableLayoutPanel1.Size = new Size(1407, 718);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -192,7 +201,7 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 150F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 128F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(893, 676);
+            tableLayoutPanel2.Size = new Size(981, 712);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // groupBox2
@@ -216,7 +225,7 @@
             groupBox2.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             groupBox2.Location = new Point(3, 3);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(887, 144);
+            groupBox2.Size = new Size(975, 144);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             // 
@@ -353,7 +362,7 @@
             flowLayoutPanel1.Dock = DockStyle.Bottom;
             flowLayoutPanel1.Location = new Point(3, 109);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(881, 32);
+            flowLayoutPanel1.Size = new Size(969, 32);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // btnThemMoi
@@ -413,7 +422,7 @@
             tabControl1.Location = new Point(3, 281);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(887, 392);
+            tabControl1.Size = new Size(975, 428);
             tabControl1.TabIndex = 1;
             // 
             // tabToaThuocUong
@@ -422,7 +431,7 @@
             tabToaThuocUong.Location = new Point(4, 27);
             tabToaThuocUong.Name = "tabToaThuocUong";
             tabToaThuocUong.Padding = new Padding(3);
-            tabToaThuocUong.Size = new Size(879, 361);
+            tabToaThuocUong.Size = new Size(967, 397);
             tabToaThuocUong.TabIndex = 0;
             tabToaThuocUong.Text = "Toa thuốc uống";
             tabToaThuocUong.UseVisualStyleBackColor = true;
@@ -441,7 +450,7 @@
             tableLayoutPanel4.RowStyles.Add(new RowStyle());
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle());
-            tableLayoutPanel4.Size = new Size(873, 355);
+            tableLayoutPanel4.Size = new Size(961, 391);
             tableLayoutPanel4.TabIndex = 0;
             // 
             // dgvToaThuocUong
@@ -449,12 +458,12 @@
             dgvToaThuocUong.AllowUserToAddRows = false;
             dgvToaThuocUong.BackgroundColor = Color.White;
             dgvToaThuocUong.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvToaThuocUong.Columns.AddRange(new DataGridViewColumn[] { colSelect, colAuto_id, colMaBn1, colMaToa, colMaThuoc, colTenThuoc, colHoatChat, colHamLuong, colNgayDung, colSang, colTrua, colChieu, colToi, colDonVi, colCachDung, colSoLuong, colDonGia, colThanhTien, colKhongLay });
+            dgvToaThuocUong.Columns.AddRange(new DataGridViewColumn[] { colSelect, colAuto_id, colMaBN1, colMaToa, colMaThuoc, colTenThuoc, colHoatChat, colHamLuong, colNgayDung, colSang, colTrua, colChieu, colToi, colSoLuong, colDonGia, colThanhTien, colDonViLe, colCachDung, colKhongLay, colNgayCapNhat });
             dgvToaThuocUong.Dock = DockStyle.Fill;
             dgvToaThuocUong.Location = new Point(3, 116);
             dgvToaThuocUong.Name = "dgvToaThuocUong";
             dgvToaThuocUong.RowHeadersVisible = false;
-            dgvToaThuocUong.Size = new Size(867, 200);
+            dgvToaThuocUong.Size = new Size(955, 236);
             dgvToaThuocUong.TabIndex = 1;
             dgvToaThuocUong.CellEndEdit += dgvToaThuocUong_CellEndEdit;
             // 
@@ -463,21 +472,21 @@
             colSelect.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colSelect.HeaderText = "CH";
             colSelect.Name = "colSelect";
-            colSelect.Width = 40;
+            colSelect.Width = 50;
             // 
             // colAuto_id
             // 
             colAuto_id.DataPropertyName = "auto_id";
-            colAuto_id.HeaderText = "auto id";
+            colAuto_id.HeaderText = "auto_id";
             colAuto_id.Name = "colAuto_id";
             colAuto_id.Visible = false;
             // 
-            // colMaBn1
+            // colMaBN1
             // 
-            colMaBn1.DataPropertyName = "ma_bn";
-            colMaBn1.HeaderText = "Mã BN";
-            colMaBn1.Name = "colMaBn1";
-            colMaBn1.Visible = false;
+            colMaBN1.DataPropertyName = "ma_bn";
+            colMaBN1.HeaderText = "Mã Bệnh nhân";
+            colMaBN1.Name = "colMaBN1";
+            colMaBN1.Visible = false;
             // 
             // colMaToa
             // 
@@ -489,7 +498,7 @@
             // colMaThuoc
             // 
             colMaThuoc.DataPropertyName = "ma_thuoc";
-            colMaThuoc.HeaderText = "Mã Thuốc";
+            colMaThuoc.HeaderText = "mã thuốc";
             colMaThuoc.Name = "colMaThuoc";
             colMaThuoc.Visible = false;
             // 
@@ -497,97 +506,84 @@
             // 
             colTenThuoc.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colTenThuoc.DataPropertyName = "ten_thuoc";
-            colTenThuoc.HeaderText = "Tên Thuốc";
+            colTenThuoc.HeaderText = "Tên thuốc";
             colTenThuoc.Name = "colTenThuoc";
-            colTenThuoc.ReadOnly = true;
-            colTenThuoc.Width = 150;
+            colTenThuoc.Width = 300;
             // 
             // colHoatChat
             // 
+            colHoatChat.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colHoatChat.DataPropertyName = "hoat_chat";
             colHoatChat.HeaderText = "Hoạt chất";
             colHoatChat.Name = "colHoatChat";
-            colHoatChat.ReadOnly = true;
+            colHoatChat.Width = 150;
             // 
             // colHamLuong
             // 
-            colHamLuong.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colHamLuong.DataPropertyName = "ham_luong";
             colHamLuong.HeaderText = "Hàm lượng";
             colHamLuong.Name = "colHamLuong";
-            colHamLuong.ReadOnly = true;
             colHamLuong.Visible = false;
-            colHamLuong.Width = 120;
             // 
             // colNgayDung
             // 
             colNgayDung.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colNgayDung.DataPropertyName = "ngay_dung";
+            dataGridViewCellStyle1.Format = "###";
+            colNgayDung.DefaultCellStyle = dataGridViewCellStyle1;
             colNgayDung.HeaderText = "Ngày dùng";
             colNgayDung.Name = "colNgayDung";
             colNgayDung.Width = 120;
             // 
             // colSang
             // 
-            colSang.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            colSang.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colSang.DataPropertyName = "sang";
+            dataGridViewCellStyle2.Format = "###,#";
+            colSang.DefaultCellStyle = dataGridViewCellStyle2;
             colSang.HeaderText = "Sáng";
             colSang.Name = "colSang";
-            colSang.Width = 70;
             // 
             // colTrua
             // 
-            colTrua.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            colTrua.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colTrua.DataPropertyName = "trua";
+            dataGridViewCellStyle3.Format = "###,#";
+            colTrua.DefaultCellStyle = dataGridViewCellStyle3;
             colTrua.HeaderText = "Trưa";
             colTrua.Name = "colTrua";
-            colTrua.Width = 66;
             // 
             // colChieu
             // 
-            colChieu.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            colChieu.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colChieu.DataPropertyName = "chieu";
+            dataGridViewCellStyle4.Format = "###,#";
+            colChieu.DefaultCellStyle = dataGridViewCellStyle4;
             colChieu.HeaderText = "Chiều";
             colChieu.Name = "colChieu";
-            colChieu.Width = 74;
             // 
             // colToi
             // 
-            colToi.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             colToi.DataPropertyName = "toi";
+            dataGridViewCellStyle5.Format = "###,#";
+            colToi.DefaultCellStyle = dataGridViewCellStyle5;
             colToi.HeaderText = "Tối";
             colToi.Name = "colToi";
-            colToi.Width = 55;
-            // 
-            // colDonVi
-            // 
-            colDonVi.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            colDonVi.DataPropertyName = "don_vi";
-            colDonVi.HeaderText = "Đơn vị";
-            colDonVi.Name = "colDonVi";
-            colDonVi.ReadOnly = true;
-            // 
-            // colCachDung
-            // 
-            colCachDung.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            colCachDung.DataPropertyName = "cach_dung";
-            colCachDung.HeaderText = "Cách dùng";
-            colCachDung.Name = "colCachDung";
-            colCachDung.Width = 120;
             // 
             // colSoLuong
             // 
-            colSoLuong.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colSoLuong.DataPropertyName = "so_luong";
-            colSoLuong.HeaderText = "SL";
+            dataGridViewCellStyle6.Format = "###,#";
+            colSoLuong.DefaultCellStyle = dataGridViewCellStyle6;
+            colSoLuong.HeaderText = "Số lượng";
             colSoLuong.Name = "colSoLuong";
-            colSoLuong.Width = 70;
             // 
             // colDonGia
             // 
+            colDonGia.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colDonGia.DataPropertyName = "don_gia";
-            dataGridViewCellStyle1.Format = "#,###";
-            colDonGia.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Format = "###,#";
+            colDonGia.DefaultCellStyle = dataGridViewCellStyle7;
             colDonGia.HeaderText = "Đơn giá";
             colDonGia.Name = "colDonGia";
             // 
@@ -595,12 +591,26 @@
             // 
             colThanhTien.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colThanhTien.DataPropertyName = "thanh_tien";
-            dataGridViewCellStyle2.Format = "#,###";
-            colThanhTien.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Format = "###,#";
+            colThanhTien.DefaultCellStyle = dataGridViewCellStyle8;
             colThanhTien.HeaderText = "Thành tiền";
             colThanhTien.Name = "colThanhTien";
-            colThanhTien.ReadOnly = true;
             colThanhTien.Width = 120;
+            // 
+            // colDonViLe
+            // 
+            colDonViLe.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colDonViLe.DataPropertyName = "don_vi_le";
+            colDonViLe.HeaderText = "Đơn vị lẻ";
+            colDonViLe.Name = "colDonViLe";
+            // 
+            // colCachDung
+            // 
+            colCachDung.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colCachDung.DataPropertyName = "cach_dung";
+            colCachDung.HeaderText = "Cách dùng";
+            colCachDung.Name = "colCachDung";
+            colCachDung.Width = 150;
             // 
             // colKhongLay
             // 
@@ -608,19 +618,30 @@
             colKhongLay.HeaderText = "Không lấy";
             colKhongLay.Name = "colKhongLay";
             // 
+            // colNgayCapNhat
+            // 
+            colNgayCapNhat.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colNgayCapNhat.DataPropertyName = "date_in";
+            dataGridViewCellStyle9.Format = "dd/MM/yyyy HH:mm:ss";
+            colNgayCapNhat.DefaultCellStyle = dataGridViewCellStyle9;
+            colNgayCapNhat.HeaderText = "Ngày cập nhật";
+            colNgayCapNhat.Name = "colNgayCapNhat";
+            colNgayCapNhat.Width = 180;
+            // 
             // flowLayoutPanel3
             // 
             flowLayoutPanel3.Controls.Add(btnThemToaThuocUong);
             flowLayoutPanel3.Controls.Add(cboxToaThuocUong);
+            flowLayoutPanel3.Controls.Add(btnCapNhatToaUong);
             flowLayoutPanel3.Controls.Add(btnInToaThuocUong);
             flowLayoutPanel3.Controls.Add(btnInToaKhongThuocUong);
             flowLayoutPanel3.Controls.Add(label13);
             flowLayoutPanel3.Controls.Add(txtTongTienThuocUong);
             flowLayoutPanel3.Controls.Add(btnXoaThuocUong);
             flowLayoutPanel3.Controls.Add(btnXoaToa);
-            flowLayoutPanel3.Location = new Point(3, 322);
+            flowLayoutPanel3.Location = new Point(3, 358);
             flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new Size(832, 30);
+            flowLayoutPanel3.Size = new Size(912, 30);
             flowLayoutPanel3.TabIndex = 2;
             // 
             // btnThemToaThuocUong
@@ -638,16 +659,26 @@
             // 
             cboxToaThuocUong.Anchor = AnchorStyles.None;
             cboxToaThuocUong.FormattingEnabled = true;
-            cboxToaThuocUong.Location = new Point(128, 3);
+            cboxToaThuocUong.Location = new Point(128, 5);
             cboxToaThuocUong.Name = "cboxToaThuocUong";
             cboxToaThuocUong.Size = new Size(63, 26);
             cboxToaThuocUong.TabIndex = 6;
             cboxToaThuocUong.SelectionChangeCommitted += cboxToaThuocUong_SelectionChangeCommitted;
             // 
+            // btnCapNhatToaUong
+            // 
+            btnCapNhatToaUong.Location = new Point(197, 3);
+            btnCapNhatToaUong.Name = "btnCapNhatToaUong";
+            btnCapNhatToaUong.Size = new Size(103, 27);
+            btnCapNhatToaUong.TabIndex = 17;
+            btnCapNhatToaUong.Text = "Cập nhật";
+            btnCapNhatToaUong.UseVisualStyleBackColor = true;
+            btnCapNhatToaUong.Click += btnCapNhatToaUong_Click;
+            // 
             // btnInToaThuocUong
             // 
             btnInToaThuocUong.Anchor = AnchorStyles.None;
-            btnInToaThuocUong.Location = new Point(197, 3);
+            btnInToaThuocUong.Location = new Point(306, 3);
             btnInToaThuocUong.Name = "btnInToaThuocUong";
             btnInToaThuocUong.Size = new Size(73, 26);
             btnInToaThuocUong.TabIndex = 0;
@@ -658,7 +689,7 @@
             // btnInToaKhongThuocUong
             // 
             btnInToaKhongThuocUong.Anchor = AnchorStyles.None;
-            btnInToaKhongThuocUong.Location = new Point(276, 3);
+            btnInToaKhongThuocUong.Location = new Point(385, 3);
             btnInToaKhongThuocUong.Name = "btnInToaKhongThuocUong";
             btnInToaKhongThuocUong.Size = new Size(153, 26);
             btnInToaKhongThuocUong.TabIndex = 4;
@@ -669,7 +700,7 @@
             // 
             label13.Anchor = AnchorStyles.None;
             label13.AutoSize = true;
-            label13.Location = new Point(435, 7);
+            label13.Location = new Point(544, 7);
             label13.Name = "label13";
             label13.Size = new Size(72, 18);
             label13.TabIndex = 1;
@@ -678,7 +709,7 @@
             // txtTongTienThuocUong
             // 
             txtTongTienThuocUong.Anchor = AnchorStyles.None;
-            txtTongTienThuocUong.Location = new Point(513, 3);
+            txtTongTienThuocUong.Location = new Point(622, 3);
             txtTongTienThuocUong.Name = "txtTongTienThuocUong";
             txtTongTienThuocUong.Size = new Size(100, 26);
             txtTongTienThuocUong.TabIndex = 2;
@@ -686,7 +717,7 @@
             // btnXoaThuocUong
             // 
             btnXoaThuocUong.Anchor = AnchorStyles.None;
-            btnXoaThuocUong.Location = new Point(619, 3);
+            btnXoaThuocUong.Location = new Point(728, 3);
             btnXoaThuocUong.Name = "btnXoaThuocUong";
             btnXoaThuocUong.Size = new Size(87, 26);
             btnXoaThuocUong.TabIndex = 3;
@@ -697,7 +728,7 @@
             // btnXoaToa
             // 
             btnXoaToa.Anchor = AnchorStyles.None;
-            btnXoaToa.Location = new Point(712, 3);
+            btnXoaToa.Location = new Point(821, 3);
             btnXoaToa.Name = "btnXoaToa";
             btnXoaToa.Size = new Size(87, 26);
             btnXoaToa.TabIndex = 7;
@@ -978,15 +1009,15 @@
             tabToaThuocTiem.Location = new Point(4, 27);
             tabToaThuocTiem.Name = "tabToaThuocTiem";
             tabToaThuocTiem.Padding = new Padding(3);
-            tabToaThuocTiem.Size = new Size(879, 361);
+            tabToaThuocTiem.Size = new Size(967, 397);
             tabToaThuocTiem.TabIndex = 1;
             tabToaThuocTiem.Text = "Toa thuốc tiêm";
             tabToaThuocTiem.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(cboxBacSi);
             groupBox3.Controls.Add(txtNgayHenTaiKham);
-            groupBox3.Controls.Add(textBox1);
             groupBox3.Controls.Add(label19);
             groupBox3.Controls.Add(btnToaThuocMau);
             groupBox3.Controls.Add(txtGhiChu);
@@ -998,9 +1029,18 @@
             groupBox3.Dock = DockStyle.Fill;
             groupBox3.Location = new Point(3, 153);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(887, 122);
+            groupBox3.Size = new Size(975, 122);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
+            // 
+            // cboxBacSi
+            // 
+            cboxBacSi.FormattingEnabled = true;
+            cboxBacSi.Location = new Point(520, 80);
+            cboxBacSi.Name = "cboxBacSi";
+            cboxBacSi.Size = new Size(321, 26);
+            cboxBacSi.TabIndex = 16;
+            cboxBacSi.SelectionChangeCommitted += cboxBacSi_SelectionChangeCommitted;
             // 
             // txtNgayHenTaiKham
             // 
@@ -1011,17 +1051,10 @@
             txtNgayHenTaiKham.Text = "0";
             txtNgayHenTaiKham.TextChanged += txtNgayHenTaiKham_TextChanged;
             // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(533, 77);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(308, 26);
-            textBox1.TabIndex = 14;
-            // 
             // label19
             // 
             label19.AutoSize = true;
-            label19.Location = new Point(472, 80);
+            label19.Location = new Point(462, 83);
             label19.Name = "label19";
             label19.Size = new Size(55, 18);
             label19.TabIndex = 13;
@@ -1043,6 +1076,7 @@
             txtGhiChu.Name = "txtGhiChu";
             txtGhiChu.Size = new Size(321, 49);
             txtGhiChu.TabIndex = 11;
+            txtGhiChu.TextChanged += txtGhiChu_TextChanged;
             // 
             // label11
             // 
@@ -1070,6 +1104,7 @@
             dtpNgayHenTaiKham.Name = "dtpNgayHenTaiKham";
             dtpNgayHenTaiKham.Size = new Size(138, 26);
             dtpNgayHenTaiKham.TabIndex = 9;
+            dtpNgayHenTaiKham.ValueChanged += dtpNgayHenTaiKham_ValueChanged;
             // 
             // txtChanDoan
             // 
@@ -1078,6 +1113,7 @@
             txtChanDoan.Name = "txtChanDoan";
             txtChanDoan.Size = new Size(342, 49);
             txtChanDoan.TabIndex = 1;
+            txtChanDoan.TextChanged += txtChanDoan_TextChanged;
             // 
             // label3
             // 
@@ -1102,7 +1138,7 @@
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle());
-            tableLayoutPanel3.Size = new Size(414, 676);
+            tableLayoutPanel3.Size = new Size(414, 712);
             tableLayoutPanel3.TabIndex = 1;
             // 
             // dgvTimBenhNhan
@@ -1116,7 +1152,7 @@
             dgvTimBenhNhan.Name = "dgvTimBenhNhan";
             dgvTimBenhNhan.ReadOnly = true;
             dgvTimBenhNhan.RowHeadersVisible = false;
-            dgvTimBenhNhan.Size = new Size(408, 534);
+            dgvTimBenhNhan.Size = new Size(408, 570);
             dgvTimBenhNhan.TabIndex = 1;
             dgvTimBenhNhan.CellMouseClick += dgvTimBenhNhan_CellMouseClick;
             // 
@@ -1273,7 +1309,7 @@
             flowLayoutPanel4.Controls.Add(rdoTatCa);
             flowLayoutPanel4.Controls.Add(rdoDaKham);
             flowLayoutPanel4.Controls.Add(rdoChoKham);
-            flowLayoutPanel4.Location = new Point(3, 643);
+            flowLayoutPanel4.Location = new Point(3, 679);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
             flowLayoutPanel4.Size = new Size(340, 30);
             flowLayoutPanel4.TabIndex = 2;
@@ -1316,7 +1352,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1319, 682);
+            ClientSize = new Size(1407, 718);
             Controls.Add(tableLayoutPanel1);
             Name = "frmPhongKham";
             Text = "frmPhongKham";
@@ -1419,7 +1455,6 @@
         private RadioButton rdoChoKham;
         private Button btnThemToaThuocUong;
         private ComboBox cboxToaThuocUong;
-        private TextBox textBox1;
         private Label label19;
         private Button btnXoaToa;
         private DataGridViewTextBoxColumn colMaBN;
@@ -1449,7 +1484,7 @@
         private TextBox txtNgayDung;
         private DataGridViewCheckBoxColumn colSelect;
         private DataGridViewTextBoxColumn colAuto_id;
-        private DataGridViewTextBoxColumn colMaBn1;
+        private DataGridViewTextBoxColumn colMaBN1;
         private DataGridViewTextBoxColumn colMaToa;
         private DataGridViewTextBoxColumn colMaThuoc;
         private DataGridViewTextBoxColumn colTenThuoc;
@@ -1460,11 +1495,14 @@
         private DataGridViewTextBoxColumn colTrua;
         private DataGridViewTextBoxColumn colChieu;
         private DataGridViewTextBoxColumn colToi;
-        private DataGridViewTextBoxColumn colDonVi;
-        private DataGridViewTextBoxColumn colCachDung;
         private DataGridViewTextBoxColumn colSoLuong;
         private DataGridViewTextBoxColumn colDonGia;
         private DataGridViewTextBoxColumn colThanhTien;
+        private DataGridViewTextBoxColumn colDonViLe;
+        private DataGridViewTextBoxColumn colCachDung;
         private DataGridViewCheckBoxColumn colKhongLay;
+        private DataGridViewTextBoxColumn colNgayCapNhat;
+        private ComboBox cboxBacSi;
+        private Button btnCapNhatToaUong;
     }
 }
