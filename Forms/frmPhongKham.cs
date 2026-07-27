@@ -33,7 +33,6 @@ namespace PhongKham.Forms
 
         private void frmPhongKham_Load(object sender, EventArgs e)
         {
-
             ucSearchCD = new LPsoft.Helpers.ucLookup();
             this.Controls.Add(ucSearchCD);
             ucSearchCD.Visible = false;
@@ -137,10 +136,7 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
 
         private void btnThemMoi_Click(object sender, EventArgs e)
         {
-            xoaThongTinTrenManHinh();
-            taoBenhNhanMoi();
-            themToaThuocUong();
-            Helpers.DebounceManager.Execute("loadToaThuocUong", 100, loadToaThuocUongChiTiet);
+
         }
         private void loadToaThuocUongChiTiet()
         {
@@ -1468,6 +1464,29 @@ ORDER BY t2.hsd ASC;",
         {
             xoaToaThuocUong();
             loadTongTienThuocUong();
+        }
+
+        private void btnThemMoi_Click_1(object sender, EventArgs e)
+        {
+            xoaThongTinTrenManHinh();
+            taoBenhNhanMoi();
+            themToaThuocUong();
+            Helpers.DebounceManager.Execute("loadToaThuocUong", 100, loadToaThuocUongChiTiet);
+        }
+
+        private void btnThemBenhMoi_Click(object sender, EventArgs e)
+        {
+            xoaThongTinTrenManHinh();
+            taoBenhNhanMoi();
+            themToaThuocUong();
+            Helpers.DebounceManager.Execute("loadToaThuocUong", 100, loadToaThuocUongChiTiet);
+        }
+
+        private void btnCapNhatBenhMoi_Click(object sender, EventArgs e)
+        {
+            capNhatThongTinBN();
+            Helpers.DebounceManager.Execute("TimBenhNhan", 100, loadDanhSachBN);
+            MessageBox.Show("Cập nhật thông tin bệnh nhân thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

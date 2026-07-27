@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPhongKham));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
             groupBox2 = new GroupBox();
@@ -56,11 +56,12 @@
             txtHoTen = new TextBox();
             label4 = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
-            btnThemMoi = new Button();
-            btnCapNhat = new Button();
-            btnXoaBenh = new Button();
-            chkKhoaBenh = new CheckBox();
+            toolStrip2 = new ToolStrip();
+            btnThemBenhMoi = new ToolStripButton();
+            toolStripButton1 = new ToolStripSeparator();
+            btnCapNhatBenhMoi = new ToolStripButton();
             chkDaKham = new CheckBox();
+            chkKhoaBenh = new CheckBox();
             tabControl1 = new TabControl();
             tabToaThuocUong = new TabPage();
             tableLayoutPanel4 = new TableLayoutPanel();
@@ -161,10 +162,18 @@
             rdoTatCa = new RadioButton();
             rdoDaKham = new RadioButton();
             rdoChoKham = new RadioButton();
+            btnThemMoi = new ToolStripButton();
+            toolStripSeparator8 = new ToolStripSeparator();
+            toolStripSeparator9 = new ToolStripSeparator();
+            toolStripButton3 = new ToolStripButton();
+            toolStripSeparator10 = new ToolStripSeparator();
+            toolStripSeparator11 = new ToolStripSeparator();
+            btnXoaBenh = new ToolStripButton();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             groupBox2.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
+            toolStrip2.SuspendLayout();
             tabControl1.SuspendLayout();
             tabToaThuocUong.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
@@ -372,65 +381,70 @@
             // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.Controls.Add(btnThemMoi);
-            flowLayoutPanel1.Controls.Add(btnCapNhat);
-            flowLayoutPanel1.Controls.Add(btnXoaBenh);
-            flowLayoutPanel1.Controls.Add(chkKhoaBenh);
+            flowLayoutPanel1.Controls.Add(toolStrip2);
             flowLayoutPanel1.Controls.Add(chkDaKham);
+            flowLayoutPanel1.Controls.Add(chkKhoaBenh);
             flowLayoutPanel1.Dock = DockStyle.Bottom;
             flowLayoutPanel1.Location = new Point(3, 109);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(942, 32);
             flowLayoutPanel1.TabIndex = 0;
             // 
-            // btnThemMoi
+            // toolStrip2
             // 
-            btnThemMoi.Location = new Point(3, 3);
-            btnThemMoi.Name = "btnThemMoi";
-            btnThemMoi.Size = new Size(140, 25);
-            btnThemMoi.TabIndex = 0;
-            btnThemMoi.Text = "Thêm bệnh mới";
-            btnThemMoi.UseVisualStyleBackColor = true;
-            btnThemMoi.Click += btnThemMoi_Click;
+            toolStrip2.Dock = DockStyle.None;
+            toolStrip2.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            toolStrip2.Items.AddRange(new ToolStripItem[] { btnThemBenhMoi, toolStripButton1, btnCapNhatBenhMoi, toolStripSeparator11, btnXoaBenh });
+            toolStrip2.Location = new Point(0, 0);
+            toolStrip2.Name = "toolStrip2";
+            toolStrip2.Size = new Size(379, 25);
+            toolStrip2.TabIndex = 14;
+            toolStrip2.Text = "toolStrip2";
             // 
-            // btnCapNhat
+            // btnThemBenhMoi
             // 
-            btnCapNhat.Location = new Point(149, 3);
-            btnCapNhat.Name = "btnCapNhat";
-            btnCapNhat.Size = new Size(145, 25);
-            btnCapNhat.TabIndex = 6;
-            btnCapNhat.Text = "Lưu/Cập nhật";
-            btnCapNhat.UseVisualStyleBackColor = true;
-            btnCapNhat.Click += btnCapNhat_Click;
+            btnThemBenhMoi.Image = Properties.Resources.plus;
+            btnThemBenhMoi.ImageTransparentColor = Color.Magenta;
+            btnThemBenhMoi.Name = "btnThemBenhMoi";
+            btnThemBenhMoi.Size = new Size(137, 22);
+            btnThemBenhMoi.Text = "Thêm bệnh mới";
+            btnThemBenhMoi.Click += btnThemBenhMoi_Click;
             // 
-            // btnXoaBenh
+            // toolStripButton1
             // 
-            btnXoaBenh.Location = new Point(300, 3);
-            btnXoaBenh.Name = "btnXoaBenh";
-            btnXoaBenh.Size = new Size(140, 25);
-            btnXoaBenh.TabIndex = 2;
-            btnXoaBenh.Text = "Xóa bệnh";
-            btnXoaBenh.UseVisualStyleBackColor = true;
+            toolStripButton1.Name = "toolStripButton1";
+            toolStripButton1.Size = new Size(6, 25);
             // 
-            // chkKhoaBenh
+            // btnCapNhatBenhMoi
             // 
-            chkKhoaBenh.AutoSize = true;
-            chkKhoaBenh.Location = new Point(446, 3);
-            chkKhoaBenh.Name = "chkKhoaBenh";
-            chkKhoaBenh.Size = new Size(102, 22);
-            chkKhoaBenh.TabIndex = 3;
-            chkKhoaBenh.Text = "Khóa bệnh";
-            chkKhoaBenh.UseVisualStyleBackColor = true;
+            btnCapNhatBenhMoi.Image = Properties.Resources.update;
+            btnCapNhatBenhMoi.ImageTransparentColor = Color.Magenta;
+            btnCapNhatBenhMoi.Name = "btnCapNhatBenhMoi";
+            btnCapNhatBenhMoi.Size = new Size(123, 22);
+            btnCapNhatBenhMoi.Text = "Lưu/Cập nhật";
+            btnCapNhatBenhMoi.Click += btnCapNhatBenhMoi_Click;
             // 
             // chkDaKham
             // 
+            chkDaKham.Anchor = AnchorStyles.None;
             chkDaKham.AutoSize = true;
-            chkDaKham.Location = new Point(554, 3);
+            chkDaKham.Location = new Point(382, 3);
             chkDaKham.Name = "chkDaKham";
             chkDaKham.Size = new Size(90, 22);
             chkDaKham.TabIndex = 4;
             chkDaKham.Text = "Đã khám";
             chkDaKham.UseVisualStyleBackColor = true;
+            // 
+            // chkKhoaBenh
+            // 
+            chkKhoaBenh.Anchor = AnchorStyles.None;
+            chkKhoaBenh.AutoSize = true;
+            chkKhoaBenh.Location = new Point(478, 3);
+            chkKhoaBenh.Name = "chkKhoaBenh";
+            chkKhoaBenh.Size = new Size(102, 22);
+            chkKhoaBenh.TabIndex = 3;
+            chkKhoaBenh.Text = "Khóa bệnh";
+            chkKhoaBenh.UseVisualStyleBackColor = true;
             // 
             // tabControl1
             // 
@@ -665,8 +679,8 @@
             // 
             colNgayDung.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colNgayDung.DataPropertyName = "ngay_dung";
-            dataGridViewCellStyle1.Format = "###";
-            colNgayDung.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle10.Format = "###";
+            colNgayDung.DefaultCellStyle = dataGridViewCellStyle10;
             colNgayDung.HeaderText = "Ngày dùng";
             colNgayDung.Name = "colNgayDung";
             colNgayDung.Width = 120;
@@ -675,8 +689,8 @@
             // 
             colSang.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colSang.DataPropertyName = "sang";
-            dataGridViewCellStyle2.Format = "###,#";
-            colSang.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Format = "###,#";
+            colSang.DefaultCellStyle = dataGridViewCellStyle11;
             colSang.HeaderText = "Sáng";
             colSang.Name = "colSang";
             // 
@@ -684,8 +698,8 @@
             // 
             colTrua.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colTrua.DataPropertyName = "trua";
-            dataGridViewCellStyle3.Format = "###,#";
-            colTrua.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Format = "###,#";
+            colTrua.DefaultCellStyle = dataGridViewCellStyle12;
             colTrua.HeaderText = "Trưa";
             colTrua.Name = "colTrua";
             // 
@@ -693,24 +707,24 @@
             // 
             colChieu.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colChieu.DataPropertyName = "chieu";
-            dataGridViewCellStyle4.Format = "###,#";
-            colChieu.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle13.Format = "###,#";
+            colChieu.DefaultCellStyle = dataGridViewCellStyle13;
             colChieu.HeaderText = "Chiều";
             colChieu.Name = "colChieu";
             // 
             // colToi
             // 
             colToi.DataPropertyName = "toi";
-            dataGridViewCellStyle5.Format = "###,#";
-            colToi.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle14.Format = "###,#";
+            colToi.DefaultCellStyle = dataGridViewCellStyle14;
             colToi.HeaderText = "Tối";
             colToi.Name = "colToi";
             // 
             // colSoLuong
             // 
             colSoLuong.DataPropertyName = "so_luong";
-            dataGridViewCellStyle6.Format = "###,#";
-            colSoLuong.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle15.Format = "###,#";
+            colSoLuong.DefaultCellStyle = dataGridViewCellStyle15;
             colSoLuong.HeaderText = "Số lượng";
             colSoLuong.Name = "colSoLuong";
             // 
@@ -718,8 +732,8 @@
             // 
             colDonGia.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colDonGia.DataPropertyName = "don_gia";
-            dataGridViewCellStyle7.Format = "###,#";
-            colDonGia.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle16.Format = "###,#";
+            colDonGia.DefaultCellStyle = dataGridViewCellStyle16;
             colDonGia.HeaderText = "Đơn giá";
             colDonGia.Name = "colDonGia";
             // 
@@ -727,8 +741,8 @@
             // 
             colThanhTien.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colThanhTien.DataPropertyName = "thanh_tien";
-            dataGridViewCellStyle8.Format = "###,#";
-            colThanhTien.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle17.Format = "###,#";
+            colThanhTien.DefaultCellStyle = dataGridViewCellStyle17;
             colThanhTien.HeaderText = "Thành tiền";
             colThanhTien.Name = "colThanhTien";
             colThanhTien.Width = 120;
@@ -758,8 +772,8 @@
             // 
             colNgayCapNhat.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colNgayCapNhat.DataPropertyName = "date_in";
-            dataGridViewCellStyle9.Format = "dd/MM/yyyy HH:mm:ss";
-            colNgayCapNhat.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle18.Format = "dd/MM/yyyy HH:mm:ss";
+            colNgayCapNhat.DefaultCellStyle = dataGridViewCellStyle18;
             colNgayCapNhat.HeaderText = "Ngày cập nhật";
             colNgayCapNhat.Name = "colNgayCapNhat";
             colNgayCapNhat.Width = 180;
@@ -1373,6 +1387,51 @@
             rdoChoKham.Text = "Chờ khám";
             rdoChoKham.UseVisualStyleBackColor = true;
             // 
+            // btnThemMoi
+            // 
+            btnThemMoi.Image = Properties.Resources.plus;
+            btnThemMoi.ImageTransparentColor = Color.Magenta;
+            btnThemMoi.Name = "btnThemMoi";
+            btnThemMoi.Size = new Size(137, 22);
+            btnThemMoi.Text = "Thêm bệnh mới";
+            btnThemMoi.Click += btnThemMoi_Click_1;
+            // 
+            // toolStripSeparator8
+            // 
+            toolStripSeparator8.Name = "toolStripSeparator8";
+            toolStripSeparator8.Size = new Size(6, 25);
+            // 
+            // toolStripSeparator9
+            // 
+            toolStripSeparator9.Name = "toolStripSeparator9";
+            toolStripSeparator9.Size = new Size(6, 25);
+            // 
+            // toolStripButton3
+            // 
+            toolStripButton3.Image = Properties.Resources.delete;
+            toolStripButton3.ImageTransparentColor = Color.Magenta;
+            toolStripButton3.Name = "toolStripButton3";
+            toolStripButton3.Size = new Size(95, 22);
+            toolStripButton3.Text = "Xóa bệnh";
+            // 
+            // toolStripSeparator10
+            // 
+            toolStripSeparator10.Name = "toolStripSeparator10";
+            toolStripSeparator10.Size = new Size(6, 25);
+            // 
+            // toolStripSeparator11
+            // 
+            toolStripSeparator11.Name = "toolStripSeparator11";
+            toolStripSeparator11.Size = new Size(6, 25);
+            // 
+            // btnXoaBenh
+            // 
+            btnXoaBenh.Image = Properties.Resources.delete;
+            btnXoaBenh.ImageTransparentColor = Color.Magenta;
+            btnXoaBenh.Name = "btnXoaBenh";
+            btnXoaBenh.Size = new Size(95, 22);
+            btnXoaBenh.Text = "Xóa bệnh";
+            // 
             // frmPhongKham
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1391,6 +1450,8 @@
             groupBox2.PerformLayout();
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
+            toolStrip2.ResumeLayout(false);
+            toolStrip2.PerformLayout();
             tabControl1.ResumeLayout(false);
             tabToaThuocUong.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
@@ -1442,7 +1503,7 @@
         private TabPage tabToaThuocTiem;
         private GroupBox groupBox1;
         private DataGridView dgvTimBenhNhan;
-        private Button btnThemMoi;
+        private Button btnThemMoi1;
         private Button btnCapNhat;
         private Label label1;
         private DateTimePicker dtpTuNgay;
@@ -1453,7 +1514,6 @@
         private ComboBox cbxGioiTinh;
         private TextBox txtHoTen;
         private Label label4;
-        private Button btnXoaBenh;
         private CheckBox chkKhoaBenh;
         private GroupBox groupBox3;
         private TextBox txtChanDoan;
@@ -1555,5 +1615,16 @@
         private ToolStripButton btnXoaThuocUong;
         private ToolStripSeparator toolStripSeparator7;
         private ToolStripButton btnXoaToa;
+        private ToolStrip toolStrip2;
+        private ToolStripButton btnThemMoi;
+        private ToolStripSeparator toolStripSeparator8;
+        private ToolStripSeparator toolStripSeparator9;
+        private ToolStripButton toolStripButton3;
+        private ToolStripSeparator toolStripSeparator10;
+        private ToolStripButton btnThemBenhMoi;
+        private ToolStripSeparator toolStripButton1;
+        private ToolStripButton btnCapNhatBenhMoi;
+        private ToolStripSeparator toolStripSeparator11;
+        private ToolStripButton btnXoaBenh;
     }
 }
