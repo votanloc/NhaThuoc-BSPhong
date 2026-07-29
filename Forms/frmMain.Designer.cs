@@ -46,7 +46,7 @@
             // menuStrip1
             // 
             menuStrip1.Font = new Font("Arial", 15.75F, FontStyle.Bold);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { btnHome, btnNhapKho, btnPhongKham, btnNhapXuatTon, btnDanhMuc, btnThongKe, btnHoTro });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { btnHome, btnPhongKham, btnNhapKho, btnNhapXuatTon, btnDanhMuc, btnThongKe, btnHoTro });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(8, 2, 0, 2);

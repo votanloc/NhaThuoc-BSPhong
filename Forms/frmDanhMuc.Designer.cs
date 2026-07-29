@@ -31,18 +31,8 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             tabDanhMuc = new TabControl();
-            tabNhomThuoc = new TabPage();
-            tableLayoutPanel1 = new TableLayoutPanel();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            label1 = new Label();
-            txtThemNhom = new TextBox();
-            btnThemNhom = new Button();
-            btnXoaNhom = new Button();
-            dgvNhomThuoc = new DataGridView();
             tabDanhMucThuoc = new TabPage();
             tableLayoutPanel2 = new TableLayoutPanel();
-            menuStrip1 = new MenuStrip();
-            btnXuatExcel_dgvDanhMucThuoc = new ToolStripMenuItem();
             dgvDanhMucThuoc = new DataGridView();
             colMaThuoc = new DataGridViewTextBoxColumn();
             colTenThuoc = new DataGridViewTextBoxColumn();
@@ -93,14 +83,8 @@
             rdoTatCaThuocDanhMuc = new RadioButton();
             rdoThuocDangSuDung = new RadioButton();
             rdoThuocKhoa = new RadioButton();
-            tabCachDung = new TabPage();
-            tableLayoutPanel3 = new TableLayoutPanel();
-            flowLayoutPanel3 = new FlowLayoutPanel();
-            label10 = new Label();
-            textBox7 = new TextBox();
-            button2 = new Button();
-            button3 = new Button();
-            dataGridView2 = new DataGridView();
+            toolStrip1 = new ToolStrip();
+            btnExportExcel = new ToolStripButton();
             tabNguoiDung = new TabPage();
             tableLayoutPanel4 = new TableLayoutPanel();
             flowLayoutPanel4 = new FlowLayoutPanel();
@@ -125,23 +109,10 @@
             colThayTheReport = new DataGridViewButtonColumn();
             colTrangThaiReport = new DataGridViewTextBoxColumn();
             colKhoaReport = new DataGridViewCheckBoxColumn();
-            tabDonVi = new TabPage();
-            tableLayoutPanel8 = new TableLayoutPanel();
-            flowLayoutPanel7 = new FlowLayoutPanel();
-            label17 = new Label();
-            textBox3 = new TextBox();
-            button1 = new Button();
-            button6 = new Button();
-            dataGridView1 = new DataGridView();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             tabDanhMuc.SuspendLayout();
-            tabNhomThuoc.SuspendLayout();
-            tableLayoutPanel1.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvNhomThuoc).BeginInit();
             tabDanhMucThuoc.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
-            menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDanhMucThuoc).BeginInit();
             tableLayoutPanel6.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -149,10 +120,7 @@
             tableLayoutPanel7.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             flowLayoutPanel6.SuspendLayout();
-            tabCachDung.SuspendLayout();
-            tableLayoutPanel3.SuspendLayout();
-            flowLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            toolStrip1.SuspendLayout();
             tabNguoiDung.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
             flowLayoutPanel4.SuspendLayout();
@@ -161,113 +129,20 @@
             tableLayoutPanel5.SuspendLayout();
             flowLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvReport).BeginInit();
-            tabDonVi.SuspendLayout();
-            tableLayoutPanel8.SuspendLayout();
-            flowLayoutPanel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // tabDanhMuc
             // 
-            tabDanhMuc.Controls.Add(tabNhomThuoc);
             tabDanhMuc.Controls.Add(tabDanhMucThuoc);
-            tabDanhMuc.Controls.Add(tabCachDung);
             tabDanhMuc.Controls.Add(tabNguoiDung);
             tabDanhMuc.Controls.Add(tabDanhSachReport);
-            tabDanhMuc.Controls.Add(tabDonVi);
             tabDanhMuc.Dock = DockStyle.Fill;
             tabDanhMuc.Location = new Point(0, 0);
             tabDanhMuc.Name = "tabDanhMuc";
             tabDanhMuc.SelectedIndex = 0;
-            tabDanhMuc.Size = new Size(1284, 661);
+            tabDanhMuc.Size = new Size(1348, 728);
             tabDanhMuc.TabIndex = 0;
             tabDanhMuc.SelectedIndexChanged += tabDanhMuc_SelectedIndexChanged;
-            // 
-            // tabNhomThuoc
-            // 
-            tabNhomThuoc.Controls.Add(tableLayoutPanel1);
-            tabNhomThuoc.Location = new Point(4, 27);
-            tabNhomThuoc.Name = "tabNhomThuoc";
-            tabNhomThuoc.Padding = new Padding(3);
-            tabNhomThuoc.Size = new Size(1276, 630);
-            tabNhomThuoc.TabIndex = 0;
-            tabNhomThuoc.Text = "Nhóm thuốc";
-            tabNhomThuoc.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel1
-            // 
-            tableLayoutPanel1.ColumnCount = 1;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Controls.Add(flowLayoutPanel1, 0, 0);
-            tableLayoutPanel1.Controls.Add(dgvNhomThuoc, 0, 1);
-            tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(3, 3);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 3;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new Size(1270, 624);
-            tableLayoutPanel1.TabIndex = 0;
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.Controls.Add(label1);
-            flowLayoutPanel1.Controls.Add(txtThemNhom);
-            flowLayoutPanel1.Controls.Add(btnThemNhom);
-            flowLayoutPanel1.Controls.Add(btnXoaNhom);
-            flowLayoutPanel1.Location = new Point(3, 3);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(429, 50);
-            flowLayoutPanel1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.None;
-            label1.AutoSize = true;
-            label1.Location = new Point(3, 10);
-            label1.Name = "label1";
-            label1.Size = new Size(80, 18);
-            label1.TabIndex = 1;
-            label1.Text = "Tên nhóm:";
-            // 
-            // txtThemNhom
-            // 
-            txtThemNhom.Anchor = AnchorStyles.None;
-            txtThemNhom.Location = new Point(89, 6);
-            txtThemNhom.Name = "txtThemNhom";
-            txtThemNhom.Size = new Size(116, 26);
-            txtThemNhom.TabIndex = 2;
-            // 
-            // btnThemNhom
-            // 
-            btnThemNhom.Anchor = AnchorStyles.None;
-            btnThemNhom.Location = new Point(211, 3);
-            btnThemNhom.Name = "btnThemNhom";
-            btnThemNhom.Size = new Size(105, 33);
-            btnThemNhom.TabIndex = 0;
-            btnThemNhom.Text = "Thêm nhóm";
-            btnThemNhom.UseVisualStyleBackColor = true;
-            // 
-            // btnXoaNhom
-            // 
-            btnXoaNhom.Anchor = AnchorStyles.None;
-            btnXoaNhom.Location = new Point(322, 4);
-            btnXoaNhom.Name = "btnXoaNhom";
-            btnXoaNhom.Size = new Size(103, 31);
-            btnXoaNhom.TabIndex = 3;
-            btnXoaNhom.Text = "Xóa nhóm";
-            btnXoaNhom.UseVisualStyleBackColor = true;
-            // 
-            // dgvNhomThuoc
-            // 
-            dgvNhomThuoc.BackgroundColor = Color.White;
-            dgvNhomThuoc.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvNhomThuoc.Dock = DockStyle.Left;
-            dgvNhomThuoc.Location = new Point(3, 59);
-            dgvNhomThuoc.Name = "dgvNhomThuoc";
-            dgvNhomThuoc.Size = new Size(429, 542);
-            dgvNhomThuoc.TabIndex = 1;
             // 
             // tabDanhMucThuoc
             // 
@@ -275,7 +150,7 @@
             tabDanhMucThuoc.Location = new Point(4, 27);
             tabDanhMucThuoc.Name = "tabDanhMucThuoc";
             tabDanhMucThuoc.Padding = new Padding(3);
-            tabDanhMucThuoc.Size = new Size(1276, 630);
+            tabDanhMucThuoc.Size = new Size(1340, 697);
             tabDanhMucThuoc.TabIndex = 1;
             tabDanhMucThuoc.Text = "Danh mục thuốc";
             tabDanhMucThuoc.UseVisualStyleBackColor = true;
@@ -284,9 +159,9 @@
             // 
             tableLayoutPanel2.ColumnCount = 1;
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Controls.Add(menuStrip1, 0, 2);
             tableLayoutPanel2.Controls.Add(dgvDanhMucThuoc, 0, 1);
             tableLayoutPanel2.Controls.Add(tableLayoutPanel6, 0, 0);
+            tableLayoutPanel2.Controls.Add(toolStrip1, 0, 2);
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(3, 3);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -294,29 +169,8 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle());
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle());
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.Size = new Size(1270, 624);
+            tableLayoutPanel2.Size = new Size(1334, 691);
             tableLayoutPanel2.TabIndex = 0;
-            // 
-            // menuStrip1
-            // 
-            menuStrip1.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { btnXuatExcel_dgvDanhMucThuoc });
-            menuStrip1.Location = new Point(0, 597);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1270, 27);
-            menuStrip1.TabIndex = 0;
-            menuStrip1.Text = "menuStrip1";
-            // 
-            // btnXuatExcel_dgvDanhMucThuoc
-            // 
-            btnXuatExcel_dgvDanhMucThuoc.BackColor = Color.FromArgb(128, 255, 255);
-            btnXuatExcel_dgvDanhMucThuoc.Name = "btnXuatExcel_dgvDanhMucThuoc";
-            btnXuatExcel_dgvDanhMucThuoc.Size = new Size(100, 23);
-            btnXuatExcel_dgvDanhMucThuoc.Text = "Xuất excel";
-            btnXuatExcel_dgvDanhMucThuoc.Click += btnXuatExcel_dgvDanhMucThuoc_Click;
             // 
             // dgvDanhMucThuoc
             // 
@@ -327,7 +181,7 @@
             dgvDanhMucThuoc.Dock = DockStyle.Fill;
             dgvDanhMucThuoc.Location = new Point(3, 243);
             dgvDanhMucThuoc.Name = "dgvDanhMucThuoc";
-            dgvDanhMucThuoc.Size = new Size(1264, 351);
+            dgvDanhMucThuoc.Size = new Size(1328, 420);
             dgvDanhMucThuoc.TabIndex = 1;
             dgvDanhMucThuoc.CellEndEdit += dgvDanhMucThuoc_CellEndEdit;
             // 
@@ -337,6 +191,7 @@
             colMaThuoc.DataPropertyName = "ma_thuoc";
             colMaThuoc.HeaderText = "Mã thuốc";
             colMaThuoc.Name = "colMaThuoc";
+            colMaThuoc.ReadOnly = true;
             // 
             // colTenThuoc
             // 
@@ -382,9 +237,11 @@
             // 
             // colDonViChan
             // 
+            colDonViChan.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colDonViChan.DataPropertyName = "don_vi_chan";
             colDonViChan.HeaderText = "Đơn vị chẵn";
             colDonViChan.Name = "colDonViChan";
+            colDonViChan.Width = 130;
             // 
             // colHeSo
             // 
@@ -441,7 +298,7 @@
             tableLayoutPanel6.RowCount = 2;
             tableLayoutPanel6.RowStyles.Add(new RowStyle());
             tableLayoutPanel6.RowStyles.Add(new RowStyle());
-            tableLayoutPanel6.Size = new Size(1264, 234);
+            tableLayoutPanel6.Size = new Size(1328, 234);
             tableLayoutPanel6.TabIndex = 2;
             // 
             // groupBox1
@@ -469,7 +326,7 @@
             groupBox1.Dock = DockStyle.Top;
             groupBox1.Location = new Point(3, 3);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(1258, 146);
+            groupBox1.Size = new Size(1322, 146);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Thông tin thuốc";
@@ -647,7 +504,7 @@
             groupBox2.Dock = DockStyle.Top;
             groupBox2.Location = new Point(3, 155);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(1258, 70);
+            groupBox2.Size = new Size(1322, 70);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Tìm thuốc";
@@ -664,7 +521,7 @@
             tableLayoutPanel7.Name = "tableLayoutPanel7";
             tableLayoutPanel7.RowCount = 1;
             tableLayoutPanel7.RowStyles.Add(new RowStyle());
-            tableLayoutPanel7.Size = new Size(1252, 45);
+            tableLayoutPanel7.Size = new Size(1316, 45);
             tableLayoutPanel7.TabIndex = 0;
             // 
             // flowLayoutPanel2
@@ -678,7 +535,7 @@
             flowLayoutPanel2.Controls.Add(rdoThuocTiem);
             flowLayoutPanel2.Location = new Point(3, 3);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(819, 36);
+            flowLayoutPanel2.Size = new Size(837, 36);
             flowLayoutPanel2.TabIndex = 0;
             // 
             // label2
@@ -762,7 +619,7 @@
             flowLayoutPanel6.Controls.Add(rdoTatCaThuocDanhMuc);
             flowLayoutPanel6.Controls.Add(rdoThuocDangSuDung);
             flowLayoutPanel6.Controls.Add(rdoThuocKhoa);
-            flowLayoutPanel6.Location = new Point(828, 3);
+            flowLayoutPanel6.Location = new Point(846, 3);
             flowLayoutPanel6.Name = "flowLayoutPanel6";
             flowLayoutPanel6.Size = new Size(329, 36);
             flowLayoutPanel6.TabIndex = 1;
@@ -802,97 +659,31 @@
             rdoThuocKhoa.UseVisualStyleBackColor = true;
             rdoThuocKhoa.CheckedChanged += rdoThuocKhoa_CheckedChanged;
             // 
-            // tabCachDung
+            // toolStrip1
             // 
-            tabCachDung.Controls.Add(tableLayoutPanel3);
-            tabCachDung.Location = new Point(4, 24);
-            tabCachDung.Name = "tabCachDung";
-            tabCachDung.Size = new Size(1276, 633);
-            tabCachDung.TabIndex = 3;
-            tabCachDung.Text = "Cách dùng";
-            tabCachDung.UseVisualStyleBackColor = true;
+            toolStrip1.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btnExportExcel });
+            toolStrip1.Location = new Point(0, 666);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(1334, 25);
+            toolStrip1.TabIndex = 3;
+            toolStrip1.Text = "toolStrip1";
             // 
-            // tableLayoutPanel3
+            // btnExportExcel
             // 
-            tableLayoutPanel3.ColumnCount = 1;
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.Controls.Add(flowLayoutPanel3, 0, 0);
-            tableLayoutPanel3.Controls.Add(dataGridView2, 0, 1);
-            tableLayoutPanel3.Dock = DockStyle.Fill;
-            tableLayoutPanel3.Location = new Point(0, 0);
-            tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.RowCount = 3;
-            tableLayoutPanel3.RowStyles.Add(new RowStyle());
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel3.Size = new Size(1276, 633);
-            tableLayoutPanel3.TabIndex = 1;
-            // 
-            // flowLayoutPanel3
-            // 
-            flowLayoutPanel3.Controls.Add(label10);
-            flowLayoutPanel3.Controls.Add(textBox7);
-            flowLayoutPanel3.Controls.Add(button2);
-            flowLayoutPanel3.Controls.Add(button3);
-            flowLayoutPanel3.Location = new Point(3, 3);
-            flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new Size(429, 50);
-            flowLayoutPanel3.TabIndex = 0;
-            // 
-            // label10
-            // 
-            label10.Anchor = AnchorStyles.None;
-            label10.AutoSize = true;
-            label10.Location = new Point(3, 10);
-            label10.Name = "label10";
-            label10.Size = new Size(80, 18);
-            label10.TabIndex = 1;
-            label10.Text = "Tên nhóm:";
-            // 
-            // textBox7
-            // 
-            textBox7.Anchor = AnchorStyles.None;
-            textBox7.Location = new Point(89, 6);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(116, 26);
-            textBox7.TabIndex = 2;
-            // 
-            // button2
-            // 
-            button2.Anchor = AnchorStyles.None;
-            button2.Location = new Point(211, 3);
-            button2.Name = "button2";
-            button2.Size = new Size(105, 33);
-            button2.TabIndex = 0;
-            button2.Text = "Thêm nhóm";
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            button3.Anchor = AnchorStyles.None;
-            button3.Location = new Point(322, 4);
-            button3.Name = "button3";
-            button3.Size = new Size(103, 31);
-            button3.TabIndex = 3;
-            button3.Text = "Xóa nhóm";
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView2
-            // 
-            dataGridView2.BackgroundColor = Color.White;
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Dock = DockStyle.Left;
-            dataGridView2.Location = new Point(3, 59);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.Size = new Size(429, 551);
-            dataGridView2.TabIndex = 1;
+            btnExportExcel.Image = Properties.Resources.excel;
+            btnExportExcel.ImageTransparentColor = Color.Magenta;
+            btnExportExcel.Name = "btnExportExcel";
+            btnExportExcel.Size = new Size(113, 22);
+            btnExportExcel.Text = "Export excel";
+            btnExportExcel.Click += btnExportExcel_Click;
             // 
             // tabNguoiDung
             // 
             tabNguoiDung.Controls.Add(tableLayoutPanel4);
             tabNguoiDung.Location = new Point(4, 24);
             tabNguoiDung.Name = "tabNguoiDung";
-            tabNguoiDung.Size = new Size(1276, 633);
+            tabNguoiDung.Size = new Size(1340, 700);
             tabNguoiDung.TabIndex = 2;
             tabNguoiDung.Text = "Danh mục người dùng";
             tabNguoiDung.UseVisualStyleBackColor = true;
@@ -910,7 +701,7 @@
             tableLayoutPanel4.RowStyles.Add(new RowStyle());
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel4.Size = new Size(1276, 633);
+            tableLayoutPanel4.Size = new Size(1340, 700);
             tableLayoutPanel4.TabIndex = 1;
             // 
             // flowLayoutPanel4
@@ -969,16 +760,16 @@
             dataGridView3.Dock = DockStyle.Left;
             dataGridView3.Location = new Point(3, 59);
             dataGridView3.Name = "dataGridView3";
-            dataGridView3.Size = new Size(429, 551);
+            dataGridView3.Size = new Size(429, 618);
             dataGridView3.TabIndex = 1;
             // 
             // tabDanhSachReport
             // 
             tabDanhSachReport.Controls.Add(tableLayoutPanel5);
-            tabDanhSachReport.Location = new Point(4, 24);
+            tabDanhSachReport.Location = new Point(4, 27);
             tabDanhSachReport.Name = "tabDanhSachReport";
             tabDanhSachReport.Padding = new Padding(3);
-            tabDanhSachReport.Size = new Size(1276, 633);
+            tabDanhSachReport.Size = new Size(1340, 697);
             tabDanhSachReport.TabIndex = 4;
             tabDanhSachReport.Text = "Danh sách report";
             tabDanhSachReport.UseVisualStyleBackColor = true;
@@ -996,7 +787,7 @@
             tableLayoutPanel5.RowStyles.Add(new RowStyle());
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel5.Size = new Size(1270, 627);
+            tableLayoutPanel5.Size = new Size(1334, 691);
             tableLayoutPanel5.TabIndex = 1;
             // 
             // flowLayoutPanel5
@@ -1067,7 +858,7 @@
             dgvReport.Dock = DockStyle.Fill;
             dgvReport.Location = new Point(3, 50);
             dgvReport.Name = "dgvReport";
-            dgvReport.Size = new Size(1264, 554);
+            dgvReport.Size = new Size(1328, 618);
             dgvReport.TabIndex = 1;
             dgvReport.CellContentClick += dgvReport_CellContentClick;
             // 
@@ -1117,100 +908,13 @@
             colKhoaReport.HeaderText = "Khóa";
             colKhoaReport.Name = "colKhoaReport";
             // 
-            // tabDonVi
-            // 
-            tabDonVi.Controls.Add(tableLayoutPanel8);
-            tabDonVi.Location = new Point(4, 24);
-            tabDonVi.Name = "tabDonVi";
-            tabDonVi.Padding = new Padding(3);
-            tabDonVi.Size = new Size(1276, 633);
-            tabDonVi.TabIndex = 5;
-            tabDonVi.Text = "Đơn vị";
-            tabDonVi.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel8
-            // 
-            tableLayoutPanel8.ColumnCount = 1;
-            tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel8.Controls.Add(flowLayoutPanel7, 0, 0);
-            tableLayoutPanel8.Controls.Add(dataGridView1, 0, 1);
-            tableLayoutPanel8.Dock = DockStyle.Fill;
-            tableLayoutPanel8.Location = new Point(3, 3);
-            tableLayoutPanel8.Name = "tableLayoutPanel8";
-            tableLayoutPanel8.RowCount = 3;
-            tableLayoutPanel8.RowStyles.Add(new RowStyle());
-            tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel8.Size = new Size(1270, 627);
-            tableLayoutPanel8.TabIndex = 1;
-            // 
-            // flowLayoutPanel7
-            // 
-            flowLayoutPanel7.Controls.Add(label17);
-            flowLayoutPanel7.Controls.Add(textBox3);
-            flowLayoutPanel7.Controls.Add(button1);
-            flowLayoutPanel7.Controls.Add(button6);
-            flowLayoutPanel7.Location = new Point(3, 3);
-            flowLayoutPanel7.Name = "flowLayoutPanel7";
-            flowLayoutPanel7.Size = new Size(429, 50);
-            flowLayoutPanel7.TabIndex = 0;
-            // 
-            // label17
-            // 
-            label17.Anchor = AnchorStyles.None;
-            label17.AutoSize = true;
-            label17.Location = new Point(3, 10);
-            label17.Name = "label17";
-            label17.Size = new Size(80, 18);
-            label17.TabIndex = 1;
-            label17.Text = "Tên nhóm:";
-            // 
-            // textBox3
-            // 
-            textBox3.Anchor = AnchorStyles.None;
-            textBox3.Location = new Point(89, 6);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(116, 26);
-            textBox3.TabIndex = 2;
-            // 
-            // button1
-            // 
-            button1.Anchor = AnchorStyles.None;
-            button1.Location = new Point(211, 3);
-            button1.Name = "button1";
-            button1.Size = new Size(105, 33);
-            button1.TabIndex = 0;
-            button1.Text = "Thêm nhóm";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            button6.Anchor = AnchorStyles.None;
-            button6.Location = new Point(322, 4);
-            button6.Name = "button6";
-            button6.Size = new Size(103, 31);
-            button6.TabIndex = 3;
-            button6.Text = "Xóa nhóm";
-            button6.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.BackgroundColor = Color.White;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Left;
-            dataGridView1.Location = new Point(3, 59);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(429, 545);
-            dataGridView1.TabIndex = 1;
-            // 
             // frmDanhMuc
             // 
             AutoScaleDimensions = new SizeF(9F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1284, 661);
+            ClientSize = new Size(1348, 728);
             Controls.Add(tabDanhMuc);
             Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            MainMenuStrip = menuStrip1;
             Margin = new Padding(4);
             Name = "frmDanhMuc";
             StartPosition = FormStartPosition.CenterScreen;
@@ -1218,16 +922,9 @@
             WindowState = FormWindowState.Maximized;
             Load += frmDanhMuc_Load;
             tabDanhMuc.ResumeLayout(false);
-            tabNhomThuoc.ResumeLayout(false);
-            tableLayoutPanel1.ResumeLayout(false);
-            flowLayoutPanel1.ResumeLayout(false);
-            flowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvNhomThuoc).EndInit();
             tabDanhMucThuoc.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
-            menuStrip1.ResumeLayout(false);
-            menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDanhMucThuoc).EndInit();
             tableLayoutPanel6.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
@@ -1238,11 +935,8 @@
             flowLayoutPanel2.PerformLayout();
             flowLayoutPanel6.ResumeLayout(false);
             flowLayoutPanel6.PerformLayout();
-            tabCachDung.ResumeLayout(false);
-            tableLayoutPanel3.ResumeLayout(false);
-            flowLayoutPanel3.ResumeLayout(false);
-            flowLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             tabNguoiDung.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
             flowLayoutPanel4.ResumeLayout(false);
@@ -1253,37 +947,16 @@
             flowLayoutPanel5.ResumeLayout(false);
             flowLayoutPanel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvReport).EndInit();
-            tabDonVi.ResumeLayout(false);
-            tableLayoutPanel8.ResumeLayout(false);
-            flowLayoutPanel7.ResumeLayout(false);
-            flowLayoutPanel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private TabControl tabDanhMuc;
-        private TabPage tabNhomThuoc;
         private TabPage tabDanhMucThuoc;
-        private TableLayoutPanel tableLayoutPanel1;
-        private FlowLayoutPanel flowLayoutPanel1;
-        private Button btnThemNhom;
-        private Label label1;
-        private DataGridView dgvNhomThuoc;
-        private TabPage tabCachDung;
         private TabPage tabNguoiDung;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private TextBox txtThemNhom;
-        private Button btnXoaNhom;
         private TabPage tabDanhSachReport;
-        private TableLayoutPanel tableLayoutPanel3;
-        private FlowLayoutPanel flowLayoutPanel3;
-        private Label label10;
-        private TextBox textBox7;
-        private Button button2;
-        private Button button3;
-        private DataGridView dataGridView2;
         private TableLayoutPanel tableLayoutPanel4;
         private FlowLayoutPanel flowLayoutPanel4;
         private Label label11;
@@ -1297,11 +970,9 @@
         private TextBox txtReport_name;
         private Button btnThemReport;
         private TableLayoutPanel tableLayoutPanel2;
-        private MenuStrip menuStrip1;
         private DataGridView dgvDanhMucThuoc;
         private TableLayoutPanel tableLayoutPanel6;
         private GroupBox groupBox1;
-        private ToolStripMenuItem btnXuatExcel_dgvDanhMucThuoc;
         private GroupBox groupBox2;
         private TableLayoutPanel tableLayoutPanel7;
         private FlowLayoutPanel flowLayoutPanel2;
@@ -1358,14 +1029,6 @@
         private DataGridViewCheckBoxColumn colKhoaReport;
         private ComboBox cboxTimNhomThuoc;
         private ComboBox cboxNhomThuoc;
-        private TabPage tabDonVi;
-        private TableLayoutPanel tableLayoutPanel8;
-        private FlowLayoutPanel flowLayoutPanel7;
-        private Label label17;
-        private TextBox textBox3;
-        private Button button1;
-        private Button button6;
-        private DataGridView dataGridView1;
         private DataGridViewTextBoxColumn colMaThuoc;
         private DataGridViewTextBoxColumn colTenThuoc;
         private DataGridViewTextBoxColumn colHoatChat;
@@ -1379,5 +1042,7 @@
         private DataGridViewCheckBoxColumn colThuocTiem;
         private DataGridViewTextBoxColumn colCachDung;
         private DataGridViewCheckBoxColumn colKhoa;
+        private ToolStrip toolStrip1;
+        private ToolStripButton btnExportExcel;
     }
 }

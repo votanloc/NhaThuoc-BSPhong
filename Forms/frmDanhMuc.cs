@@ -21,23 +21,15 @@ namespace PhongKham.Forms
 
         private void frmDanhMuc_Load(object sender, EventArgs e)
         {
-
+            Helpers.DebounceManager.Execute("loadDanhMucThuoc", 100, loadDanhMucThuoc);
         }
 
         private void tabDanhMuc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabDanhMuc.SelectedTab == tabNhomThuoc)
-            {
-                loadNhomThuoc();
-            }
-            else if (tabDanhMuc.SelectedTab == tabDanhMucThuoc)
+            if (tabDanhMuc.SelectedTab == tabDanhMucThuoc)
             {
                 Helpers.DebounceManager.Execute("loadDanhMucThuoc", 100, loadDanhMucThuoc);
-                loadNhomThuoc();
-            }
-            else if (tabDanhMuc.SelectedTab == tabCachDung)
-            {
-                loadCachDung();
+                //loadNhomThuoc();
             }
             else if (tabDanhMuc.SelectedTab == tabDanhSachReport)
             {
@@ -284,7 +276,6 @@ namespace PhongKham.Forms
 
         private void btnXuatExcel_dgvDanhMucThuoc_Click(object sender, EventArgs e)
         {
-            Export.ExportExcel(dgvDanhMucThuoc);
         }
 
         private void cboxTimNhomThuoc_SelectionChangeCommitted(object sender, EventArgs e)
@@ -393,6 +384,11 @@ namespace PhongKham.Forms
             {
                 //MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnExportExcel_Click(object sender, EventArgs e)
+        {
+            Export.ExportExcel(dgvDanhMucThuoc);
         }
     }
 }

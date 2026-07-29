@@ -73,6 +73,16 @@ namespace PhongKham.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap excel {
+            get {
+                object obj = ResourceManager.GetObject("excel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap logo_an_thịnh {
             get {
                 object obj = ResourceManager.GetObject("logo an thịnh", resourceCulture);
@@ -96,6 +106,16 @@ namespace PhongKham.Properties {
         internal static System.Drawing.Bitmap printing {
             get {
                 object obj = ResourceManager.GetObject("printing", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap statistics__1_ {
+            get {
+                object obj = ResourceManager.GetObject("statistics (1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

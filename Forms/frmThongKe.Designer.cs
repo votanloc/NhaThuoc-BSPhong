@@ -28,6 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             panel1 = new Panel();
             tableLayoutPanel1 = new TableLayoutPanel();
             panel2 = new Panel();
@@ -39,25 +47,43 @@
             tabThongke = new TabControl();
             tabDoanhThu = new TabPage();
             tableLayoutPanel3 = new TableLayoutPanel();
-            dataGridView1 = new DataGridView();
+            dgvDoanhThu = new DataGridView();
             colMaBN = new DataGridViewTextBoxColumn();
             colHoTen = new DataGridViewTextBoxColumn();
             colNamSinh = new DataGridViewTextBoxColumn();
             colPhai = new DataGridViewTextBoxColumn();
             colDiaChi = new DataGridViewTextBoxColumn();
             colSDT = new DataGridViewTextBoxColumn();
-            colChanDoan = new DataGridViewTextBoxColumn();
-            colGhiChu = new DataGridViewTextBoxColumn();
+            colNgayNhap = new DataGridViewTextBoxColumn();
+            colBacSi = new DataGridViewTextBoxColumn();
+            colTongTien = new DataGridViewTextBoxColumn();
             toolStrip2 = new ToolStrip();
+            btnThongKeDoanhThu = new ToolStripButton();
+            toolStripSeparator3 = new ToolStripSeparator();
+            btnExport = new ToolStripButton();
+            toolStripLabel3 = new ToolStripLabel();
+            txtTongTienDoanhThu = new ToolStripTextBox();
+            tabDoanhThuThuoc = new TabPage();
+            tableLayoutPanel4 = new TableLayoutPanel();
+            dgvDoanhThuThoc = new DataGridView();
+            colMaThuoc = new DataGridViewTextBoxColumn();
+            colTenThuoc = new DataGridViewTextBoxColumn();
+            colHoatChat = new DataGridViewTextBoxColumn();
+            colNhomThuoc = new DataGridViewTextBoxColumn();
+            colSoluong = new DataGridViewTextBoxColumn();
+            colDonGia = new DataGridViewTextBoxColumn();
+            colThanhTien = new DataGridViewTextBoxColumn();
+            colNgayNhap2 = new DataGridViewTextBoxColumn();
+            toolStrip3 = new ToolStrip();
+            btnThongKeThuoc = new ToolStripButton();
+            toolStripSeparator4 = new ToolStripSeparator();
+            btnXuatExcelThuoc = new ToolStripButton();
+            toolStripSeparator5 = new ToolStripSeparator();
             toolStripLabel2 = new ToolStripLabel();
+            txtTongTienDoanhThuThuoc = new ToolStripTextBox();
             tabChanDoan = new TabPage();
             tableLayoutPanel2 = new TableLayoutPanel();
             dgvChanDoan = new DataGridView();
-            toolStrip1 = new ToolStrip();
-            toolStripLabel1 = new ToolStripLabel();
-            toolStripSeparator1 = new ToolStripSeparator();
-            btnXuatExcel = new ToolStripLabel();
-            toolStripSeparator2 = new ToolStripSeparator();
             colMaBN1 = new DataGridViewTextBoxColumn();
             colHoTen1 = new DataGridViewTextBoxColumn();
             colNamSinh1 = new DataGridViewTextBoxColumn();
@@ -69,6 +95,11 @@
             colNgayNhap1 = new DataGridViewTextBoxColumn();
             colBacSi1 = new DataGridViewTextBoxColumn();
             colTaiKham1 = new DataGridViewTextBoxColumn();
+            toolStrip1 = new ToolStrip();
+            btnThongKeChanDoan = new ToolStripButton();
+            toolStripSeparator1 = new ToolStripSeparator();
+            btnXuatExcel = new ToolStripButton();
+            toolStripSeparator2 = new ToolStripSeparator();
             panel1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -76,8 +107,12 @@
             tabThongke.SuspendLayout();
             tabDoanhThu.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvDoanhThu).BeginInit();
             toolStrip2.SuspendLayout();
+            tabDoanhThuThuoc.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvDoanhThuThoc).BeginInit();
+            toolStrip3.SuspendLayout();
             tabChanDoan.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvChanDoan).BeginInit();
@@ -117,7 +152,7 @@
             panel2.Location = new Point(4, 4);
             panel2.Margin = new Padding(4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1075, 102);
+            panel2.Size = new Size(1075, 74);
             panel2.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -174,13 +209,14 @@
             // tabThongke
             // 
             tabThongke.Controls.Add(tabDoanhThu);
+            tabThongke.Controls.Add(tabDoanhThuThuoc);
             tabThongke.Controls.Add(tabChanDoan);
             tabThongke.Dock = DockStyle.Fill;
-            tabThongke.Location = new Point(4, 114);
+            tabThongke.Location = new Point(4, 86);
             tabThongke.Margin = new Padding(4);
             tabThongke.Name = "tabThongke";
             tabThongke.SelectedIndex = 0;
-            tabThongke.Size = new Size(1276, 543);
+            tabThongke.Size = new Size(1276, 571);
             tabThongke.TabIndex = 1;
             tabThongke.SelectedIndexChanged += tabThongke_SelectedIndexChanged;
             // 
@@ -191,7 +227,7 @@
             tabDoanhThu.Margin = new Padding(4);
             tabDoanhThu.Name = "tabDoanhThu";
             tabDoanhThu.Padding = new Padding(4);
-            tabDoanhThu.Size = new Size(1268, 512);
+            tabDoanhThu.Size = new Size(1268, 540);
             tabDoanhThu.TabIndex = 1;
             tabDoanhThu.Text = "Doanh Thu";
             tabDoanhThu.UseVisualStyleBackColor = true;
@@ -200,7 +236,7 @@
             // 
             tableLayoutPanel3.ColumnCount = 1;
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.Controls.Add(dataGridView1, 0, 0);
+            tableLayoutPanel3.Controls.Add(dgvDoanhThu, 0, 0);
             tableLayoutPanel3.Controls.Add(toolStrip2, 0, 1);
             tableLayoutPanel3.Dock = DockStyle.Fill;
             tableLayoutPanel3.Location = new Point(4, 4);
@@ -208,75 +244,293 @@
             tableLayoutPanel3.RowCount = 2;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle());
-            tableLayoutPanel3.Size = new Size(1260, 504);
+            tableLayoutPanel3.Size = new Size(1260, 532);
             tableLayoutPanel3.TabIndex = 1;
             // 
-            // dataGridView1
+            // dgvDoanhThu
             // 
-            dataGridView1.BackgroundColor = Color.White;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { colMaBN, colHoTen, colNamSinh, colPhai, colDiaChi, colSDT, colChanDoan, colGhiChu });
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(3, 3);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(1254, 473);
-            dataGridView1.TabIndex = 0;
+            dgvDoanhThu.AllowUserToAddRows = false;
+            dgvDoanhThu.BackgroundColor = Color.White;
+            dgvDoanhThu.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvDoanhThu.Columns.AddRange(new DataGridViewColumn[] { colMaBN, colHoTen, colNamSinh, colPhai, colDiaChi, colSDT, colNgayNhap, colBacSi, colTongTien });
+            dgvDoanhThu.Dock = DockStyle.Fill;
+            dgvDoanhThu.Location = new Point(3, 3);
+            dgvDoanhThu.Name = "dgvDoanhThu";
+            dgvDoanhThu.Size = new Size(1254, 494);
+            dgvDoanhThu.TabIndex = 0;
             // 
             // colMaBN
             // 
+            colMaBN.DataPropertyName = "ma_bn";
             colMaBN.HeaderText = "Mã BN";
             colMaBN.Name = "colMaBN";
             // 
             // colHoTen
             // 
+            colHoTen.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colHoTen.DataPropertyName = "ho_ten";
             colHoTen.HeaderText = "Họ tên";
             colHoTen.Name = "colHoTen";
+            colHoTen.Width = 200;
             // 
             // colNamSinh
             // 
+            colNamSinh.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colNamSinh.DataPropertyName = "tuoi";
             colNamSinh.HeaderText = "Năm sinh";
             colNamSinh.Name = "colNamSinh";
             // 
             // colPhai
             // 
+            colPhai.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colPhai.DataPropertyName = "phai";
             colPhai.HeaderText = "Phái";
             colPhai.Name = "colPhai";
             // 
             // colDiaChi
             // 
+            colDiaChi.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colDiaChi.DataPropertyName = "dia_chi";
             colDiaChi.HeaderText = "Địa chỉ";
             colDiaChi.Name = "colDiaChi";
+            colDiaChi.Width = 200;
             // 
             // colSDT
             // 
+            colSDT.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colSDT.DataPropertyName = "sdt";
             colSDT.HeaderText = "SĐT";
             colSDT.Name = "colSDT";
+            colSDT.Width = 120;
             // 
-            // colChanDoan
+            // colNgayNhap
             // 
-            colChanDoan.HeaderText = "Chẩn đoán";
-            colChanDoan.Name = "colChanDoan";
+            colNgayNhap.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colNgayNhap.DataPropertyName = "date_in";
+            dataGridViewCellStyle1.Format = "dd/MM/yyyy";
+            colNgayNhap.DefaultCellStyle = dataGridViewCellStyle1;
+            colNgayNhap.HeaderText = "Ngày nhập";
+            colNgayNhap.Name = "colNgayNhap";
+            colNgayNhap.Width = 150;
             // 
-            // colGhiChu
+            // colBacSi
             // 
-            colGhiChu.HeaderText = "Ghi chú";
-            colGhiChu.Name = "colGhiChu";
+            colBacSi.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colBacSi.DataPropertyName = "bac_si";
+            colBacSi.HeaderText = "Bác sĩ";
+            colBacSi.Name = "colBacSi";
+            colBacSi.Width = 200;
+            // 
+            // colTongTien
+            // 
+            colTongTien.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colTongTien.DataPropertyName = "tong_tien";
+            dataGridViewCellStyle2.Format = "###,#";
+            colTongTien.DefaultCellStyle = dataGridViewCellStyle2;
+            colTongTien.HeaderText = "Tổng tiền";
+            colTongTien.Name = "colTongTien";
+            colTongTien.Width = 150;
             // 
             // toolStrip2
             // 
             toolStrip2.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            toolStrip2.Items.AddRange(new ToolStripItem[] { toolStripLabel2 });
-            toolStrip2.Location = new Point(0, 479);
+            toolStrip2.Items.AddRange(new ToolStripItem[] { btnThongKeDoanhThu, toolStripSeparator3, btnExport, toolStripLabel3, txtTongTienDoanhThu });
+            toolStrip2.Location = new Point(0, 500);
             toolStrip2.Name = "toolStrip2";
-            toolStrip2.Size = new Size(1260, 25);
+            toolStrip2.Size = new Size(1260, 32);
             toolStrip2.TabIndex = 1;
             toolStrip2.Text = "toolStrip2";
+            // 
+            // btnThongKeDoanhThu
+            // 
+            btnThongKeDoanhThu.Image = Properties.Resources.statistics__1_;
+            btnThongKeDoanhThu.ImageTransparentColor = Color.Magenta;
+            btnThongKeDoanhThu.Name = "btnThongKeDoanhThu";
+            btnThongKeDoanhThu.Size = new Size(118, 29);
+            btnThongKeDoanhThu.Text = "Thống kê";
+            btnThongKeDoanhThu.Click += btnThongKeDoanhThu_Click;
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(6, 32);
+            // 
+            // btnExport
+            // 
+            btnExport.Image = Properties.Resources.excel;
+            btnExport.ImageTransparentColor = Color.Magenta;
+            btnExport.Name = "btnExport";
+            btnExport.Size = new Size(126, 29);
+            btnExport.Text = "Xuất excel";
+            btnExport.Click += btnExport_Click;
+            // 
+            // toolStripLabel3
+            // 
+            toolStripLabel3.Name = "toolStripLabel3";
+            toolStripLabel3.Size = new Size(98, 29);
+            toolStripLabel3.Text = "Tổng tiền";
+            // 
+            // txtTongTienDoanhThu
+            // 
+            txtTongTienDoanhThu.Font = new Font("Arial", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtTongTienDoanhThu.Name = "txtTongTienDoanhThu";
+            txtTongTienDoanhThu.Size = new Size(100, 32);
+            // 
+            // tabDoanhThuThuoc
+            // 
+            tabDoanhThuThuoc.Controls.Add(tableLayoutPanel4);
+            tabDoanhThuThuoc.Location = new Point(4, 24);
+            tabDoanhThuThuoc.Name = "tabDoanhThuThuoc";
+            tabDoanhThuThuoc.Size = new Size(1268, 543);
+            tabDoanhThuThuoc.TabIndex = 2;
+            tabDoanhThuThuoc.Text = "Doanh thu thuốc";
+            tabDoanhThuThuoc.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel4
+            // 
+            tableLayoutPanel4.ColumnCount = 1;
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel4.Controls.Add(dgvDoanhThuThoc, 0, 0);
+            tableLayoutPanel4.Controls.Add(toolStrip3, 0, 1);
+            tableLayoutPanel4.Dock = DockStyle.Fill;
+            tableLayoutPanel4.Location = new Point(0, 0);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 2;
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel4.RowStyles.Add(new RowStyle());
+            tableLayoutPanel4.Size = new Size(1268, 543);
+            tableLayoutPanel4.TabIndex = 2;
+            // 
+            // dgvDoanhThuThoc
+            // 
+            dgvDoanhThuThoc.AllowUserToAddRows = false;
+            dgvDoanhThuThoc.BackgroundColor = Color.White;
+            dgvDoanhThuThoc.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvDoanhThuThoc.Columns.AddRange(new DataGridViewColumn[] { colMaThuoc, colTenThuoc, colHoatChat, colNhomThuoc, colSoluong, colDonGia, colThanhTien, colNgayNhap2 });
+            dgvDoanhThuThoc.Dock = DockStyle.Fill;
+            dgvDoanhThuThoc.Location = new Point(3, 3);
+            dgvDoanhThuThoc.Name = "dgvDoanhThuThoc";
+            dgvDoanhThuThoc.Size = new Size(1262, 505);
+            dgvDoanhThuThoc.TabIndex = 0;
+            // 
+            // colMaThuoc
+            // 
+            colMaThuoc.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colMaThuoc.DataPropertyName = "ma_thuoc";
+            colMaThuoc.HeaderText = "Mã thuốc";
+            colMaThuoc.Name = "colMaThuoc";
+            // 
+            // colTenThuoc
+            // 
+            colTenThuoc.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colTenThuoc.DataPropertyName = "ten_thuoc";
+            colTenThuoc.HeaderText = "Tên thuốc";
+            colTenThuoc.Name = "colTenThuoc";
+            colTenThuoc.Width = 400;
+            // 
+            // colHoatChat
+            // 
+            colHoatChat.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colHoatChat.DataPropertyName = "hoat_chat";
+            colHoatChat.HeaderText = "Hoạt chất";
+            colHoatChat.Name = "colHoatChat";
+            colHoatChat.Width = 300;
+            // 
+            // colNhomThuoc
+            // 
+            colNhomThuoc.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colNhomThuoc.DataPropertyName = "nhom_thuoc";
+            colNhomThuoc.HeaderText = "Nhóm thuốc";
+            colNhomThuoc.Name = "colNhomThuoc";
+            colNhomThuoc.Width = 200;
+            // 
+            // colSoluong
+            // 
+            colSoluong.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colSoluong.DataPropertyName = "so_luong";
+            dataGridViewCellStyle3.Format = "###,#";
+            colSoluong.DefaultCellStyle = dataGridViewCellStyle3;
+            colSoluong.HeaderText = "Số lượng";
+            colSoluong.Name = "colSoluong";
+            // 
+            // colDonGia
+            // 
+            colDonGia.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colDonGia.DataPropertyName = "don_gia";
+            dataGridViewCellStyle4.Format = "###,#";
+            colDonGia.DefaultCellStyle = dataGridViewCellStyle4;
+            colDonGia.HeaderText = "Đơn giá";
+            colDonGia.Name = "colDonGia";
+            // 
+            // colThanhTien
+            // 
+            colThanhTien.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colThanhTien.DataPropertyName = "thanh_tien";
+            dataGridViewCellStyle5.Format = "###,#";
+            colThanhTien.DefaultCellStyle = dataGridViewCellStyle5;
+            colThanhTien.HeaderText = "Thành tiền";
+            colThanhTien.Name = "colThanhTien";
+            colThanhTien.Width = 150;
+            // 
+            // colNgayNhap2
+            // 
+            colNgayNhap2.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colNgayNhap2.DataPropertyName = "date_in";
+            dataGridViewCellStyle6.Format = "dd/MM/yyyy HH:mm:ss";
+            colNgayNhap2.DefaultCellStyle = dataGridViewCellStyle6;
+            colNgayNhap2.HeaderText = "Ngày nhập";
+            colNgayNhap2.Name = "colNgayNhap2";
+            colNgayNhap2.Width = 200;
+            // 
+            // toolStrip3
+            // 
+            toolStrip3.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            toolStrip3.Items.AddRange(new ToolStripItem[] { btnThongKeThuoc, toolStripSeparator4, btnXuatExcelThuoc, toolStripSeparator5, toolStripLabel2, txtTongTienDoanhThuThuoc });
+            toolStrip3.Location = new Point(0, 511);
+            toolStrip3.Name = "toolStrip3";
+            toolStrip3.Size = new Size(1268, 32);
+            toolStrip3.TabIndex = 1;
+            toolStrip3.Text = "toolStrip3";
+            // 
+            // btnThongKeThuoc
+            // 
+            btnThongKeThuoc.Image = Properties.Resources.statistics__1_;
+            btnThongKeThuoc.ImageTransparentColor = Color.Magenta;
+            btnThongKeThuoc.Name = "btnThongKeThuoc";
+            btnThongKeThuoc.Size = new Size(118, 29);
+            btnThongKeThuoc.Text = "Thống kê";
+            btnThongKeThuoc.Click += btnThongKeThuoc_Click;
+            // 
+            // toolStripSeparator4
+            // 
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new Size(6, 32);
+            // 
+            // btnXuatExcelThuoc
+            // 
+            btnXuatExcelThuoc.Image = Properties.Resources.excel;
+            btnXuatExcelThuoc.ImageTransparentColor = Color.Magenta;
+            btnXuatExcelThuoc.Name = "btnXuatExcelThuoc";
+            btnXuatExcelThuoc.Size = new Size(126, 29);
+            btnXuatExcelThuoc.Text = "Xuất excel";
+            btnXuatExcelThuoc.Click += btnXuatExcelThuoc_Click;
+            // 
+            // toolStripSeparator5
+            // 
+            toolStripSeparator5.Name = "toolStripSeparator5";
+            toolStripSeparator5.Size = new Size(6, 32);
             // 
             // toolStripLabel2
             // 
             toolStripLabel2.Name = "toolStripLabel2";
-            toolStripLabel2.Size = new Size(98, 22);
-            toolStripLabel2.Text = "Thống kê";
+            toolStripLabel2.Size = new Size(98, 29);
+            toolStripLabel2.Text = "Tổng tiền";
+            // 
+            // txtTongTienDoanhThuThuoc
+            // 
+            txtTongTienDoanhThuThuoc.Font = new Font("Arial", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtTongTienDoanhThuThuoc.Name = "txtTongTienDoanhThuThuoc";
+            txtTongTienDoanhThuThuoc.Size = new Size(100, 32);
             // 
             // tabChanDoan
             // 
@@ -285,7 +539,7 @@
             tabChanDoan.Margin = new Padding(4);
             tabChanDoan.Name = "tabChanDoan";
             tabChanDoan.Padding = new Padding(4);
-            tabChanDoan.Size = new Size(1268, 512);
+            tabChanDoan.Size = new Size(1268, 540);
             tabChanDoan.TabIndex = 0;
             tabChanDoan.Text = "Chẩn đoán";
             tabChanDoan.UseVisualStyleBackColor = true;
@@ -302,7 +556,7 @@
             tableLayoutPanel2.RowCount = 2;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle());
-            tableLayoutPanel2.Size = new Size(1260, 504);
+            tableLayoutPanel2.Size = new Size(1260, 532);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // dgvChanDoan
@@ -314,41 +568,8 @@
             dgvChanDoan.Dock = DockStyle.Fill;
             dgvChanDoan.Location = new Point(3, 3);
             dgvChanDoan.Name = "dgvChanDoan";
-            dgvChanDoan.Size = new Size(1254, 473);
+            dgvChanDoan.Size = new Size(1254, 497);
             dgvChanDoan.TabIndex = 0;
-            // 
-            // toolStrip1
-            // 
-            toolStrip1.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripLabel1, toolStripSeparator1, btnXuatExcel, toolStripSeparator2 });
-            toolStrip1.Location = new Point(0, 479);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(1260, 25);
-            toolStrip1.TabIndex = 1;
-            toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripLabel1
-            // 
-            toolStripLabel1.Name = "toolStripLabel1";
-            toolStripLabel1.Size = new Size(98, 22);
-            toolStripLabel1.Text = "Thống kê";
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(6, 25);
-            // 
-            // btnXuatExcel
-            // 
-            btnXuatExcel.Name = "btnXuatExcel";
-            btnXuatExcel.Size = new Size(106, 22);
-            btnXuatExcel.Text = "Xuất excel";
-            btnXuatExcel.Click += btnXuatExcel_Click;
-            // 
-            // toolStripSeparator2
-            // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(6, 25);
             // 
             // colMaBN1
             // 
@@ -410,21 +631,69 @@
             // 
             // colNgayNhap1
             // 
+            colNgayNhap1.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colNgayNhap1.DataPropertyName = "date_in";
+            dataGridViewCellStyle7.Format = "dd/MM/yyyy";
+            colNgayNhap1.DefaultCellStyle = dataGridViewCellStyle7;
             colNgayNhap1.HeaderText = "Ngày nhập";
             colNgayNhap1.Name = "colNgayNhap1";
+            colNgayNhap1.Width = 150;
             // 
             // colBacSi1
             // 
+            colBacSi1.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colBacSi1.DataPropertyName = "bac_si";
             colBacSi1.HeaderText = "Bác sĩ";
             colBacSi1.Name = "colBacSi1";
+            colBacSi1.Width = 200;
             // 
             // colTaiKham1
             // 
+            colTaiKham1.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colTaiKham1.DataPropertyName = "tai_kham";
+            dataGridViewCellStyle8.Format = "dd/MM/yyyy";
+            colTaiKham1.DefaultCellStyle = dataGridViewCellStyle8;
             colTaiKham1.HeaderText = "Tái khám";
             colTaiKham1.Name = "colTaiKham1";
+            colTaiKham1.Width = 150;
+            // 
+            // toolStrip1
+            // 
+            toolStrip1.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btnThongKeChanDoan, toolStripSeparator1, btnXuatExcel, toolStripSeparator2 });
+            toolStrip1.Location = new Point(0, 503);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(1260, 29);
+            toolStrip1.TabIndex = 1;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // btnThongKeChanDoan
+            // 
+            btnThongKeChanDoan.Image = Properties.Resources.statistics__1_;
+            btnThongKeChanDoan.ImageTransparentColor = Color.Magenta;
+            btnThongKeChanDoan.Name = "btnThongKeChanDoan";
+            btnThongKeChanDoan.Size = new Size(118, 26);
+            btnThongKeChanDoan.Text = "Thống kê";
+            btnThongKeChanDoan.Click += btnThongKeChanDoan_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(6, 29);
+            // 
+            // btnXuatExcel
+            // 
+            btnXuatExcel.Image = Properties.Resources.excel;
+            btnXuatExcel.ImageTransparentColor = Color.Magenta;
+            btnXuatExcel.Name = "btnXuatExcel";
+            btnXuatExcel.Size = new Size(126, 26);
+            btnXuatExcel.Text = "Xuất excel";
+            btnXuatExcel.Click += btnXuatExcel_Click;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(6, 29);
             // 
             // frmThongKe
             // 
@@ -447,9 +716,15 @@
             tabDoanhThu.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
             tableLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvDoanhThu).EndInit();
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
+            tabDoanhThuThuoc.ResumeLayout(false);
+            tableLayoutPanel4.ResumeLayout(false);
+            tableLayoutPanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvDoanhThuThoc).EndInit();
+            toolStrip3.ResumeLayout(false);
+            toolStrip3.PerformLayout();
             tabChanDoan.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
@@ -470,27 +745,50 @@
         private TableLayoutPanel tableLayoutPanel2;
         private DataGridView dgvChanDoan;
         private ToolStrip toolStrip1;
-        private ToolStripLabel toolStripLabel1;
         private TabPage tabDoanhThu;
         private FlowLayoutPanel flowLayoutPanel1;
         private DateTimePicker dtpTuNgay;
         private Label label2;
         private DateTimePicker dtpDenNgay;
         private TableLayoutPanel tableLayoutPanel3;
-        private DataGridView dataGridView1;
+        private DataGridView dgvDoanhThu;
         private ToolStrip toolStrip2;
-        private ToolStripLabel toolStripLabel2;
         private ToolStripSeparator toolStripSeparator1;
-        private ToolStripLabel btnXuatExcel;
         private ToolStripSeparator toolStripSeparator2;
+        private ToolStripButton btnThongKeDoanhThu;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripButton btnExport;
         private DataGridViewTextBoxColumn colMaBN;
         private DataGridViewTextBoxColumn colHoTen;
         private DataGridViewTextBoxColumn colNamSinh;
         private DataGridViewTextBoxColumn colPhai;
         private DataGridViewTextBoxColumn colDiaChi;
         private DataGridViewTextBoxColumn colSDT;
-        private DataGridViewTextBoxColumn colChanDoan;
-        private DataGridViewTextBoxColumn colGhiChu;
+        private DataGridViewTextBoxColumn colNgayNhap;
+        private DataGridViewTextBoxColumn colBacSi;
+        private DataGridViewTextBoxColumn colTongTien;
+        private TabPage tabDoanhThuThuoc;
+        private TableLayoutPanel tableLayoutPanel4;
+        private DataGridView dgvDoanhThuThoc;
+        private ToolStrip toolStrip3;
+        private ToolStripButton btnThongKeThuoc;
+        private ToolStripSeparator toolStripSeparator4;
+        private ToolStripButton btnXuatExcelThuoc;
+        private ToolStripButton btnThongKeChanDoan;
+        private ToolStripButton btnXuatExcel;
+        private ToolStripSeparator toolStripSeparator5;
+        private ToolStripLabel toolStripLabel2;
+        private ToolStripTextBox txtTongTienDoanhThuThuoc;
+        private DataGridViewTextBoxColumn colMaThuoc;
+        private DataGridViewTextBoxColumn colTenThuoc;
+        private DataGridViewTextBoxColumn colHoatChat;
+        private DataGridViewTextBoxColumn colNhomThuoc;
+        private DataGridViewTextBoxColumn colSoluong;
+        private DataGridViewTextBoxColumn colDonGia;
+        private DataGridViewTextBoxColumn colThanhTien;
+        private DataGridViewTextBoxColumn colNgayNhap2;
+        private ToolStripLabel toolStripLabel3;
+        private ToolStripTextBox txtTongTienDoanhThu;
         private DataGridViewTextBoxColumn colMaBN1;
         private DataGridViewTextBoxColumn colHoTen1;
         private DataGridViewTextBoxColumn colNamSinh1;

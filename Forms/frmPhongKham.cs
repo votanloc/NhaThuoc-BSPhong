@@ -35,6 +35,8 @@ namespace PhongKham.Forms
 
         private void frmPhongKham_Load(object sender, EventArgs e)
         {
+            Helpers.DebounceManager.Execute("TimBenhNhan", 100, loadDanhSachBN);
+
             ucSearchCD = new LPsoft.Helpers.ucLookup();
             this.Controls.Add(ucSearchCD);
             ucSearchCD.Visible = false;
@@ -187,7 +189,7 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
             txtHoTen.Clear();
             txtNamSinh.Clear();
             txtDiaChi.Clear();
-            cbxGioiTinh.SelectedIndex = -1;
+            cboxGioiTinh.SelectedIndex = -1;
             txtSDT.Clear();
             txtChanDoan.Clear();
             txtGhiChu.Clear();
@@ -223,20 +225,28 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
 
         private void capNhatThongTinBN()
         {
-            string sql = @"UPDATE tbl_bn set 
-                ho_ten = @ho_ten,
-                tuoi = @tuoi,
-                phai = @phai,
-                dia_chi = @dia_chi, SDT = @SDT 
-            WHERE ma_bn = @ma_bn";
+            string sql = @"
+UPDATE tbl_bn 
+SET 
+    ho_ten = @ho_ten,
+    tuoi = @tuoi,
+    phai = @phai,
+    dia_chi = @dia_chi,
+    SDT = @SDT,
+    da_kham = @da_kham,
+    khoa = @khoa
+WHERE
+    ma_bn = @ma_bn;";
 
             Helpers.MySqlHelper.ExecuteNonQuery(
                 sql,
                 new MySqlParameter("@ho_ten", txtHoTen.Text.Trim()),
                 new MySqlParameter("@tuoi", txtNamSinh.Text.Trim()),
-                new MySqlParameter("@phai", cbxGioiTinh.Text.Trim()),
+                new MySqlParameter("@phai", cboxGioiTinh.Text.Trim()),
                 new MySqlParameter("@dia_chi", txtDiaChi.Text.Trim()),
                 new MySqlParameter("@SDT", txtSDT.Text.Trim()),
+                new MySqlParameter("@da_kham", chkDaKham.Checked ? 1 : 0),
+                new MySqlParameter("@khoa", chkKhoaBenh.Checked ? 1 : 0),
                 new MySqlParameter("@ma_bn", txtMaBN.Text.Trim())
             );
         }
@@ -566,7 +576,7 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
             txtMaBN.Text = dgvTimBenhNhan.CurrentRow.Cells["colMaBN"].Value.ToString();
             txtHoTen.Text = dgvTimBenhNhan.CurrentRow.Cells["colHoTen"].Value.ToString();
             txtNamSinh.Text = dgvTimBenhNhan.CurrentRow.Cells["colNamSinh"].Value.ToString();
-            cbxGioiTinh.Text = dgvTimBenhNhan.CurrentRow.Cells["colPhai"].Value.ToString();
+            cboxGioiTinh.Text = dgvTimBenhNhan.CurrentRow.Cells["colPhai"].Value.ToString();
             txtDiaChi.Text = dgvTimBenhNhan.CurrentRow.Cells["colDiaChi"].Value.ToString();
             txtSDT.Text = dgvTimBenhNhan.CurrentRow.Cells["colsdt"].Value.ToString();
 
@@ -635,8 +645,8 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
         {
             if (e.KeyCode == Keys.Enter)
             {
-                cbxGioiTinh.DroppedDown = true;
-                cbxGioiTinh.Focus();
+                cboxGioiTinh.DroppedDown = true;
+                cboxGioiTinh.Focus();
             }
         }
 
@@ -660,12 +670,18 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
         {
             if (e.KeyCode == Keys.Enter)
             {
-                btnCapNhat.Focus();
+                capNhatThongTinBN();
+                Helpers.DebounceManager.Execute("TimBenhNhan", 100, loadDanhSachBN);
             }
         }
 
         private void txtTimThuocUong_TextChanged(object sender, EventArgs e)
         {
+            if (txtTimThuocUong.Text.Length < 2)
+            {
+                ucSearchCD.Visible = false;
+                return;
+            }
             activeTextBox = txtTimThuocUong;
             string timThuocUong = "%" + txtTimThuocUong.Text.Trim() + "%";
 
@@ -702,7 +718,7 @@ ORDER BY t2.hsd ASC LIMIT 5;",
 
             if (dtTimThuocUong != null && dtTimThuocUong.Rows.Count > 0)
             {
-                var widths = new Dictionary<string, int> { { "ma_thuoc", 0 }, { "Tên thuốc", 300 }, { "Hoạt chất", 300 }, { "Đơn vị", 70 }, { "Tồn kho", 100 }, { "cach_dung", 0 }, { "HSD", 100 }, { "LSX", 0 } };
+                var widths = new Dictionary<string, int> { { "ma_thuoc", 0 }, { "Tên thuốc", 300 }, { "Hoạt chất", 300 }, { "Đơn vị", 70 }, { "Tồn kho", 100 }, { "cach_dung", 0 }, { "HSD", 130 }, { "LSX", 0 } };
 
                 var formats = new Dictionary<string, string> { { "HSD", "dd/MM/yyyy" } };
 
@@ -713,7 +729,7 @@ ORDER BY t2.hsd ASC LIMIT 5;",
 
                 ucSearchCD.Left = locationOnForm.X;
                 ucSearchCD.Top = locationOnForm.Y + txtTimThuocUong.Height;
-                ucSearchCD.Width = 900; // Độ rộng của bảng kết quả
+                ucSearchCD.Width = 930; // Độ rộng của bảng kết quả
                 ucSearchCD.Height = 150; // Chiều cao của bảng kết quả
 
                 ucSearchCD.Visible = true;
@@ -997,7 +1013,7 @@ ORDER BY t2.hsd ASC LIMIT 5;",
             report.SetParameterValue("paraHoTen", txtHoTen.Text.Trim());
             report.SetParameterValue("paraTuoi", txtNamSinh.Text.Trim());
             report.SetParameterValue("paraDiaChi", txtDiaChi.Text.Trim());
-            report.SetParameterValue("paraGioiTinh", cbxGioiTinh.Text.Trim());
+            report.SetParameterValue("paraGioiTinh", cboxGioiTinh.Text.Trim());
             report.SetParameterValue("paraChanDoan", txtChanDoan.Text.Trim());
             report.SetParameterValue("paraGhiChu", txtGhiChu.Text.Trim());
             report.SetParameterValue("paraBacSi", cboxBacSi.Text.Trim());
@@ -1453,6 +1469,7 @@ ORDER BY t2.hsd ASC LIMIT 5;",
 
         private void btnInToaThuocUong_Click_1(object sender, EventArgs e)
         {
+            capNhatThongTinToaUong();
             inToaThuocUong();
         }
 
@@ -1513,6 +1530,73 @@ ORDER BY t2.hsd ASC LIMIT 5;",
             AND t2.ton_kho > 0
         ORDER BY t2.hsd ASC;"
             );
+        }
+
+        private void chkKhoaBenh_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkKhoaBenh.Checked)
+            {
+                if (MessageBox.Show("Bạn có chắc chắn muốn khóa bệnh nhân này không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    khoaBenhNhan();
+                    MessageBox.Show("Bệnh nhân đã được khóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    chkKhoaBenh.Checked = false;
+                }
+            }
+            else
+            {
+                if (MessageBox.Show("Bạn có chắc chắn muốn mở khóa bệnh nhân này không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    moKhoaBenhNhan();
+                    MessageBox.Show("Bệnh nhân đã được mở khóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    chkKhoaBenh.Checked = true;
+                }
+            }
+        }
+
+        private void khoaBenhNhan()
+        {
+            txtHoTen.Enabled = false;
+            txtNamSinh.Enabled = false;
+            cboxGioiTinh.Enabled = false;
+            txtDiaChi.Enabled = false;
+            txtSDT.Enabled = false;
+            txtChanDoan.Enabled = false;
+            txtGhiChu.Enabled = false;
+            txtNgayHenTaiKham.Enabled = false;
+            dtpNgayHenTaiKham.Enabled = false;
+            cboxBacSi.Enabled = false;
+
+            txtTimThuocUong.Enabled = false;
+            btnThemThuocUong.Enabled = false;
+            dgvToaThuocUong.ReadOnly = true;
+            toolStripToaThuocUong.Enabled = false;
+        }
+
+        private void moKhoaBenhNhan() 
+        {
+
+            txtHoTen.Enabled = true;
+            txtNamSinh.Enabled = true;
+            cboxGioiTinh.Enabled = true;
+            txtDiaChi.Enabled = true;
+            txtSDT.Enabled = true;
+            txtChanDoan.Enabled = true;
+            txtGhiChu.Enabled = true;
+            txtNgayHenTaiKham.Enabled = true;
+            dtpNgayHenTaiKham.Enabled = true;
+            cboxBacSi.Enabled = true;
+
+            txtTimThuocUong.Enabled = true;
+            btnThemThuocUong.Enabled = true;
+            dgvToaThuocUong.ReadOnly = true;
+            toolStripToaThuocUong.Enabled = true;
         }
     }
 }
