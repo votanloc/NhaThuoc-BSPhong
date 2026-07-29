@@ -7,30 +7,29 @@ namespace PhongKham.Helpers
 {
     public static class DebounceManager
     {
-        private static readonly Dictionary<string, Timer> _timers =
-            new Dictionary<string, Timer>();
+        private static readonly Dictionary<string, Timer> _timers = new();
 
         public static void Execute(string key, int delay, Action action)
         {
             if (!_timers.TryGetValue(key, out Timer timer))
             {
                 timer = new Timer();
-                _timers.Add(key, timer);
+                _timers[key] = timer;
             }
 
             timer.Stop();
             timer.Interval = delay;
 
-            timer.Tick -= Timer_Tick;
+            EventHandler handler = null;
 
-            void Timer_Tick(object sender, EventArgs e)
+            handler = (s, e) =>
             {
                 timer.Stop();
-                timer.Tick -= Timer_Tick;
+                timer.Tick -= handler;
                 action();
-            }
+            };
 
-            timer.Tick += Timer_Tick;
+            timer.Tick += handler;
             timer.Start();
         }
     }

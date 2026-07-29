@@ -14,6 +14,8 @@ using FastReport.Export.PdfSimple;
 using FastReport;
 using MySqlConnector;
 using System.Globalization;
+using PhongKham.Helpers;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace PhongKham.Forms
 {
@@ -345,6 +347,7 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
         }
 
         string auto_id_toa_uong = "";
+        private DataTable dtAllThuoc = null;
 
         private void loadThongTinToaThuocUong()
         {
@@ -686,13 +689,13 @@ SELECT
 FROM
     dm_thuoc t1
         LEFT JOIN
-    tbl_ton_kho t2 ON t1.ma_thuoc = t2.ma_thuoc
+    vw_ton_kho t2 ON t1.ma_thuoc = t2.ma_thuoc
 WHERE
     (ten_thuoc LIKE @ten_thuoc
         OR hoat_chat LIKE @ten_thuoc)
         AND t1.khoa = '0'
         AND t2.ton_kho > 0
-ORDER BY t2.hsd ASC;",
+ORDER BY t2.hsd ASC LIMIT 5;",
                 new MySqlParameter("@ten_thuoc", timThuocUong)
             );
 
@@ -1487,6 +1490,29 @@ ORDER BY t2.hsd ASC;",
             capNhatThongTinBN();
             Helpers.DebounceManager.Execute("TimBenhNhan", 100, loadDanhSachBN);
             MessageBox.Show("Cập nhật thông tin bệnh nhân thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private void LoadAllThuoc()
+        {
+            dtAllThuoc = Helpers.MySqlHelper.ExecuteDataTable(
+                @"
+        SELECT 
+            t1.ma_thuoc,
+            t1.ten_thuoc as 'Tên thuốc',
+            t1.hoat_chat as 'Hoạt chất',
+            t1.don_vi_le as 'Đơn vị',
+            ROUND(t2.ton_kho, 0) AS 'Tồn kho',
+            t1.cach_dung,
+            t2.hsd as 'HSD',
+            t2.lsx as 'LSX'
+        FROM
+            dm_thuoc t1
+                LEFT JOIN
+            vw_ton_kho t2 ON t1.ma_thuoc = t2.ma_thuoc
+        WHERE
+            t1.khoa = '0'
+            AND t2.ton_kho > 0
+        ORDER BY t2.hsd ASC;"
+            );
         }
     }
 }
