@@ -379,9 +379,9 @@
             // tabDoanhThuThuoc
             // 
             tabDoanhThuThuoc.Controls.Add(tableLayoutPanel4);
-            tabDoanhThuThuoc.Location = new Point(4, 24);
+            tabDoanhThuThuoc.Location = new Point(4, 27);
             tabDoanhThuThuoc.Name = "tabDoanhThuThuoc";
-            tabDoanhThuThuoc.Size = new Size(1268, 543);
+            tabDoanhThuThuoc.Size = new Size(1268, 540);
             tabDoanhThuThuoc.TabIndex = 2;
             tabDoanhThuThuoc.Text = "Doanh thu thuốc";
             tabDoanhThuThuoc.UseVisualStyleBackColor = true;
@@ -398,7 +398,7 @@
             tableLayoutPanel4.RowCount = 2;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle());
-            tableLayoutPanel4.Size = new Size(1268, 543);
+            tableLayoutPanel4.Size = new Size(1268, 540);
             tableLayoutPanel4.TabIndex = 2;
             // 
             // dgvDoanhThuThoc
@@ -410,7 +410,7 @@
             dgvDoanhThuThoc.Dock = DockStyle.Fill;
             dgvDoanhThuThoc.Location = new Point(3, 3);
             dgvDoanhThuThoc.Name = "dgvDoanhThuThoc";
-            dgvDoanhThuThoc.Size = new Size(1262, 505);
+            dgvDoanhThuThoc.Size = new Size(1262, 502);
             dgvDoanhThuThoc.TabIndex = 0;
             // 
             // colMaThuoc
@@ -486,7 +486,7 @@
             // 
             toolStrip3.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             toolStrip3.Items.AddRange(new ToolStripItem[] { btnThongKeThuoc, toolStripSeparator4, btnXuatExcelThuoc, toolStripSeparator5, toolStripLabel2, txtTongTienDoanhThuThuoc });
-            toolStrip3.Location = new Point(0, 511);
+            toolStrip3.Location = new Point(0, 508);
             toolStrip3.Name = "toolStrip3";
             toolStrip3.Size = new Size(1268, 32);
             toolStrip3.TabIndex = 1;
@@ -535,11 +535,11 @@
             // tabChanDoan
             // 
             tabChanDoan.Controls.Add(tableLayoutPanel2);
-            tabChanDoan.Location = new Point(4, 27);
+            tabChanDoan.Location = new Point(4, 24);
             tabChanDoan.Margin = new Padding(4);
             tabChanDoan.Name = "tabChanDoan";
             tabChanDoan.Padding = new Padding(4);
-            tabChanDoan.Size = new Size(1268, 540);
+            tabChanDoan.Size = new Size(1268, 543);
             tabChanDoan.TabIndex = 0;
             tabChanDoan.Text = "Chẩn đoán";
             tabChanDoan.UseVisualStyleBackColor = true;
@@ -556,7 +556,7 @@
             tableLayoutPanel2.RowCount = 2;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle());
-            tableLayoutPanel2.Size = new Size(1260, 532);
+            tableLayoutPanel2.Size = new Size(1260, 535);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // dgvChanDoan
@@ -568,7 +568,7 @@
             dgvChanDoan.Dock = DockStyle.Fill;
             dgvChanDoan.Location = new Point(3, 3);
             dgvChanDoan.Name = "dgvChanDoan";
-            dgvChanDoan.Size = new Size(1254, 497);
+            dgvChanDoan.Size = new Size(1254, 500);
             dgvChanDoan.TabIndex = 0;
             // 
             // colMaBN1
@@ -661,7 +661,7 @@
             // 
             toolStrip1.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             toolStrip1.Items.AddRange(new ToolStripItem[] { btnThongKeChanDoan, toolStripSeparator1, btnXuatExcel, toolStripSeparator2 });
-            toolStrip1.Location = new Point(0, 503);
+            toolStrip1.Location = new Point(0, 506);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1260, 29);
             toolStrip1.TabIndex = 1;

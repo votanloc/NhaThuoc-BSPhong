@@ -22,6 +22,41 @@ namespace PhongKham.Forms
         private void frmDanhMuc_Load(object sender, EventArgs e)
         {
             Helpers.DebounceManager.Execute("loadDanhMucThuoc", 100, loadDanhMucThuoc);
+            loadDonViLe();
+            loadNhomThuoc();
+            loadCachDung();
+        }
+
+        private void loadDonViLe()
+        {
+            var dt = Helpers.MySqlHelper.ExecuteDataTable(@"
+                SELECT DISTINCT don_vi_le 
+                FROM dm_thuoc 
+                WHERE don_vi_le IS NOT NULL AND don_vi_le <> ''
+                ORDER BY don_vi_le;");
+
+            cboxDonViLe.DropDownWidth = 200;
+            cboxDonViLe.DropDownHeight = 200;
+            cboxDonViLe.DataSource = dt;
+            cboxDonViLe.DisplayMember = "don_vi_le";
+            cboxDonViLe.ValueMember = "don_vi_le";
+            cboxDonViLe.SelectedIndex = -1;
+        }
+
+        private void loadCachDung()
+        {
+            var dt = Helpers.MySqlHelper.ExecuteDataTable(@"
+                SELECT DISTINCT cach_dung
+                FROM dm_thuoc 
+                WHERE cach_dung IS NOT NULL AND cach_dung <> ''
+                ORDER BY cach_dung;");
+
+            cboxCachDung.DropDownWidth = 200;
+            cboxCachDung.DropDownHeight = 200;
+            cboxCachDung.DataSource = dt;
+            cboxCachDung.DisplayMember = "cach_dung";
+            cboxCachDung.ValueMember = "cach_dung";
+            cboxCachDung.SelectedIndex = -1;
         }
 
         private void tabDanhMuc_SelectedIndexChanged(object sender, EventArgs e)
@@ -41,7 +76,7 @@ namespace PhongKham.Forms
         {
             var dt = Helpers.MySqlHelper.ExecuteDataTable(@"
                 SELECT DISTINCT nhom_thuoc
-                FROM dm_nhom 
+                FROM dm_thuoc 
                 WHERE nhom_thuoc IS NOT NULL AND nhom_thuoc <> ''
                 ORDER BY nhom_thuoc;");
 
@@ -98,10 +133,6 @@ namespace PhongKham.Forms
                 new MySqlParameter("@nhom_thuoc", timNhomThuoc));
         }
 
-        private void loadCachDung()
-        {
-
-        }
 
         private void btnThemReport_Click(object sender, EventArgs e)
         {
@@ -307,7 +338,7 @@ namespace PhongKham.Forms
             ten_thuoc,
             hoat_chat,
             ham_luong,
-            don_vi,
+            don_vi_le,
             nhom_thuoc,
             thuoc_tiem,
             gia_nhap,
@@ -319,7 +350,7 @@ namespace PhongKham.Forms
             @ten_thuoc,
             @hoat_chat,
             @ham_luong,
-            @don_vi,
+            @don_vi_le,
             @nhom_thuoc,
             @thuoc_tiem,
             @gia_nhap,
@@ -331,12 +362,12 @@ namespace PhongKham.Forms
                 new MySqlParameter("@ten_thuoc", txtTenThuoc.Text.Trim()),
                 new MySqlParameter("@hoat_chat", txtHoatChat.Text.Trim()),
                 new MySqlParameter("@ham_luong", txtHamLuong.Text.Trim()),
-                new MySqlParameter("@don_vi", txtDonVi.Text.Trim()),
+                new MySqlParameter("@don_vi_le", cboxDonViLe.Text.Trim()),
                 new MySqlParameter("@nhom_thuoc", cboxNhomThuoc.Text.Trim()),
                 new MySqlParameter("@thuoc_tiem", checkBoxThuocTiem.Checked ? 1 : 0),
                 new MySqlParameter("@gia_nhap", decimal.TryParse(txtGiaNhap.Text, out decimal giaNhap) ? giaNhap : 0),
                 new MySqlParameter("@gia_ban", decimal.TryParse(txtGiaBan.Text, out decimal giaBan) ? giaBan : 0),
-                new MySqlParameter("@cach_dung", txtCachDung.Text.Trim())
+                new MySqlParameter("@cach_dung", cboxCachDung.Text.Trim())
             );
         }
 
@@ -345,12 +376,12 @@ namespace PhongKham.Forms
             txtTenThuoc.Clear();
             txtHoatChat.Clear();
             txtHamLuong.Clear();
-            txtDonVi.Clear();
+            cboxDonViLe.Text = "";
             cboxNhomThuoc.SelectedIndex = -1;
             checkBoxThuocTiem.Checked = false;
             txtGiaNhap.Clear();
             txtGiaBan.Clear();
-            txtCachDung.Clear();
+            cboxCachDung.Text = "";
         }
 
         private void dgvDanhMucThuoc_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -389,6 +420,81 @@ namespace PhongKham.Forms
         private void btnExportExcel_Click(object sender, EventArgs e)
         {
             Export.ExportExcel(dgvDanhMucThuoc);
+        }
+
+        private void txtTenThuoc_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtHoatChat.Focus();
+            }
+        }
+
+        private void txtHoatChat_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtHamLuong.Focus();
+            }
+        }
+
+        private void txtHamLuong_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                cboxDonViLe.Focus();
+                cboxDonViLe.DroppedDown = true;
+            }
+        }
+
+        private void txtDonVi_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                cboxNhomThuoc.Focus();
+                cboxNhomThuoc.DroppedDown = true;
+            }
+        }
+
+        private void cboxNhomThuoc_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                cboxCachDung.Focus();
+            }
+        }
+
+        private void cboxCachDung_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtGiaNhap.Focus();
+            }
+        }
+
+        private void txtGiaNhap_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtGiaBan.Focus();
+            }
+        }
+
+        private void txtGiaBan_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnThemMoi.Focus();
+            }
+        }
+
+        private void cboxDonViLe_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                cboxNhomThuoc.Focus();
+                cboxNhomThuoc.DroppedDown = true;
+            }
         }
     }
 }

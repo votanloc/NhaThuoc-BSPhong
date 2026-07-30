@@ -106,5 +106,29 @@ namespace PhongKham.Forms
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void hướngDẫnSửDụngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string filePath = Path.Combine(Application.StartupPath, "huongdan.docx");
+
+                if (!File.Exists(filePath))
+                {
+                    MessageBox.Show("Không tìm thấy file hướng dẫn.");
+                    return;
+                }
+
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = filePath,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không thể mở tài liệu.\n" + ex.Message);
+            }
+        }
     }
 }

@@ -285,6 +285,7 @@ WHERE
 
             txtTimThuoc.Text = "";
             txtSoLuong.Text = "";
+            txtLSX.Text = "";   
             dtpHSD.Value = DateTime.Now;
             txtTimThuoc.Focus();
         }

@@ -83,7 +83,7 @@ SELECT
     v1.so_nhap,
     v1.so_xuat,
     v1.ton_kho,
-    v1.ngay_nhap,
+    v1.ngay_nhap ,
     v1.ngay_xuat
 FROM
     dm_thuoc t1

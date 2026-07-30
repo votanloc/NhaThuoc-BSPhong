@@ -49,16 +49,16 @@
             colKhoa = new DataGridViewCheckBoxColumn();
             tableLayoutPanel6 = new TableLayoutPanel();
             groupBox1 = new GroupBox();
+            cboxDonViLe = new ComboBox();
+            cboxCachDung = new ComboBox();
             cboxNhomThuoc = new ComboBox();
             btnThemMoi = new Button();
             checkBoxThuocTiem = new CheckBox();
             txtGiaBan = new TextBox();
             txtGiaNhap = new TextBox();
-            txtDonVi = new TextBox();
             txtHamLuong = new TextBox();
             txtHoatChat = new TextBox();
             txtTenThuoc = new TextBox();
-            txtCachDung = new TextBox();
             label15 = new Label();
             label14 = new Label();
             label13 = new Label();
@@ -303,16 +303,16 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(cboxDonViLe);
+            groupBox1.Controls.Add(cboxCachDung);
             groupBox1.Controls.Add(cboxNhomThuoc);
             groupBox1.Controls.Add(btnThemMoi);
             groupBox1.Controls.Add(checkBoxThuocTiem);
             groupBox1.Controls.Add(txtGiaBan);
             groupBox1.Controls.Add(txtGiaNhap);
-            groupBox1.Controls.Add(txtDonVi);
             groupBox1.Controls.Add(txtHamLuong);
             groupBox1.Controls.Add(txtHoatChat);
             groupBox1.Controls.Add(txtTenThuoc);
-            groupBox1.Controls.Add(txtCachDung);
             groupBox1.Controls.Add(label15);
             groupBox1.Controls.Add(label14);
             groupBox1.Controls.Add(label13);
@@ -331,6 +331,24 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Thông tin thuốc";
             // 
+            // cboxDonViLe
+            // 
+            cboxDonViLe.FormattingEnabled = true;
+            cboxDonViLe.Location = new Point(294, 64);
+            cboxDonViLe.Name = "cboxDonViLe";
+            cboxDonViLe.Size = new Size(176, 26);
+            cboxDonViLe.TabIndex = 20;
+            cboxDonViLe.KeyDown += cboxDonViLe_KeyDown;
+            // 
+            // cboxCachDung
+            // 
+            cboxCachDung.FormattingEnabled = true;
+            cboxCachDung.Location = new Point(958, 64);
+            cboxCachDung.Name = "cboxCachDung";
+            cboxCachDung.Size = new Size(283, 26);
+            cboxCachDung.TabIndex = 19;
+            cboxCachDung.KeyDown += cboxCachDung_KeyDown;
+            // 
             // cboxNhomThuoc
             // 
             cboxNhomThuoc.FormattingEnabled = true;
@@ -338,12 +356,14 @@
             cboxNhomThuoc.Name = "cboxNhomThuoc";
             cboxNhomThuoc.Size = new Size(148, 26);
             cboxNhomThuoc.TabIndex = 5;
+            cboxNhomThuoc.KeyDown += cboxNhomThuoc_KeyDown;
             // 
             // btnThemMoi
             // 
+            btnThemMoi.Image = Properties.Resources.plus;
             btnThemMoi.Location = new Point(490, 103);
             btnThemMoi.Name = "btnThemMoi";
-            btnThemMoi.Size = new Size(121, 26);
+            btnThemMoi.Size = new Size(100, 26);
             btnThemMoi.TabIndex = 10;
             btnThemMoi.Text = "Thêm mới";
             btnThemMoi.UseVisualStyleBackColor = true;
@@ -365,6 +385,7 @@
             txtGiaBan.Name = "txtGiaBan";
             txtGiaBan.Size = new Size(176, 26);
             txtGiaBan.TabIndex = 9;
+            txtGiaBan.KeyDown += txtGiaBan_KeyDown;
             // 
             // txtGiaNhap
             // 
@@ -372,13 +393,7 @@
             txtGiaNhap.Name = "txtGiaNhap";
             txtGiaNhap.Size = new Size(100, 26);
             txtGiaNhap.TabIndex = 8;
-            // 
-            // txtDonVi
-            // 
-            txtDonVi.Location = new Point(294, 62);
-            txtDonVi.Name = "txtDonVi";
-            txtDonVi.Size = new Size(176, 26);
-            txtDonVi.TabIndex = 4;
+            txtGiaNhap.KeyDown += txtGiaNhap_KeyDown;
             // 
             // txtHamLuong
             // 
@@ -386,6 +401,7 @@
             txtHamLuong.Name = "txtHamLuong";
             txtHamLuong.Size = new Size(100, 26);
             txtHamLuong.TabIndex = 3;
+            txtHamLuong.KeyDown += txtHamLuong_KeyDown;
             // 
             // txtHoatChat
             // 
@@ -393,6 +409,7 @@
             txtHoatChat.Name = "txtHoatChat";
             txtHoatChat.Size = new Size(468, 26);
             txtHoatChat.TabIndex = 2;
+            txtHoatChat.KeyDown += txtHoatChat_KeyDown;
             // 
             // txtTenThuoc
             // 
@@ -400,13 +417,7 @@
             txtTenThuoc.Name = "txtTenThuoc";
             txtTenThuoc.Size = new Size(389, 26);
             txtTenThuoc.TabIndex = 1;
-            // 
-            // txtCachDung
-            // 
-            txtCachDung.Location = new Point(958, 64);
-            txtCachDung.Name = "txtCachDung";
-            txtCachDung.Size = new Size(283, 26);
-            txtCachDung.TabIndex = 7;
+            txtTenThuoc.KeyDown += txtTenThuoc_KeyDown;
             // 
             // label15
             // 
@@ -766,10 +777,10 @@
             // tabDanhSachReport
             // 
             tabDanhSachReport.Controls.Add(tableLayoutPanel5);
-            tabDanhSachReport.Location = new Point(4, 27);
+            tabDanhSachReport.Location = new Point(4, 24);
             tabDanhSachReport.Name = "tabDanhSachReport";
             tabDanhSachReport.Padding = new Padding(3);
-            tabDanhSachReport.Size = new Size(1340, 697);
+            tabDanhSachReport.Size = new Size(1340, 700);
             tabDanhSachReport.TabIndex = 4;
             tabDanhSachReport.Text = "Danh sách report";
             tabDanhSachReport.UseVisualStyleBackColor = true;
@@ -787,7 +798,7 @@
             tableLayoutPanel5.RowStyles.Add(new RowStyle());
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel5.Size = new Size(1334, 691);
+            tableLayoutPanel5.Size = new Size(1334, 694);
             tableLayoutPanel5.TabIndex = 1;
             // 
             // flowLayoutPanel5
@@ -858,7 +869,7 @@
             dgvReport.Dock = DockStyle.Fill;
             dgvReport.Location = new Point(3, 50);
             dgvReport.Name = "dgvReport";
-            dgvReport.Size = new Size(1328, 618);
+            dgvReport.Size = new Size(1328, 621);
             dgvReport.TabIndex = 1;
             dgvReport.CellContentClick += dgvReport_CellContentClick;
             // 
@@ -1005,12 +1016,10 @@
         private CheckBox checkBox1;
         private TextBox txtMaThuoc;
         private Label label4;
-        private TextBox txtCachDung;
         private Label label15;
         private CheckBox checkBoxThuocTiem;
         private TextBox txtGiaBan;
         private TextBox txtGiaNhap;
-        private TextBox txtDonVi;
         private TextBox txtHamLuong;
         private TextBox txtHoatChat;
         private TextBox txtTenThuoc;
@@ -1044,5 +1053,7 @@
         private DataGridViewCheckBoxColumn colKhoa;
         private ToolStrip toolStrip1;
         private ToolStripButton btnExportExcel;
+        private ComboBox cboxCachDung;
+        private ComboBox cboxDonViLe;
     }
 }

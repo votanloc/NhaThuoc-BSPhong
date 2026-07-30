@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             menuStrip1 = new MenuStrip();
             btnHome = new ToolStripMenuItem();
-            btnNhapKho = new ToolStripMenuItem();
             btnPhongKham = new ToolStripMenuItem();
+            btnNhapKho = new ToolStripMenuItem();
             btnNhapXuatTon = new ToolStripMenuItem();
             btnDanhMuc = new ToolStripMenuItem();
             btnThongKe = new ToolStripMenuItem();
@@ -61,19 +61,19 @@
             btnHome.Text = "Home";
             btnHome.Click += btnHome_Click;
             // 
-            // btnNhapKho
-            // 
-            btnNhapKho.Name = "btnNhapKho";
-            btnNhapKho.Size = new Size(118, 28);
-            btnNhapKho.Text = "Nhập kho";
-            btnNhapKho.Click += btnNhapKho_Click;
-            // 
             // btnPhongKham
             // 
             btnPhongKham.Name = "btnPhongKham";
             btnPhongKham.Size = new Size(150, 28);
             btnPhongKham.Text = "Phòng khám";
             btnPhongKham.Click += btnPhongKham_Click;
+            // 
+            // btnNhapKho
+            // 
+            btnNhapKho.Name = "btnNhapKho";
+            btnNhapKho.Size = new Size(118, 28);
+            btnNhapKho.Text = "Nhập kho";
+            btnNhapKho.Click += btnNhapKho_Click;
             // 
             // btnNhapXuatTon
             // 
@@ -116,6 +116,7 @@
             hướngDẫnSửDụngToolStripMenuItem.Name = "hướngDẫnSửDụngToolStripMenuItem";
             hướngDẫnSửDụngToolStripMenuItem.Size = new Size(322, 28);
             hướngDẫnSửDụngToolStripMenuItem.Text = "Hướng dẫn sử dụng";
+            hướngDẫnSửDụngToolStripMenuItem.Click += hướngDẫnSửDụngToolStripMenuItem_Click;
             // 
             // pnlMain
             // 
