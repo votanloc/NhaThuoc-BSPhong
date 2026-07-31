@@ -173,15 +173,23 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
     new MySqlParameter("@ma_toa", cboxToaThuocUong.Text.Trim())
 );
 
-            //if (dt.Rows.Count > 0)
-            //{
-            //    MessageBox.Show(
-            //        $"Ngày dùng = {dt.Rows[0]["ngay_dung"]}\n" +
-            //        $"Sáng = {dt.Rows[0]["sang"]}\n" +
-            //        $"SL = {dt.Rows[0]["so_luong"]}");
-            //}
 
             dgvToaThuocUong.DataSource = dt;
+
+            decimal tongThanhTien = 0;
+
+            foreach (DataRow row in dt.Rows)
+            {
+                //tongSoLuong += Convert.ToInt32(row["so_luong"]);
+
+                tongThanhTien += Convert.ToDecimal(
+                    row["thanh_tien"] == DBNull.Value
+                    ? 0
+                    : row["thanh_tien"]);
+            }
+
+            txtTongTienThuocUong.Text =
+                tongThanhTien.ToString("#,##0");
         }
         private void xoaThongTinTrenManHinh()
         {
@@ -262,7 +270,7 @@ WHERE
             loadDanhSachToaThuocUong();
             loadThongTinToaThuocUong();
             loadToaThuocUongChiTiet();
-            loadTongTienThuocUong();
+            //loadTongTienThuocUong();
         }
 
         private void loadTongTienThuocUong()
@@ -289,12 +297,12 @@ WHERE
                 new MySqlParameter("@ma_toa", maToa)
             );
 
-            decimal tongTien = 0m;
+            decimal tongTien = 0;
 
-            if (dt.Rows.Count > 0 && dt.Rows[0]["tong_tien"] != DBNull.Value)
+            if (dt.Rows.Count > 0 && dt.Rows[0]["thanh_tien"] != DBNull.Value)
             {
                 decimal.TryParse(
-                    dt.Rows[0]["tong_tien"].ToString(),
+                    dt.Rows[0]["thanh_tien"].ToString(),
                     NumberStyles.Any,
                     CultureInfo.InvariantCulture,
                     out tongTien
@@ -563,6 +571,11 @@ WHERE
                 @"SELECT ma_toa from tbl_tu where ma_bn = @ma_bn and delete_at is null order by ma_toa desc;",
                 new MySqlParameter("@ma_bn", txtMaBN.Text.Trim()));
 
+            if(dt.Rows.Count == 0)
+            {
+                cboxToaThuocUong.ComboBox.DataSource = null;
+                return;
+            }
             cboxToaThuocUong.ComboBox.DisplayMember = "ma_toa";
             cboxToaThuocUong.ComboBox.ValueMember = "ma_toa";
             cboxToaThuocUong.ComboBox.DataSource = dt;
@@ -832,7 +845,7 @@ ORDER BY t2.hsd ASC LIMIT 5;",
 
 
                 tinhTongTienThuocUong();
-                loadTongTienThuocUong();
+                //loadTongTienThuocUong();
                 txtTimThuocUong.Focus();
             }
             catch (Exception ex)
@@ -1143,7 +1156,7 @@ ORDER BY t2.hsd ASC LIMIT 5;",
             capNhatThongTinToaUong();
 
             tinhTongTienThuocUong();
-            loadTongTienThuocUong();
+            //loadTongTienThuocUong();
         }
 
         private void xoaThuocToaUong()
@@ -1357,7 +1370,6 @@ ORDER BY t2.hsd ASC LIMIT 5;",
                 new MySqlParameter("@auto_id", row.Cells["colAuto_id"].Value)
             );
             tinhTongTienThuocUong();
-            loadTongTienThuocUong();
         }
 
 

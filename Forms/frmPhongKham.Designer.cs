@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPhongKham));
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
             groupBox2 = new GroupBox();
@@ -599,6 +599,7 @@
             // 
             // txtTongTienThuocUong
             // 
+            txtTongTienThuocUong.Enabled = false;
             txtTongTienThuocUong.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtTongTienThuocUong.Name = "txtTongTienThuocUong";
             txtTongTienThuocUong.Size = new Size(100, 26);
@@ -708,8 +709,8 @@
             // 
             colNgayDung.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colNgayDung.DataPropertyName = "ngay_dung";
-            dataGridViewCellStyle10.Format = "###";
-            colNgayDung.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Format = "###";
+            colNgayDung.DefaultCellStyle = dataGridViewCellStyle1;
             colNgayDung.HeaderText = "Ngày dùng";
             colNgayDung.Name = "colNgayDung";
             colNgayDung.Width = 150;
@@ -718,8 +719,8 @@
             // 
             colSang.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colSang.DataPropertyName = "sang";
-            dataGridViewCellStyle11.Format = "###,#";
-            colSang.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Format = "###,#";
+            colSang.DefaultCellStyle = dataGridViewCellStyle2;
             colSang.HeaderText = "Sáng";
             colSang.Name = "colSang";
             // 
@@ -727,8 +728,8 @@
             // 
             colTrua.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colTrua.DataPropertyName = "trua";
-            dataGridViewCellStyle12.Format = "###,#";
-            colTrua.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Format = "###,#";
+            colTrua.DefaultCellStyle = dataGridViewCellStyle3;
             colTrua.HeaderText = "Trưa";
             colTrua.Name = "colTrua";
             // 
@@ -736,24 +737,24 @@
             // 
             colChieu.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colChieu.DataPropertyName = "chieu";
-            dataGridViewCellStyle13.Format = "###,#";
-            colChieu.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle4.Format = "###,#";
+            colChieu.DefaultCellStyle = dataGridViewCellStyle4;
             colChieu.HeaderText = "Chiều";
             colChieu.Name = "colChieu";
             // 
             // colToi
             // 
             colToi.DataPropertyName = "toi";
-            dataGridViewCellStyle14.Format = "###,#";
-            colToi.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle5.Format = "###,#";
+            colToi.DefaultCellStyle = dataGridViewCellStyle5;
             colToi.HeaderText = "Tối";
             colToi.Name = "colToi";
             // 
             // colSoLuong
             // 
             colSoLuong.DataPropertyName = "so_luong";
-            dataGridViewCellStyle15.Format = "###,#";
-            colSoLuong.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle6.Format = "###,#";
+            colSoLuong.DefaultCellStyle = dataGridViewCellStyle6;
             colSoLuong.HeaderText = "Số lượng";
             colSoLuong.Name = "colSoLuong";
             // 
@@ -761,8 +762,8 @@
             // 
             colDonGia.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colDonGia.DataPropertyName = "don_gia";
-            dataGridViewCellStyle16.Format = "###,#";
-            colDonGia.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle7.Format = "###,#";
+            colDonGia.DefaultCellStyle = dataGridViewCellStyle7;
             colDonGia.HeaderText = "Đơn giá";
             colDonGia.Name = "colDonGia";
             // 
@@ -770,8 +771,8 @@
             // 
             colThanhTien.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colThanhTien.DataPropertyName = "thanh_tien";
-            dataGridViewCellStyle17.Format = "###,#";
-            colThanhTien.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle8.Format = "###,#";
+            colThanhTien.DefaultCellStyle = dataGridViewCellStyle8;
             colThanhTien.HeaderText = "Thành tiền";
             colThanhTien.Name = "colThanhTien";
             colThanhTien.Width = 150;
@@ -801,8 +802,8 @@
             // 
             colNgayCapNhat.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colNgayCapNhat.DataPropertyName = "date_in";
-            dataGridViewCellStyle18.Format = "dd/MM/yyyy HH:mm:ss";
-            colNgayCapNhat.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle9.Format = "dd/MM/yyyy HH:mm:ss";
+            colNgayCapNhat.DefaultCellStyle = dataGridViewCellStyle9;
             colNgayCapNhat.HeaderText = "Ngày cập nhật";
             colNgayCapNhat.Name = "colNgayCapNhat";
             colNgayCapNhat.Width = 180;
