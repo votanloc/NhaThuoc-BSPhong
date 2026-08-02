@@ -103,7 +103,7 @@ FROM
 WHERE
     date_in >= @TuNgay
         AND date_in < @DenNgay
-        AND ho_ten LIKE @ho_ten
+        AND ( ho_ten LIKE @ho_ten or ho_ten is null or TRIM(ho_ten) = '' ) 
         AND delete_at IS NULL
         {rdoFilter} 
 ORDER BY date_in , ma_bn ASC;",
@@ -199,9 +199,23 @@ new MySqlParameter("@DenNgay", dtpDenNgay.Value.Date.AddDays(1))
             txtDiaChi.Clear();
             cboxGioiTinh.SelectedIndex = -1;
             txtSDT.Clear();
+
             txtChanDoan.Clear();
             txtGhiChu.Clear();
+
+            txtNgayHenTaiKham.Text = "";
             dtpNgayHenTaiKham.Value = DateTime.Now;
+
+            labelSoLuongTon.Text = "0";
+            txtTimThuocUong.Text = "";
+            txtNgayDung.Text = "";
+            txtSang.Text = "";
+            txtTrua.Text = "";
+            txtChieu.Text = "";
+            txtToi.Text = "";
+            txtDonVi.Text = "";
+            txtCachDung.Text = "";
+            txtSoLuong.Text = "";
         }
 
         private void taoBenhNhanMoi()
@@ -241,8 +255,8 @@ SET
     phai = @phai,
     dia_chi = @dia_chi,
     SDT = @SDT,
-    da_kham = @da_kham,
-    khoa = @khoa
+    `da_kham` = @da_kham,
+    `khoa` = @khoa
 WHERE
     ma_bn = @ma_bn;";
 
@@ -299,10 +313,10 @@ WHERE
 
             decimal tongTien = 0;
 
-            if (dt.Rows.Count > 0 && dt.Rows[0]["thanh_tien"] != DBNull.Value)
+            if (dt.Rows.Count > 0 && dt.Rows[0]["tong_tien"] != DBNull.Value)
             {
                 decimal.TryParse(
-                    dt.Rows[0]["thanh_tien"].ToString(),
+                    dt.Rows[0]["tong_tien"].ToString(),
                     NumberStyles.Any,
                     CultureInfo.InvariantCulture,
                     out tongTien
@@ -314,22 +328,24 @@ WHERE
             //MessageBox.Show($"Tổng tiền thuốc uống: {tongTien.ToString("#,##0")} VND", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private decimal tinhTongTienThuocUong()
+        private decimal tinhTongTienToaThuocUongLocal()
         {
             string maBN = txtMaBN.Text.Trim();
             string maToa = cboxToaThuocUong.Text.Trim();
 
             if (string.IsNullOrEmpty(maBN) || string.IsNullOrEmpty(maToa))
+            {
+                txtTongTienThuocUong.Text = "0";
                 return 0m;
+            }
 
-            // 1) Tính tổng từ chi tiết toa uống
             string sqlSum = @"
-        SELECT COALESCE(SUM(thanh_tien), 0) AS tong_tien
-        FROM tbl_tu_ct
-        WHERE ma_bn = @ma_bn
-          AND ma_toa = @ma_toa
-          AND delete_at IS NULL
-          AND khong_lay = 0;";
+SELECT COALESCE(SUM(thanh_tien), 0) AS tong_tien
+FROM tbl_tu_ct
+WHERE ma_bn = @ma_bn
+  AND ma_toa = @ma_toa
+  AND delete_at IS NULL
+  AND khong_lay = 0;";
 
             object objTongTien = Helpers.MySqlHelper.ExecuteScalar(
                 sqlSum,
@@ -348,18 +364,8 @@ WHERE
                 );
             }
 
-            // 2) Cập nhật lại tổng tiền vào bảng header tbl_tu
-            string sqlUpdate = @"
-        UPDATE tbl_tu
-        SET tong_tien = @tong_tien
-        WHERE ma_bn = @ma_bn AND ma_toa = @ma_toa;";
-
-            Helpers.MySqlHelper.ExecuteNonQuery(
-                sqlUpdate,
-                new MySqlParameter("@tong_tien", tongTien),
-                new MySqlParameter("@ma_bn", maBN),
-                new MySqlParameter("@ma_toa", maToa)
-            );
+            // format kiểu ###,###
+            txtTongTienThuocUong.Text = tongTien.ToString("#,##0", CultureInfo.InvariantCulture);
 
             return tongTien;
         }
@@ -423,41 +429,20 @@ WHERE
               ghi_chu = @ghi_chu,
               bac_si = @bac_si,
               tai_kham = @tai_kham,
+              tong_tien = @tong_tien,
               date_in = NOW()
-          WHERE auto_id = @auto_id",
+          WHERE ma_bn = @ma_bn and ma_toa = @ma_toa",
 
                 new MySqlParameter("@chan_doan", txtChanDoan.Text.Trim()),
                 new MySqlParameter("@ghi_chu", txtGhiChu.Text.Trim()),
                 new MySqlParameter("@bac_si", cboxBacSi.Text.Trim()),
                 new MySqlParameter("@tai_kham", dtpNgayHenTaiKham.Value),
-                new MySqlParameter("@auto_id", auto_id_toa_uong)
+                new MySqlParameter("@tong_tien", decimal.TryParse(txtTongTienThuocUong.Text, out decimal tongTien) ? tongTien : 0),
+                new MySqlParameter("@ma_bn", txtMaBN.Text.Trim()),
+                new MySqlParameter("@ma_toa", cboxToaThuocUong.Text.Trim())
             );
         }
 
-        // ===== PHƯƠNG PHÁP 1: Tính toán Local (NHANH NHẤT) =====
-        private decimal TinhTongTienThuocUongLocal()
-        {
-            decimal tongTien = 0;
-
-            foreach (DataGridViewRow row in dgvToaThuocUong.Rows)
-            {
-                if (row.IsNewRow)
-                    continue;
-
-                // Kiểm tra không phải hàng xóa
-                if (row.Cells["colKhongLay"].Value != null &&
-                    Convert.ToBoolean(row.Cells["colKhongLay"].Value))
-                    continue;
-
-                if (decimal.TryParse(row.Cells["colThanhTien"].Value?.ToString() ?? "0", out decimal thanhTien))
-                {
-                    tongTien += thanhTien;
-                }
-            }
-
-            txtTongTienThuocUong.Text = tongTien.ToString("#,##0");
-            return tongTien;
-        }
 
         // ===== PHƯƠNG PHÁP 2: Database (AN TOÀN HƠN) =====
         private bool CapNhatTongTienVaoDB(string maBN, string maToaUong)
@@ -571,7 +556,7 @@ WHERE
                 @"SELECT ma_toa from tbl_tu where ma_bn = @ma_bn and delete_at is null order by ma_toa desc;",
                 new MySqlParameter("@ma_bn", txtMaBN.Text.Trim()));
 
-            if(dt.Rows.Count == 0)
+            if (dt.Rows.Count == 0)
             {
                 cboxToaThuocUong.ComboBox.DataSource = null;
                 return;
@@ -607,10 +592,6 @@ WHERE
 
         }
 
-        private void loadToaThuocUong()
-        {
-
-        }
 
         private void frmPhongKham_LocationChanged(object sender, EventArgs e)
         {
@@ -822,6 +803,12 @@ ORDER BY t2.hsd ASC LIMIT 5;",
         {
             try
             {
+                if (cboxToaThuocUong.Text == "")
+                {
+                    MessageBox.Show("Vui lòng chọn toa thuốc uống trước khi thêm thuốc!",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 if (string.IsNullOrWhiteSpace(txtTimThuocUong.Text))
                 {
                     MessageBox.Show("Vui lòng chọn thuốc uống!",
@@ -843,9 +830,16 @@ ORDER BY t2.hsd ASC LIMIT 5;",
                 capNhatThongTinToaUong();
                 loadToaThuocUongChiTiet();
 
+                labelSoLuongTon.Text = "";
+                txtTimThuocUong.Text = "";
+                txtSang.Text = "";
+                txtTrua.Text = "";
+                txtChieu.Text = "";
+                txtToi.Text = "";
+                txtDonVi.Text = "";
+                txtCachDung.Text = "";
+                txtSoLuong.Text = "";
 
-                tinhTongTienThuocUong();
-                //loadTongTienThuocUong();
                 txtTimThuocUong.Focus();
             }
             catch (Exception ex)
@@ -1082,6 +1076,7 @@ ORDER BY t2.hsd ASC LIMIT 5;",
 
             dt.Columns.Add("stt");
             dt.Columns.Add("ten_thuoc");
+            dt.Columns.Add("hoat_chat");
             dt.Columns.Add("ham_luong");
             dt.Columns.Add("ngay_dung");
             dt.Columns.Add("lieu_dung");
@@ -1131,6 +1126,7 @@ ORDER BY t2.hsd ASC LIMIT 5;",
                 dt.Rows.Add(
                 stt++,
                 row.Cells["colTenThuoc"].Value,
+                row.Cells["colHoatChat"].Value,
                 row.Cells["colHamLuong"].Value,
                 row.Cells["colNgayDung"].Value,
                 lieuDung,
@@ -1154,29 +1150,27 @@ ORDER BY t2.hsd ASC LIMIT 5;",
         {
             xoaThuocToaUong();
             capNhatThongTinToaUong();
-
-            tinhTongTienThuocUong();
-            //loadTongTienThuocUong();
+            loadToaThuocUongChiTiet();
         }
 
         private void xoaThuocToaUong()
         {
             try
             {
+                // Quan trọng: chốt giá trị ô đang sửa
+                dgvToaThuocUong.EndEdit();
+                this.BindingContext[dgvToaThuocUong.DataSource]?.EndCurrentEdit();
+
                 List<(int AutoId, string MaPhieu, string MaThuoc)> dsCanXoa = new();
 
                 foreach (DataGridViewRow row in dgvToaThuocUong.Rows)
                 {
-                    if (row.IsNewRow)
-                        continue;
+                    if (row.IsNewRow) continue;
 
-                    bool isChecked = false;
+                    bool isChecked = row.Cells["colSelect"].Value != null
+                                     && Convert.ToBoolean(row.Cells["colSelect"].Value);
 
-                    if (row.Cells["colSelect"].Value != null)
-                        bool.TryParse(row.Cells["colSelect"].Value.ToString(), out isChecked);
-
-                    if (!isChecked)
-                        continue;
+                    if (!isChecked) continue;
 
                     int autoId = Convert.ToInt32(row.Cells["colAuto_id"].Value);
                     string maPhieu = row.Cells["colMaToa"].Value?.ToString();
@@ -1187,19 +1181,13 @@ ORDER BY t2.hsd ASC LIMIT 5;",
 
                 if (dsCanXoa.Count == 0)
                 {
-                    MessageBox.Show(
-                        "Vui lòng chọn thuốc cần xóa.",
-                        "Thông báo",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+                    MessageBox.Show("Vui lòng chọn thuốc cần xóa.", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
-                if (MessageBox.Show(
-                    $"Bạn có chắc muốn xóa {dsCanXoa.Count} thuốc khỏi toa?",
-                    "Xác nhận",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question) != DialogResult.Yes)
+                if (MessageBox.Show($"Bạn có chắc muốn xóa {dsCanXoa.Count} thuốc khỏi toa?",
+                    "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                     return;
 
                 foreach (var item in dsCanXoa)
@@ -1208,18 +1196,13 @@ ORDER BY t2.hsd ASC LIMIT 5;",
                         @"UPDATE tbl_tu_ct
                   SET delete_at = NOW()
                   WHERE auto_id = @auto_id",
-                        new MySqlParameter("@auto_id", item.AutoId)
-                    );
+                        new MySqlParameter("@auto_id", item.AutoId));
                 }
 
-                MessageBox.Show(
-                    $"Đã xóa {dsCanXoa.Count} thuốc.",
-                    "Thông báo",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                MessageBox.Show($"Đã xóa {dsCanXoa.Count} thuốc.", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 CapNhatTongTienVaoDB(txtMaBN.Text.Trim(), cboxToaThuocUong.Text.Trim());
-
             }
             catch (Exception ex)
             {
@@ -1369,7 +1352,8 @@ ORDER BY t2.hsd ASC LIMIT 5;",
                 new MySqlParameter("@khong_lay", Convert.ToBoolean(row.Cells["colKhongLay"].Value ?? false)),
                 new MySqlParameter("@auto_id", row.Cells["colAuto_id"].Value)
             );
-            tinhTongTienThuocUong();
+            tinhTongTienToaThuocUongLocal();
+            capNhatThongTinToaUong();
         }
 
 
@@ -1511,6 +1495,7 @@ ORDER BY t2.hsd ASC LIMIT 5;",
             xoaThongTinTrenManHinh();
             taoBenhNhanMoi();
             themToaThuocUong();
+            moKhoaBenhNhan();
             Helpers.DebounceManager.Execute("loadToaThuocUong", 100, loadToaThuocUongChiTiet);
         }
 
@@ -1548,27 +1533,13 @@ ORDER BY t2.hsd ASC LIMIT 5;",
         {
             if (chkKhoaBenh.Checked)
             {
-                if (MessageBox.Show("Bạn có chắc chắn muốn khóa bệnh nhân này không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    khoaBenhNhan();
-                    MessageBox.Show("Bệnh nhân đã được khóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    chkKhoaBenh.Checked = false;
-                }
+                khoaBenhNhan();
+                loadDanhSachBN();
             }
             else
             {
-                if (MessageBox.Show("Bạn có chắc chắn muốn mở khóa bệnh nhân này không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    moKhoaBenhNhan();
-                    MessageBox.Show("Bệnh nhân đã được mở khóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    chkKhoaBenh.Checked = true;
-                }
+                moKhoaBenhNhan();
+                loadDanhSachBN();
             }
         }
 
@@ -1591,7 +1562,7 @@ ORDER BY t2.hsd ASC LIMIT 5;",
             toolStripToaThuocUong.Enabled = false;
         }
 
-        private void moKhoaBenhNhan() 
+        private void moKhoaBenhNhan()
         {
 
             txtHoTen.Enabled = true;
@@ -1607,8 +1578,74 @@ ORDER BY t2.hsd ASC LIMIT 5;",
 
             txtTimThuocUong.Enabled = true;
             btnThemThuocUong.Enabled = true;
-            dgvToaThuocUong.ReadOnly = true;
+            dgvToaThuocUong.ReadOnly = false;
             toolStripToaThuocUong.Enabled = true;
+        }
+
+        private void btnXoaBenh_Click(object sender, EventArgs e)
+        {
+            xoaBenhNhan();
+        }
+
+        private void xoaBenhNhan()
+        {
+            string maBN = txtMaBN.Text.Trim();
+            if (string.IsNullOrEmpty(maBN))
+            {
+                MessageBox.Show("Mã bệnh nhân trống.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var confirm = MessageBox.Show(
+                "Bạn có chắc chắn muốn xóa tất cả thông tin bệnh nhân này không? Hành động này không thể hoàn tác.",
+                "Xác nhận",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (confirm != DialogResult.Yes)
+            {
+                MessageBox.Show("Hủy xóa thông tin bệnh nhân.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            try
+            {
+                // Nếu helper của bạn có transaction thì bọc transaction để tránh xóa dở dang
+                Helpers.MySqlHelper.ExecuteNonQuery(
+                    @"DELETE FROM tbl_tu_ct WHERE ma_bn = @ma_bn;",
+                    new MySqlParameter("@ma_bn", maBN));
+
+                Helpers.MySqlHelper.ExecuteNonQuery(
+                    @"DELETE FROM tbl_tu WHERE ma_bn = @ma_bn;",
+                    new MySqlParameter("@ma_bn", maBN));
+
+                Helpers.MySqlHelper.ExecuteNonQuery(
+                    @"DELETE FROM tbl_bn WHERE ma_bn = @ma_bn;",
+                    new MySqlParameter("@ma_bn", maBN)); // <-- sửa đúng tên param
+
+                MessageBox.Show("Đã xóa tất cả thông tin bệnh nhân.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                xoaThongTinTrenManHinh(); // chỉ xóa màn hình khi xóa thành công
+                loadDanhSachBN(); // load lại danh sách bệnh nhân
+                loadDanhSachToaThuocUong(); // load lại danh sách toa thuốc uống
+                loadToaThuocUongChiTiet(); // load lại chi tiết toa thuốc uống
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Xóa thất bại: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void chkDaKham_CheckedChanged(object sender, EventArgs e)
+        {
+            loadDanhSachBN();
+        }
+
+        private void dgvToaThuocUong_CurrentCellDirtyStateChanged_1(object sender, EventArgs e)
+        {
+            if (dgvToaThuocUong.IsCurrentCellDirty)
+            {
+                dgvToaThuocUong.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
         }
     }
 }

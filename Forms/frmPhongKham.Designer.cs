@@ -451,6 +451,7 @@
             btnXoaBenh.Name = "btnXoaBenh";
             btnXoaBenh.Size = new Size(95, 22);
             btnXoaBenh.Text = "Xóa bệnh";
+            btnXoaBenh.Click += btnXoaBenh_Click;
             // 
             // chkDaKham
             // 
@@ -462,6 +463,7 @@
             chkDaKham.TabIndex = 4;
             chkDaKham.Text = "Đã khám";
             chkDaKham.UseVisualStyleBackColor = true;
+            chkDaKham.CheckedChanged += chkDaKham_CheckedChanged;
             // 
             // chkKhoaBenh
             // 
@@ -646,6 +648,7 @@
             dgvToaThuocUong.Size = new Size(928, 265);
             dgvToaThuocUong.TabIndex = 1;
             dgvToaThuocUong.CellEndEdit += dgvToaThuocUong_CellEndEdit;
+            dgvToaThuocUong.CurrentCellDirtyStateChanged += dgvToaThuocUong_CurrentCellDirtyStateChanged_1;
             // 
             // colSelect
             // 
