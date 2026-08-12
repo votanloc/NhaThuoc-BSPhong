@@ -95,12 +95,7 @@ order by ngay_nhap asc";
 
         private void btnThemPhieuNhapKho_Click(object sender, EventArgs e)
         {
-            xoaThongTinPhieuNhap();
 
-            if (!DangKyMaPhieuNhapKho())
-                return;
-
-            cboxLyDoNhap.Focus();
         }
 
         private void xoaThongTinPhieuNhap()
@@ -166,15 +161,7 @@ order by ngay_nhap asc";
 
         private void btnCapNhatPhieuNhapKho_Click(object sender, EventArgs e)
         {
-            if (CapNhapPhieuNhapKho())
-            {
-                MessageBox.Show("Cập nhật thành công.");
-            }
-            else
-            {
-                MessageBox.Show("Không tìm thấy phiếu hoặc phiếu đã bị xóa.");
-            }
-            loadDanhSachPhieuNhap();
+
         }
 
         private bool CapNhapPhieuNhapKho()
@@ -285,7 +272,7 @@ WHERE
 
             txtTimThuoc.Text = "";
             txtSoLuong.Text = "";
-            txtLSX.Text = "";   
+            txtLSX.Text = "";
             dtpHSD.Value = DateTime.Now;
             txtTimThuoc.Focus();
         }
@@ -347,7 +334,7 @@ WHERE
         {
             dgvNhapKhoChiTiet.DataSource = Helpers.MySqlHelper.ExecuteDataTable(
                 @"SELECT 
-                    auto_id,ma_phieu_nhap,ma_thuoc, ten_thuoc, don_vi_le, so_luong, don_gia , thanh_tien , hsd , lsx 
+                    auto_id,ma_phieu_nhap,ma_thuoc, ten_thuoc, don_vi_le, so_luong, don_gia , thanh_tien , hsd , lsx , update_in 
                 FROM 
                     tbl_nk_ct 
                 WHERE 
@@ -452,9 +439,320 @@ WHERE
 
         private void txtLSX_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 txtSoLuong.Focus();
+            }
+        }
+
+        private void btnXoaThuocNhapKho_Click(object sender, EventArgs e)
+        {
+            xoaThuocNhapKho();
+        }
+
+        private void btnThemPhieuNhapKho_Click_1(object sender, EventArgs e)
+        {
+            xoaThongTinPhieuNhap();
+
+            if (!DangKyMaPhieuNhapKho())
+                return;
+
+            cboxLyDoNhap.Focus();
+        }
+
+        private void btnCapNhatPhieuNhapKho_Click_1(object sender, EventArgs e)
+        {
+            if (CapNhapPhieuNhapKho())
+            {
+                MessageBox.Show("Cập nhật thành công.");
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy phiếu hoặc phiếu đã bị xóa.");
+            }
+            loadDanhSachPhieuNhap();
+        }
+
+        private void btnXoaPhieuNhapKho1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvNhapKhoChiTiet_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
+
+            DataGridViewRow row = dgvNhapKhoChiTiet.Rows[e.RowIndex];
+
+            string colName =
+                dgvNhapKhoChiTiet.Columns[e.ColumnIndex].Name;
+
+            if (colName != "colDonVi" &&
+                colName != "colLSX" &&
+                colName != "colSoLuong" &&
+                colName != "colGia" &&
+                colName != "colHSD")
+            {
+                return;
+            }
+
+            try
+            {
+                int autoId = Convert.ToInt32(
+                    row.Cells["colAuto_id"].Value
+                );
+
+                string donVi =
+                    row.Cells["colDonVi"].Value?.ToString()?.Trim() ?? "";
+
+                string lsx =
+                    row.Cells["colLSX"].Value?.ToString()?.Trim() ?? "";
+
+                decimal.TryParse(
+                    row.Cells["colSoLuong"].Value?.ToString(),
+                    out decimal soLuong
+                );
+
+                decimal.TryParse(
+                    row.Cells["colGia"].Value?.ToString(),
+                    out decimal donGia
+                );
+
+                // =========================
+                // LẤY HSD
+                // =========================
+
+                bool isEditingHSD = colName == "colHSD";
+
+                if (!TryGetHSD(
+                    row.Cells["colHSD"],
+                    isEditingHSD,
+                    out DateTime? hsd))
+                {
+                    MessageBox.Show(
+                        "Hạn sử dụng phải có định dạng dd/MM/yyyy.\n\n" +
+                        "Ví dụ: 16/12/2028",
+                        "Sai định dạng",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+
+                    return;
+                }
+
+                // =========================
+                // KIỂM TRA NHẬP ĐIỀU CHỈNH
+                // =========================
+
+                bool laNhapDieuChinh =
+                    cboxLyDoNhap.Text.Trim()
+                    .Equals(
+                        "Nhập điều chỉnh",
+                        StringComparison.OrdinalIgnoreCase
+                    );
+
+                if (!laNhapDieuChinh && soLuong < 0)
+                {
+                    MessageBox.Show(
+                        "Số lượng không được âm.",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+
+                    row.Cells["colSoLuong"].Value = 0;
+
+                    return;
+                }
+
+                // =========================
+                // TÍNH THÀNH TIỀN
+                // =========================
+
+                decimal thanhTien = laNhapDieuChinh
+                    ? 0
+                    : soLuong * donGia;
+
+                row.Cells["colThanhTien"].Value = thanhTien;
+
+                // =========================
+                // UPDATE DATABASE
+                // =========================
+
+                string query = @"
+UPDATE tbl_nk_ct
+SET
+    don_vi_le = @don_vi_le,
+    lsx = @lsx,
+    hsd = @hsd,
+    so_luong = @so_luong,
+    don_gia = @don_gia,
+    thanh_tien = @thanh_tien,
+    update_in = NOW()
+WHERE auto_id = @auto_id;
+";
+
+                Helpers.MySqlHelper.ExecuteNonQuery(
+                    query,
+                    new MySqlParameter("@don_vi_le", donVi),
+                    new MySqlParameter("@lsx", lsx),
+                    new MySqlParameter(
+                        "@hsd",
+                        hsd.HasValue
+                            ? (object)hsd.Value
+                            : DBNull.Value
+                    ),
+                    new MySqlParameter("@so_luong", soLuong),
+                    new MySqlParameter("@don_gia", donGia),
+                    new MySqlParameter("@thanh_tien", thanhTien),
+                    new MySqlParameter("@auto_id", autoId)
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Không thể cập nhật dữ liệu.\n\n" + ex.Message,
+                    "Lỗi",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
+        private bool TryGetHSD(
+    DataGridViewCell cell,
+    bool isEditingHSD,
+    out DateTime? hsd)
+        {
+            hsd = null;
+
+            object value = cell.Value;
+
+            if (value == null || value == DBNull.Value)
+                return true;
+
+            // Dữ liệu load từ MySQL
+            if (value is DateTime dateValue)
+            {
+                hsd = dateValue.Date;
+                return true;
+            }
+
+            string hsdText = value.ToString()?.Trim();
+
+            if (string.IsNullOrWhiteSpace(hsdText))
+                return true;
+
+            // Khi người dùng sửa HSD:
+            // bắt buộc dd/MM/yyyy
+            if (isEditingHSD)
+            {
+                if (DateTime.TryParseExact(
+                    hsdText,
+                    "dd/MM/yyyy",
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.None,
+                    out DateTime result))
+                {
+                    hsd = result.Date;
+                    return true;
+                }
+
+                return false;
+            }
+
+            // Các trường hợp dữ liệu cũ từ DB
+            if (DateTime.TryParse(hsdText, out DateTime dbDate))
+            {
+                hsd = dbDate.Date;
+                return true;
+            }
+
+            return false;
+        }
+
+        private void btnXoaPhieuNhapKho_Click(object sender, EventArgs e)
+        {
+            xoaPhieuNhap();
+        }
+        private void xoaPhieuNhap()
+        {
+            // Kiểm tra mã phiếu
+            string maPhieuNhap = txtMaPhieuNhap.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(maPhieuNhap))
+            {
+                MessageBox.Show(
+                    "Chưa chọn phiếu nhập cần xóa.",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                return;
+            }
+
+            // Xác nhận
+            DialogResult result = MessageBox.Show(
+                $"Bạn có chắc muốn xóa phiếu nhập [{maPhieuNhap}] không?\n\n" +
+                "Toàn bộ chi tiết của phiếu sẽ bị xóa.",
+                "Xác nhận xóa",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
+            if (result != DialogResult.Yes)
+                return;
+
+            try
+            {
+                string queryXoaChiTiet = @"
+DELETE FROM tbl_nk_ct
+WHERE ma_phieu_nhap = @ma_phieu_nhap;
+";
+
+                string queryXoaPhieu = @"
+DELETE FROM tbl_nk
+WHERE ma_phieu_nhap = @ma_phieu_nhap;
+";
+
+                // Xóa chi tiết trước
+                Helpers.MySqlHelper.ExecuteNonQuery(
+                    queryXoaChiTiet,
+                    new MySqlParameter("@ma_phieu_nhap", maPhieuNhap)
+                );
+
+                // Xóa phiếu nhập sau
+                Helpers.MySqlHelper.ExecuteNonQuery(
+                    queryXoaPhieu,
+                    new MySqlParameter("@ma_phieu_nhap", maPhieuNhap)
+                );
+
+                MessageBox.Show(
+                    "Đã xóa phiếu nhập thành công.",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
+                // Load lại danh sách
+                loadNhapKhoChiTiet();
+
+                // Xóa dữ liệu đang hiển thị
+                txtMaPhieuNhap.Clear();
+                txtDienGiai.Clear();
+
+                dgvNhapKhoChiTiet.DataSource = null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Không thể xóa phiếu nhập.\n\n" + ex.Message,
+                    "Lỗi",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
     }

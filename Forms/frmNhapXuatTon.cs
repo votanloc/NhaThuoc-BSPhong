@@ -85,6 +85,7 @@ SELECT
     v1.ton_kho,
     v1.ngay_nhap ,
     v1.ngay_xuat
+    
 FROM
     dm_thuoc t1
         JOIN
@@ -104,6 +105,7 @@ order by t1.nhom_thuoc asc;
                 new MySqlParameter("@tenthuoc", "%" + txtTenThuoc.Text.Trim() + "%"),
                 new MySqlParameter("@nhomthuoc", "%" + cboxNhomThuoc.Text.Trim() + "%")
                 );
+            dgvNhapXuatTon.AutoGenerateColumns = false;
         }
 
         private void dtpTuNgay_ValueChanged(object sender, EventArgs e)
